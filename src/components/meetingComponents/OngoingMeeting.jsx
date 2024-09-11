@@ -97,12 +97,11 @@ const OngoingMeeting = ({ users, iframeLink, role }) => {
     <div>
       {/* Show the extracted fullName */}
       <h1>Welcome, {fullName}</h1>
-
       <div
-        className="iframe-container"
+        className=""
         style={{ width: "100%", paddingBottom: "56.25%", position: "relative" }}
       >
-        <Main />
+       <Main/>
       </div>
     </div>
   );
