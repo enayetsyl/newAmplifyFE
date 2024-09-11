@@ -52,7 +52,7 @@ const Page = () => {
       meetingPasscode: "",
     },
   });
-console.log('form data', formData)
+  console.log("form data", formData);
 
   useEffect(() => {
     fetchContacts();
@@ -90,10 +90,10 @@ console.log('form data', formData)
     const validMembers = formData.members.filter((member) => member.userId);
 
     // Determine the project status based on the conditions
-  const status =
-  validMembers.length > 0 && formData.meeting.moderator
-    ? 'Active'
-    : 'Draft';
+    const status =
+      validMembers.length > 0 && formData.meeting.moderator
+        ? "Active"
+        : "Draft";
 
     // Add the createdBy field to the formData
     const updatedFormData = {
@@ -106,7 +106,7 @@ console.log('form data', formData)
       },
       status,
     };
-console.log('updated form data', updatedFormData)
+    console.log("updated form data", updatedFormData);
     try {
       const response = await axios.post(
         `http://localhost:8008/api/create/project`,
@@ -242,7 +242,7 @@ console.log('updated form data', updatedFormData)
             <Button
               onClick={prevStep}
               variant="cancel"
-              className="rounded-lg px-7 py-1"
+              className="rounded-lg px-7 py-1 my-6"
             >
               Back
             </Button>
@@ -251,7 +251,7 @@ console.log('updated form data', updatedFormData)
             <Button
               onClick={nextStep}
               variant="save"
-              className="rounded-lg px-7 py-1"
+              className="rounded-lg px-7 py-1 my-6 mr-2"
             >
               Next
             </Button>
@@ -260,7 +260,7 @@ console.log('updated form data', updatedFormData)
             <Button
               variant="save"
               type="button"
-              className="rounded-lg px-7 py-1"
+              className="rounded-lg px-7 py-1 my-6"
               onClick={handleFormSubmit}
             >
               Save Project

@@ -5,29 +5,28 @@ import InputField from "../shared/InputField";
 import { FaCircle } from "react-icons/fa";
 import { generatePasscode } from "@/utils/generatePasscode";
 
-
 const Step1 = ({ formData, setFormData }) => {
- // Function to refresh the passcode
- const refreshPasscode = () => {
-  const newPasscode = generatePasscode();
-  setFormData((prevFormData) => ({
-    ...prevFormData,
-    projectPasscode: newPasscode,
-  }));
-};
+  // Function to refresh the passcode
+  const refreshPasscode = () => {
+    const newPasscode = generatePasscode();
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      projectPasscode: newPasscode,
+    }));
+  };
 
-// Automatically generate passcode when the component mounts or when the end date changes
-useEffect(() => {
-  if (!formData.projectPasscode) {
-    refreshPasscode();
-  }
-}, [formData.endDate]);
+  // Automatically generate passcode when the component mounts or when the end date changes
+  useEffect(() => {
+    if (!formData.projectPasscode) {
+      refreshPasscode();
+    }
+  }, [formData.endDate]);
 
   return (
     <div className="px-5">
       <HeadingBlue25px children="General Information" />
       {/* form items container div */}
-      <div className="pt-3 w-1/2 space-y-5 ">
+      <div className="pt-3 w-full md:w-1/2 space-y-5 ">
         {/* container for name and moderator */}
 
         <div className="w-full">
@@ -51,9 +50,7 @@ useEffect(() => {
         </div>
 
         <div>
-          <p className="block text-sm font-semibold mb-2">
-            Start Time
-          </p>
+          <p className="block text-sm font-semibold mb-2">Start Time</p>
           <div className="flex items-center">
             <input
               type="date"
@@ -66,9 +63,7 @@ useEffect(() => {
           </div>
         </div>
         <div>
-          <p className="block text-sm font-semibold mb-2">
-            End Time
-          </p>
+          <p className="block text-sm font-semibold mb-2">End Time</p>
           <div className="flex items-center">
             <input
               type="date"
@@ -82,7 +77,7 @@ useEffect(() => {
         </div>
 
         {/* passcode */}
-        <div className=" w-full flex justify-start items-end gap-2 ">
+        <div className="w-full flex justify-start items-end gap-2">
           <InputField
             label="Passcode"
             value={formData.projectPasscode}
@@ -92,8 +87,11 @@ useEffect(() => {
             type="text"
             name="passcode"
           />
-          <div className="flex justify-start items-center gap-2"  onClick={refreshPasscode}>
-            <FaCircle/>
+          <div
+            className="flex justify-start items-center gap-2"
+            onClick={refreshPasscode}
+          >
+            <FaCircle />
             <p>Refresh</p>
           </div>
         </div>
