@@ -1,7 +1,7 @@
 import io from "socket.io-client";
 
-// const ENDPOINT = 'http://localhost:3001';
-const ENDPOINT = "https://serverzoom-mpbv.onrender.com/"; // Uncomment this line for production
+// const ENDPOINT = 'https://amplifymeetingbe.onrender.com';
+const ENDPOINT = "http://localhost:8008/"; // Uncomment this line for production
 
 const socket = io(ENDPOINT, {
   autoConnect: true,
@@ -11,12 +11,12 @@ const socket = io(ENDPOINT, {
   reconnectionAttempts: Infinity,
   reconnectionDelay: 1000,
 });
-
 socket.on("connect", () => {
   console.log("Socket connected with ID:", socket.id);
 });
 
 socket.on("connect_error", (error) => {
+
   console.error("Socket connection error:", error);
   // Attempt to reconnect
   socket.connect();

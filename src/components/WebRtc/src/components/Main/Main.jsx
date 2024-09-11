@@ -3,44 +3,55 @@ import styled from "styled-components";
 import socket from "../../socket";
 import Room from "../Room/Room";
 
-const Main = () => {
+const Main = ({ breakRoomID }) => {
   const roomRef = useRef();
   const userRef = useRef();
   const [err, setErr] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const [showRoom, setShowRoom] = useState(false);
-  const [roomName, setRoomName] = useState(""); // Store room name in state
-  const [userName, setUserName] = useState(""); // Store user name in state
-
+  const [roomprop, setRoomProps] = useState("");
   useEffect(() => {
     socket.on("FE-error-user-exist", ({ error }) => {
       if (!error) {
-        sessionStorage.setItem("user", userName); // Store user name in session storage
-        setShowRoom(true); // Show the room once the user is validated
+        const roomName = roomRef.current.value;
+        const userName = userRef.current.value;
+
+        // props.history.push(`/room/${roomName}`); since we are using react-router-dom v6, we need to use the navigate function
       } else {
-        setErr(true);
-        setErrMsg("User name already exists");
+        setErr(error);
+        setErrMsg("User name already exist");
       }
     });
-  }, [userName]);
-
+  }, []);
+  useEffect(() => {
+    if (breakRoomID) {
+      setRoomProps(breakRoomID);
+      console.log("isopenBreak");
+      socket.emit("BE-check-user", { roomId: breakRoomID, userName:"medulas" });
+      setShowRoom(true);
+    }
+  });
   function clickJoin() {
-    const room = roomRef.current.value;
-    const user = userRef.current.value;
-
-    if (!room || !user) {
+    
+    const roomName = roomRef.current.value;
+    const userName = userRef.current.value;
+    console.log("roomName: ", breakRoomID);
+    
+    localStorage.setItem("user2", userName);
+    if (!roomName || !userName) {
       setErr(true);
       setErrMsg("Enter Room Name or User Name");
     } else {
-      setRoomName(room); // Set room name in state
-      setUserName(user); // Set user name in state
-      socket.emit("BE-check-user", { roomId: room, userName: user });
+      setRoomProps(roomName); // Set room name in state
+      socket.emit("BE-check-user", { roomId: roomName, userName });
+      console.log("BE-check-user: ", { roomId: roomName, userName });
+      setShowRoom(true);
     }
   }
 
   return (
     <div>
-      {!showRoom ? (
+      {showRoom == false ? (
         <MainContainer>
           <Row>
             <Label htmlFor="roomName">Room Name</Label>
@@ -55,7 +66,7 @@ const Main = () => {
         </MainContainer>
       ) : (
         <div>
-          <Room roomId={roomName} /> {/* Pass roomName from state */}
+          <Room roomId={roomprop} />
         </div>
       )}
     </div>

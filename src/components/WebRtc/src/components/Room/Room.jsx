@@ -11,7 +11,7 @@ import BottomBar from "../BottomBar/BottomBar";
 
 const Room = ({ roomId }) => {  
   console.log("roomIdProps: ", roomId);
-  const currentUser = sessionStorage.getItem("user");
+  const currentUser = localStorage.getItem("user2");
   const [peers, setPeers] = useState([]);
   const [userVideoAudio, setUserVideoAudio] = useState({
     localUser: { video: true, audio: true },

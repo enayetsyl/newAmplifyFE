@@ -10,7 +10,6 @@ function WebRtc() {
       <AppContainer>
         <Routes>
           <Route exact path="/" element={<Main />} />
-          {/* <Route exact path="/room/:roomId" element={<Room />} /> */}
         </Routes>
       </AppContainer>
     </BrowserRouter>

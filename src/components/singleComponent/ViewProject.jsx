@@ -31,7 +31,7 @@ const ViewProject = ({ project, onClose, user }) => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:8008/api/get-all/meeting/${project._id}`,
+        `https://amplifymeetingbe.onrender.com/api/get-all/meeting/${project._id}`,
         // {
         //   params: { page, limit: 10 },
         // }

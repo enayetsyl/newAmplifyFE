@@ -36,7 +36,7 @@ const AddMeetingModal = ({ onClose, project, user, refetchMeetings }) => {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `http://localhost:8008/api/get-all/contact/${user._id}`
+        `https://amplifymeetingbe.onrender.com/api/get-all/contact/${user._id}`
       );
       if (!response.ok) {
         throw new Error(`Failed to fetch contacts: ${response.statusText}`);
@@ -94,7 +94,7 @@ const AddMeetingModal = ({ onClose, project, user, refetchMeetings }) => {
       projectId: project._id,
     };
     try {
-      const response = await axios.post(`http://localhost:8008/api/create/meeting`, updatedFormData);
+      const response = await axios.post(`https://amplifymeetingbe.onrender.com/api/create/meeting`, updatedFormData);
       
       if (response.status === 201) { 
         refetchMeetings(); 
