@@ -10,6 +10,7 @@ import BottomBar from "../BottomBar/BottomBar";
 // import { useParams } from "react-router-dom";
 
 const Room = ({ roomId }) => {  
+  console.log("roomIdProps: ", roomId);
   const currentUser = sessionStorage.getItem("user");
   const [peers, setPeers] = useState([]);
   const [userVideoAudio, setUserVideoAudio] = useState({
