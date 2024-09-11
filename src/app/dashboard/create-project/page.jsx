@@ -62,7 +62,7 @@ console.log('form data', formData)
     try {
       setIsLoading(true);
       const response = await fetch(
-        `http://localhost:8008/api/get-all/contact/${user?._id}`
+        `https://amplifymeetingbe.onrender.com/api/get-all/contact/${user?._id}`
       );
       if (!response.ok) {
         throw new Error(`Failed to fetch contacts: ${response.statusText}`);

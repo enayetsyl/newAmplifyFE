@@ -24,7 +24,7 @@ const page = () => {
   const getParticipantList = async (meetingId) => {
     try {
       const response = await axios.get(
-        `http://localhost:8008/api/live-meeting/participant-list/${meetingId}`
+        `https://amplifymeetingbe.onrender.com/api/live-meeting/participant-list/${meetingId}`
       );
       setParticipants(response?.data?.participantsList);
 

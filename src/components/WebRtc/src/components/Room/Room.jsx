@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Peer from "simple-peer";
-// import styled from "styled-components";
+import styled from "styled-components";
 import socket from "../../socket";
 import VideoCard from "../Video/VideoCard";
 import BottomBar from "../BottomBar/BottomBar";
@@ -9,8 +9,9 @@ import BottomBar from "../BottomBar/BottomBar";
 // params
 // import { useParams } from "react-router-dom";
 
-const Room = ({ roomId }) => {
-  const currentUser = sessionStorage.getItem("user");
+const Room = ({ roomId }) => {  
+  console.log("roomIdProps: ", roomId);
+  const currentUser = localStorage.getItem("user2");
   const [peers, setPeers] = useState([]);
   const [userVideoAudio, setUserVideoAudio] = useState({
     localUser: { video: true, audio: true },
@@ -400,67 +401,68 @@ const Room = ({ roomId }) => {
   );
 };
 
-// const RoomContainer = styled.div`
-//   display: flex;
-//   width: 100%;
-//   height: 70vh;
-//   flex-direction: row;
-//   overflow: scroll;
-//   borderr: 1px solid #000;
-//   position: relative;
-// `;
+const RoomContainer = styled.div`
+  display: flex;
+  width: 100%;
+  height: 70vh;
+  flex-direction: row;
+  overflow: scroll;
+  borderr: 1px solid #000;
+  position: relative;
+`;
 
-// const VideoContainer = styled.div`
-//   max-width: 100%;
-//   height: 52%;
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-around;
-//   flex-wrap: wrap;
-//   align-items: center;
-//   padding: 15px;
-//   box-sizing: border-box;
-//   gap: 10px;
-// `;
+const VideoContainer = styled.div`
+  max-width: 100%;
+  height: 52%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 15px;
+  box-sizing: border-box;
+  gap: 10px;
+`;
 
-// const VideoAndBarContainer = styled.div`
-//   position: absolute;
-//   width: 100%;
-//   height: 100vh;
-// `;
+const VideoAndBarContainer = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+`;
 
-// const MyVideo = styled.video``;
+const MyVideo = styled.video``;
 
-// const VideoBox = styled.div`
-//   // position: relative;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   > video {
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 100%;
-//   }
+const VideoBox = styled.div`
+  // position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > video {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 
-//   :hover {
-//     > i {
-//       display: block;
-//     }
-//   }
-// `;
+  :hover {
+    > i {
+      display: block;
+    }
+  }
+`;
 
-// const UserName = styled.div`
-//   position: absolute;
-//   font-size: calc(20px + 5vmin);
-//   z-index: 1;
-// `;
+const UserName = styled.div`
+  position: absolute;
+  font-size: calc(20px + 5vmin);
+  z-index: 1;
+`;
 
-// const FaIcon = styled.i`
-//   display: none;
-//   position: absolute;
-//   right: 15px;
-//   top: 15px;
-// `;
+const FaIcon = styled.i`
+  display: none;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+`;
+
 
 export default Room;

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-// import styled from 'styled-components';
+import styled from 'styled-components';
 const VideoCard = ({ peer, number }) => {
   const ref = useRef();
 
@@ -20,6 +20,6 @@ const VideoCard = ({ peer, number }) => {
   );
 };
 
-// const Video = styled.video``;
+const Video = styled.video``;
 
 export default VideoCard;

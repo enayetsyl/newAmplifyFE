@@ -90,7 +90,7 @@ const Page = () => {
 
   const deleteUser = async () => {
     try {
-      await axios.delete(`http://localhost:8008/api/users/delete-by-id`, {
+      await axios.delete(`https://amplifymeetingbe.onrender.com/api/users/delete-by-id`, {
         params: { id: id }, // replace with actual user ID
       });
       router.push("/register"); // Redirect to registration page
@@ -110,7 +110,7 @@ const Page = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8008/api/users/find-by-id`,
+          `https://amplifymeetingbe.onrender.com/api/users/find-by-id`,
           {
             params: { id: id }, // replace 'user-id' with actual user ID
           }
