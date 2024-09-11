@@ -1,11 +1,24 @@
 // components/InputField.js
-import React from 'react';
+import React from "react";
 import { BiSolidErrorAlt } from "react-icons/bi";
 
-const InputField = ({ label, type = 'text', name, value, onChange, placeholder, error, icon, emailSuccess }) => {
+const InputField = ({
+  label,
+  type = "text",
+  name,
+  value,
+  onChange,
+  placeholder,
+  error,
+  icon,
+  emailSuccess,
+}) => {
   return (
-    <div className="mb-1">
-      <label className="block sm:text-sm font-semibold mb-2 text-sm text-black" htmlFor={name}>
+    <div className="mb-4">
+      <label
+        className="block sm:text-sm font-semibold mb-2 text-sm text-black"
+        htmlFor={name}
+      >
         {label}
       </label>
       <div className="relative">
@@ -16,8 +29,8 @@ const InputField = ({ label, type = 'text', name, value, onChange, placeholder, 
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className={`w-full px-4 py-2 border-[0.5px] rounded-lg focus:outline-none   ${
-            error ? 'border-custom-red' : 'border-black'
+          className={`w-full px-4 py-2 border-[0.5px] rounded-xl focus:outline-none   ${
+            error ? "border-custom-red" : "border-black"
           }`}
         />
         {icon && (
@@ -26,14 +39,18 @@ const InputField = ({ label, type = 'text', name, value, onChange, placeholder, 
           </span>
         )}
       </div>
-      {error && <div className='flex justify-start items-start gap-1 mt-2'>
-        <BiSolidErrorAlt className='text-custom-red'/>
-        <p className="text-custom-red text-xs ">{error}</p>
-        </div>}
-      {emailSuccess && <div className='flex justify-start items-start gap-1 mt-2'>
-        <BiSolidErrorAlt className=''/>
-        <p className="text-custom-green text-xs ">Your Email is available.</p>
-        </div>}
+      {error && (
+        <div className="flex justify-start items-start gap-1 mt-2">
+          <BiSolidErrorAlt className="text-custom-red" />
+          <p className="text-custom-red text-xs ">{error}</p>
+        </div>
+      )}
+      {emailSuccess && (
+        <div className="flex justify-start items-start gap-1 mt-2">
+          <BiSolidErrorAlt className="" />
+          <p className="text-custom-green text-xs ">Your Email is available.</p>
+        </div>
+      )}
     </div>
   );
 };

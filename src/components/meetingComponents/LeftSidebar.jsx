@@ -30,7 +30,7 @@ const LeftSidebar = ({
   meetingId,
   removeParticipant,
   isStreaming,
-  setStartStreaming
+  setStartStreaming,
 }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -166,13 +166,15 @@ const LeftSidebar = ({
   const toggleRecordingButton = () => {
     setIsRecordingOpen(!isRecordingOpen);
   };
- 
+
   return (
-    <div >
+    <div>
       <div
         className={`flex ${
           isSidebarOpen ? "w-80" : "w-24"
-        } transition-width duration-300 bg-white h-screen rounded-r-xl relative ${role=="Observer"&&"hidden"}`}
+        } transition-width duration-300 bg-white h-screen rounded-r-xl relative ${
+          role == "Observer" && "hidden"
+        }`}
       >
         {isSidebarOpen ? (
           <LuArrowLeftToLine
@@ -218,7 +220,7 @@ const LeftSidebar = ({
               messages={messages}
               sendMessageParticipant={sendMessageParticipant}
               userName={userName}
-              meetingId={meetingId} 
+              meetingId={meetingId}
               removeParticipant={removeParticipant}
               isStreaming={isStreaming}
               setStartStreaming={setStartStreaming}

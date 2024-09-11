@@ -17,8 +17,6 @@ export default function DashboardLayout({ children }) {
   const handleCloseLogoutModal = () => {
     setIsLogoutModalOpen(false);
   };
-    
-
 
   useEffect(() => {
     // Check if user is defined and if it's an empty object
@@ -32,17 +30,16 @@ export default function DashboardLayout({ children }) {
     <div className="min-h-screen flex flex-col h-full">
       {/* upper div */}
       <div className="flex-grow h-full flex relative">
-        <div className="sticky top-0 w-[260px] h-screen z-10">
-          <DashboardSidebar handleLogoutModalOpen={handleLogoutModalOpen} 
-          isLogoutModalOpen={isLogoutModalOpen}
-          user={user}
+        <div className="sticky top-0 md:w-[260px] h-screen z-10">
+          <DashboardSidebar
+            handleLogoutModalOpen={handleLogoutModalOpen}
+            isLogoutModalOpen={isLogoutModalOpen}
+            user={user}
           />
         </div>
         <div className="flex-grow h-full ">{children}</div>
       </div>
-      {isLogoutModalOpen && <LogoutModal onClose={handleCloseLogoutModal} 
-    
-      />}
+      {isLogoutModalOpen && <LogoutModal onClose={handleCloseLogoutModal} />}
       {/* footer */}
       <Footer />
     </div>

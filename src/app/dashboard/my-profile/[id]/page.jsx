@@ -90,9 +90,12 @@ const Page = () => {
 
   const deleteUser = async () => {
     try {
-      await axios.delete(`https://amplifymeetingbe.onrender.com/api/users/delete-by-id`, {
-        params: { id: id }, // replace with actual user ID
-      });
+      await axios.delete(
+        `https://amplifymeetingbe.onrender.com/api/users/delete-by-id`,
+        {
+          params: { id: id }, // replace with actual user ID
+        }
+      );
       router.push("/register"); // Redirect to registration page
     } catch (error) {
       console.error("Error deleting user:", error);
@@ -236,7 +239,7 @@ const Page = () => {
           <DeleteModal onClose={handleCloseDeleteModal} onDelete={deleteUser} />
         )}
       </div>
-      <div className="md:hidden   my_profile_main_section_shadow bg-[#fafafb] bg-opacity-90 h-full min-h-screen flex flex-col-reverse justify-start items-center p-5 relative">
+      <div className="md:hidden my_profile_main_section_shadow bg-[#fafafb] bg-opacity-90 h-full min-h-screen flex flex-col-reverse justify-start items-center p-5 relative">
         <div className="fixed  top-2 right-5 flex items-center justify-center">
           <Link href={`/dashboard/edit-profile/${id}`}>
             <Button
@@ -249,13 +252,12 @@ const Page = () => {
           </Link>
         </div>
         <div>
-              <p className="text-xl md:text-2xl font-bold text-custom-teal absolute top-4 left-40">
-                My Profile
-              </p>
-            </div>
+          <p className="text-xl md:text-2xl font-bold text-custom-teal absolute top-4 left-40">
+            My Profile
+          </p>
+        </div>
         <div className="bg-white w-full pb-5 relative">
           <div className="flex flex-col md:flex-row justify-between items-center pt-5">
-            
             <div className="flex flex-col md:flex-row justify-center items-center gap-4 mt-5 md:mt-0 relative w-full">
               <Button
                 children="Change Password"
@@ -276,20 +278,22 @@ const Page = () => {
           </div>
         </div>
         <div className="flex-grow w-full">
-          <div className="pt-10">
+          <div className="pt-16">
             <div className="flex flex-col md:flex-row justify-start items-center gap-8">
               <Image
                 src={userImage}
                 alt="user image"
-                height={70}
-                width={70}
+                height={90}
+                width={90}
                 className="rounded-full"
               />
               <div className="flex-grow items-center justify-center">
                 <h1 className="text-3xl md:text-3xl font-semibold  text-center text-custom-teal">
                   {userData ? userData.firstName.toUpperCase() : "Loading..."}
                 </h1>
-                <p className="text-xs text-center text-gray-400">{userData ? userData.role.toUpperCase() : "Loading..."}</p>
+                <p className="text-sm text-center text-gray-400">
+                  {userData ? userData.role.toUpperCase() : "Loading..."}
+                </p>
               </div>
             </div>
             <div>
