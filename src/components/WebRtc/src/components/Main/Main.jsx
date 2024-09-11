@@ -9,40 +9,38 @@ const Main = () => {
   const [err, setErr] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const [showRoom, setShowRoom] = useState(false);
-  const [roomName, setRoomName] = useState("");
+  const [roomName, setRoomName] = useState(""); // Store room name in state
+  const [userName, setUserName] = useState(""); // Store user name in state
+
   useEffect(() => {
     socket.on("FE-error-user-exist", ({ error }) => {
       if (!error) {
-        const roomName = roomRef.current.value;
-        const userName = userRef.current.value;
-
-        sessionStorage.setItem("user", userName);
+        sessionStorage.setItem("user", userName); // Store user name in session storage
+        setShowRoom(true); // Show the room once the user is validated
       } else {
-        setErr(error);
-        setErrMsg("User name already exist");
+        setErr(true);
+        setErrMsg("User name already exists");
       }
     });
-  }, []);
+  }, [userName]);
 
   function clickJoin() {
-    const roomName = roomRef.current.value;
-    const userName = userRef.current.value;
-    console.log("roomName: ", roomName);
+    const room = roomRef.current.value;
+    const user = userRef.current.value;
 
-    if (!roomName || !userName) {
+    if (!room || !user) {
       setErr(true);
       setErrMsg("Enter Room Name or User Name");
     } else {
-      socket.emit("BE-check-user", { roomId: roomName, userName });
-      console.log("BE-check-user: ", { roomId: roomName, userName });
-      setRoomName({ roomName });
-      setShowRoom(true);
+      setRoomName(room); // Set room name in state
+      setUserName(user); // Set user name in state
+      socket.emit("BE-check-user", { roomId: room, userName: user });
     }
   }
 
   return (
     <div>
-      {showRoom == false ? (
+      {!showRoom ? (
         <MainContainer>
           <Row>
             <Label htmlFor="roomName">Room Name</Label>
@@ -57,7 +55,7 @@ const Main = () => {
         </MainContainer>
       ) : (
         <div>
-          <Room roomId={roomName.roomName} />
+          <Room roomId={roomName} /> {/* Pass roomName from state */}
         </div>
       )}
     </div>
