@@ -2,41 +2,45 @@ import React, { useState, useEffect } from "react";
 import HeadingLg from "../shared/HeadingLg";
 
 const Step2 = ({ formData, setFormData, contacts, setContacts, isLoading }) => {
-
   const [selectedRoles, setSelectedRoles] = useState({});
 
+  // Handle role selection (checkbox)
   const handleRoleChange = (index, role) => {
-    setSelectedRoles((prevSelectedRoles) => ({
-      ...prevSelectedRoles,
-      [index]: role,
+    setSelectedRoles((prevSelectedRoles) => {
+      const updatedRoles = prevSelectedRoles[index] || [];
+      let newRoles;
+
+      if (updatedRoles.includes(role)) {
+        // If role is already selected, remove it
+        newRoles = updatedRoles.filter((r) => r !== role);
+      } else {
+        // Add the selected role
+        newRoles = [...updatedRoles, role];
+      }
+
+      return {
+        ...prevSelectedRoles,
+        [index]: newRoles,
+      };
+    });
+  };
+
+  // Use useEffect to update formData only after the role state has been updated
+  useEffect(() => {
+    const updatedMembers = contacts
+      .map((contact, index) => {
+        const rolesForMember = selectedRoles[index] || [];
+        return rolesForMember.length > 0
+          ? { userId: contact._id, email: contact.email, roles: rolesForMember }
+          : null;
+      })
+      .filter((member) => member !== null); // Filter out members with no roles
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      members: updatedMembers,
     }));
-  };
-
-  const handleAddClick = (index) => {
-    const selectedContact = contacts[index];
-    const role = selectedRoles[index];
-  
-    if (role) {
-      // Remove the initial empty person object if it exists
-      const updatedMembers = formData.members.filter((member) => member.userId);
-
-  
-      // Add the selected contact
-      updatedMembers.push({
-        userId: selectedContact._id,
-        email: selectedContact.email,
-        role: role,
-      });
-  
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        members: updatedMembers,
-      }));
-  
- 
-    }
-  };
-  
+  }, [selectedRoles, contacts, setFormData]); // Update formData whenever roles or contacts change
 
   if (isLoading) {
     return <p className="text-center text-5xl text-custom-dark-blue-1 font-bold">Loading... Please wait</p>;
@@ -60,8 +64,9 @@ const Step2 = ({ formData, setFormData, contacts, setContacts, isLoading }) => {
               <thead>
                 <tr>
                   <th className="px-4 py-2 border-b-2 border-custom-dark-blue-1">Name</th>
-                  <th className="px-4 py-2 border-b-2 border-custom-dark-blue-1">Role</th>
-                  <th className="px-4 py-2 border-b-2 border-custom-dark-blue-1">Action</th>
+                  <th className="px-4 py-2 border-b-2 border-custom-dark-blue-1">Admin</th>
+                  <th className="px-4 py-2 border-b-2 border-custom-dark-blue-1">Moderator</th>
+                  <th className="px-4 py-2 border-b-2 border-custom-dark-blue-1">Observer</th>
                 </tr>
               </thead>
               <tbody>
@@ -70,25 +75,26 @@ const Step2 = ({ formData, setFormData, contacts, setContacts, isLoading }) => {
                     <td className="px-4 py-2 border-b border-custom-dark-blue-1">
                       {contact.firstName} {contact.lastName}
                     </td>
-                    <td className="px-4 py-2 border-b border-custom-dark-blue-1">
-                      <select
-                        value={selectedRoles[index] || ""}
-                        onChange={(e) => handleRoleChange(index, e.target.value)}
-                        className="form-select"
-                      >
-                        <option value="" disabled>Select a role</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Moderator">Moderator</option>
-                        <option value="Observer">Observer</option>
-                      </select>
+                    <td className="px-4 py-2 border-b border-custom-dark-blue-1 text-center">
+                      <input
+                        type="checkbox"
+                        checked={selectedRoles[index]?.includes("Admin") || false}
+                        onChange={() => handleRoleChange(index, "Admin")}
+                      />
                     </td>
-                    <td className="px-4 py-2 border-b border-custom-dark-blue-1">
-                      <button
-                        onClick={() => handleAddClick(index)}
-                        className="bg-custom-teal text-white px-4 py-2 rounded"
-                      >
-                        Add
-                      </button>
+                    <td className="px-4 py-2 border-b border-custom-dark-blue-1 text-center">
+                      <input
+                        type="checkbox"
+                        checked={selectedRoles[index]?.includes("Moderator") || false}
+                        onChange={() => handleRoleChange(index, "Moderator")}
+                      />
+                    </td>
+                    <td className="px-4 py-2 border-b border-custom-dark-blue-1 text-center">
+                      <input
+                        type="checkbox"
+                        checked={selectedRoles[index]?.includes("Observer") || false}
+                        onChange={() => handleRoleChange(index, "Observer")}
+                      />
                     </td>
                   </tr>
                 ))}

@@ -18,7 +18,9 @@ const ShareMeetingModal = ({ meeting, onClose }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white p-6 rounded-lg shadow-lg w-2/5 relative">
         {/* Close button */}
-        <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-5xl">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-5xl">
           &times;
         </button>
 
@@ -31,7 +33,7 @@ const ShareMeetingModal = ({ meeting, onClose }) => {
         <h2 className="text-2xl font-semibold text-center text-gray-800">
           Share Meeting Details
         </h2>
-     
+
         {/* Dropdown for access level */}
         <div className="mb-4 flex justify-center">
           <select
@@ -48,8 +50,9 @@ const ShareMeetingModal = ({ meeting, onClose }) => {
         {accessLevel === "Observer Access" ? (
           <div className="p-4 border rounded-md mb-4">
             <p className="text-sm">
-              Nancy Jones has just created a meeting named {meeting.name}. The meeting is now accessible to you as an observer.
-                          </p>
+              Nancy Jones has just created a meeting named {meeting.name}. The
+              meeting is now accessible to you as an observer.
+            </p>
             <p className="mt-2 text-sm">
               <strong>Join Meeting</strong>
               <br />
@@ -67,10 +70,7 @@ const ShareMeetingModal = ({ meeting, onClose }) => {
             <p className="mt-2 text-sm">
               <strong>Create an account</strong>
               <br />
-              <a
-                href={`https://amplify.us/register`}
-                className="text-blue-500"
-              >
+              <a href={`https://amplify.us/register`} className="text-blue-500">
                 https://amplify.us/register
               </a>
             </p>
@@ -84,7 +84,8 @@ const ShareMeetingModal = ({ meeting, onClose }) => {
               <strong>Title:</strong> {meeting.title}
             </p>
             <p className="mt-2 text-sm">
-              <strong>Time:</strong> {meeting.startDate + " " + meeting.startTime}
+              <strong>Time:</strong>{" "}
+              {meeting.startDate + " " + meeting.startTime}
             </p>
             <p className="mt-2 text-sm">
               <strong>Join Meeting</strong>

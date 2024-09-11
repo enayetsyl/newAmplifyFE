@@ -1,18 +1,25 @@
-'use client';
-import React, { useState, useEffect, useRef } from 'react';
-import Button from '../shared/button';
-import TableHead from '../shared/TableHead';
-import TableData from '../shared/TableData';
-import { BsThreeDotsVertical } from 'react-icons/bs';
-import { FaUser } from 'react-icons/fa';
-import { RiPencilFill } from 'react-icons/ri';
-import ViewModeratorModal from './ViewModeratorModal';
-import EditModeratorModal from './EditModeratorModal';
-import ViewContactModal from './ViewContactModal';
-import AddContactModal from './AddContactModal';
+"use client";
+import React, { useState, useEffect, useRef } from "react";
+import Button from "../shared/button";
+import TableHead from "../shared/TableHead";
+import TableData from "../shared/TableData";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { FaUser } from "react-icons/fa";
+import { RiPencilFill } from "react-icons/ri";
+import ViewModeratorModal from "./ViewModeratorModal";
+import EditModeratorModal from "./EditModeratorModal";
+import ViewContactModal from "./ViewContactModal";
+import AddContactModal from "./AddContactModal";
+import { IoTrashBin } from "react-icons/io5";
 
-const ContactTable = ({contacts, setContacts, currentContact, setCurrentContact, isEditing, setIsEditing}) => {
-  
+const ContactTable = ({
+  contacts,
+  setContacts,
+  currentContact,
+  setCurrentContact,
+  isEditing,
+  setIsEditing,
+}) => {
   // const [filteredModerators, setFilteredModerators] = useState([]);
   // const [searchQuery, setSearchQuery] = useState('');
 
@@ -28,11 +35,9 @@ const ContactTable = ({contacts, setContacts, currentContact, setCurrentContact,
 
   const modalRef = useRef();
 
-
-  
-    // useEffect(() => {
-    //   filterModerators();
-    // }, [searchQuery, selectedStatus, contacts]);
+  // useEffect(() => {
+  //   filterModerators();
+  // }, [searchQuery, selectedStatus, contacts]);
 
   // const filterModerators = () => {
   //   let results = moderators;
@@ -67,7 +72,7 @@ const ContactTable = ({contacts, setContacts, currentContact, setCurrentContact,
 
   const handleEditContactOpenModal = (contact) => {
     closeModal();
-    setIsEditing(true)
+    setIsEditing(true);
     setCurrentContact(contact);
     setIsEditContactModalOpen(true);
   };
@@ -103,13 +108,14 @@ const ContactTable = ({contacts, setContacts, currentContact, setCurrentContact,
     }
   };
 
-
-
   const handleDeleteContact = async (contactId) => {
     try {
-      const response = await fetch(`https://amplifymeetingbe.onrender.com/api/delete/contact/${contactId}`, {
-        method: 'DELETE',
-      });
+      const response = await fetch(
+        `http://localhost:8008/api/delete/contact/${contactId}`,
+        {
+          method: "DELETE",
+        }
+      );
       const data = await response.json();
       if (response.ok) {
         alert(data.message);
@@ -120,11 +126,10 @@ const ContactTable = ({contacts, setContacts, currentContact, setCurrentContact,
         alert(data.message);
       }
     } catch (error) {
-      console.error('Error deleting moderator:', error);
-      alert('Error deleting moderator.');
+      console.error("Error deleting moderator:", error);
+      alert("Error deleting moderator.");
     }
   };
-
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -136,20 +141,18 @@ const ContactTable = ({contacts, setContacts, currentContact, setCurrentContact,
     setCurrentPage(newPage);
   };
 
-
-  const  formatDate = (dateInput) => {
+  const formatDate = (dateInput) => {
     const date = new Date(dateInput);
 
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // getMonth() is zero-based, so we add 1
-  const day = String(date.getDate()).padStart(2, '0');
-  const year = String(date.getFullYear()).slice(-2); // Get last two digits of the year
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // getMonth() is zero-based, so we add 1
+    const day = String(date.getDate()).padStart(2, "0");
+    const year = String(date.getFullYear()).slice(-2); // Get last two digits of the year
 
-  return `${month}, ${day}, ${year}`;
-  }
+    return `${month}, ${day}, ${year}`;
+  };
 
   return (
     <div className="overflow-x-auto px-10 pt-10 w-full min-h-80">
-    
       <div className="border-[0.5px] border-custom-dark-blue-1  w-full">
         <table className="min-w-full divide-y divide-gray-200 rounded-lg w-full">
           <thead className="bg-custom-gray-2 rounded-lg py-2 w-full">
@@ -165,11 +168,21 @@ const ContactTable = ({contacts, setContacts, currentContact, setCurrentContact,
           </thead>
           <tbody className="bg-white divide-y divide-gray-200 rounded-lg w-full">
             {contacts?.map((contact, index) => (
-              <tr key={contact._id} className="shadow-[0px_0px_26px_#00000029] w-full ">
-                <TableData>{contact.firstName} {contact.lastName}</TableData>
+              <tr
+                key={contact._id}
+                className="shadow-[0px_0px_26px_#00000029] w-full "
+              >
+                <TableData>
+                  {contact.firstName} {contact.lastName}
+                </TableData>
                 <TableData>{contact.email}</TableData>
                 <TableData>{contact.companyName}</TableData>
-                <TableData>{contact?.roles[0]},{contact?.roles[1]},{contact?.roles[2]}</TableData>
+                <TableData>
+                  {contact?.roles?.length > 0
+                    ? contact.roles.join(", ")
+                    : "No roles assigned"}
+                </TableData>
+
                 <TableData>{formatDate(contact.addedDate)}</TableData>
                 <TableData>{formatDate(contact.lastUpdatedOn)}</TableData>
                 <td className="flex justify-between items-center gap-2 relative py-2">
@@ -201,7 +214,7 @@ const ContactTable = ({contacts, setContacts, currentContact, setCurrentContact,
                         className="flex items-center justify-start px-4 py-2 w-full text-sm text-gray-700 hover:bg-gray-100"
                         onClick={() => handleDeleteContact(contact._id)}
                       >
-                        Delete
+                        <IoTrashBin className="mr-2" /> Delete
                       </button>
                     </div>
                   )}
@@ -249,13 +262,11 @@ const ContactTable = ({contacts, setContacts, currentContact, setCurrentContact,
 
       {/* Edit Moderator Modal */}
       {isEditContactModalOpen && (
-        <AddContactModal 
-        onClose={handleEditContactCloseModal}
-        contactToEdit={currentContact}
-        isEditing={isEditing}
+        <AddContactModal
+          onClose={handleEditContactCloseModal}
+          contactToEdit={currentContact}
+          isEditing={isEditing}
         />
-
-       
       )}
     </div>
   );

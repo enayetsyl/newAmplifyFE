@@ -69,7 +69,7 @@ const page = () => {
   const [messages, setMessages] = useState([]);
 
   const handleBreakoutRoomChange = (roomName) => {
-    const room = breakoutRooms.find((room) => room.roomName === roomName);
+    const room = breakoutRooms?.find((room) => room.roomName === roomName);
     setSelectedRoom(room);
   };
 

@@ -16,7 +16,7 @@ const Login = () => {
   const router = useRouter()
   const {  setUser } = useGlobalContext();
   const [formData, setFormData] = useState({
-    email: 'user2@gmail.com',
+    email: 'enayet@gmail.com',
     password: 'Ab123456@',
   });
   const [showPassword, setShowPassword] = useState(false);

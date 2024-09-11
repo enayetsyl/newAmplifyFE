@@ -92,6 +92,7 @@ const AddContactModal = ({
       setSuccessMessage(null);
     } finally {
       console.error(error);
+      
       onClose();
     }
   };

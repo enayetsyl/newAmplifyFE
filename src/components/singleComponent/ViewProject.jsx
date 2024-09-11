@@ -12,11 +12,13 @@ import axios from "axios";
 import MeetingTab from "../projectComponents/meetings/MeetingTab";
 import AddMeetingModal from "../projectComponents/meetings/AddMeetingModal";
 
-const ViewProject = ({ project, onClose, user }) => {
+const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("Meetings");
   const [meetings, setMeetings] = useState([]);
-  const [isAddMeetingModalOpen, setIsAddMeetingModalOpen] = useState(false)
+  const [isAddMeetingModalOpen, setIsAddMeetingModalOpen] = useState(false);
+  const [selectedStatus, setSelectedStatus] = useState(project?.status || '');
+
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -31,7 +33,7 @@ const ViewProject = ({ project, onClose, user }) => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `https://amplifymeetingbe.onrender.com/api/get-all/meeting/${project._id}`,
+        `http://localhost:8008/api/get-all/meeting/${project._id}`
         // {
         //   params: { page, limit: 10 },
         // }
@@ -50,13 +52,67 @@ const ViewProject = ({ project, onClose, user }) => {
   }, []);
 
   const handleAddMeetingModal = () => {
-   setIsAddMeetingModalOpen(true)
-  }
-  
+    setIsAddMeetingModalOpen(true);
+  };
+
   const closeAddMeetingModal = () => {
-    setIsAddMeetingModalOpen(false)
+    setIsAddMeetingModalOpen(false);
+  };
+
+// Function to handle status change
+const handleStatusChange = async (e) => {
+  const newStatus = e.target.value;
+  setSelectedStatus(newStatus);
+
+  try {
+    // Sending request to change project status
+    const response = await axios.put(
+      `http://localhost:8008/api/change-project-status/${project._id}`, 
+      { status: newStatus }
+    );
+
+    if (response.status === 200) {
+      console.log('Status updated successfully');
+      fetchProjects(user?._id)
+      // You can also add logic here to display success message to the user
+    } else {
+      console.error('Failed to update status');
+      // Show a generic error message to the user
+      alert('Failed to update status. Please try again.');
+    }
+  } catch (error) {
+    // Handle error based on the response or error message
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      const { status, data } = error.response;
+
+      if (status === 400) {
+        // Handle bad request, possibly due to validation error
+        alert(`Validation Error: ${data.message}`);
+      } else if (status === 404) {
+        // Handle project not found error
+        alert(`Error: Project not found`);
+      } else if (status === 500) {
+        // Handle internal server error
+        alert(`Server Error: ${data.message}`);
+      } else {
+        // Handle any other errors
+        alert(`Error: ${data.message || 'An unexpected error occurred'}`);
+      }
+    } else if (error.request) {
+      // The request was made but no response was received
+      console.error('No response received:', error.request);
+      alert('No response from the server. Please try again later.');
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.error('Error setting up the request:', error.message);
+      alert(`Error: ${error.message}`);
+    }
   }
-  
+};
+
+
 
   return (
     <div className="my_profile_main_section_shadow bg-[#fafafb] bg-opacity-90 h-full min-h-screen flex flex-col justify-center items-center w-full">
@@ -68,23 +124,30 @@ const ViewProject = ({ project, onClose, user }) => {
       </div>
       {/* body */}
       <div className="flex-grow px-10 w-full">
-        {/* button */}
+        {/* project status change button */}
         <div className="flex justify-end py-5">
-          <Link href="/dashboard/edit-project">
-            <Button
-              children="Edit"
-              type="submit"
-              variant="save"
-              icon={<RiPencilFill />}
-              className="rounded-xl  px-5 py-1 shadow-[0px_3px_6px_#2976a54d]"
-            />
-          </Link>
+          <select
+            value={selectedStatus}
+            onChange={handleStatusChange}
+            className="border rounded-lg text-white font-semibold px-4  py-2 bg-custom-teal outline-none"
+          >
+            <option value="Draft">Draft</option>
+            <option value="Active">Active</option>
+            <option value="Complete">Complete</option>
+            <option value="Inactive">Inactive</option>
+            <option value="Closed">Closed</option>
+          </select>
         </div>
         {/*  general information  div*/}
         <div className="bg-white shadow-[0px_0px_12px_#00000029] rounded-xl p-5 w-full">
+          <div className="flex justify-between items-center">
           <div className="flex justify-start items-center gap-5">
             <HeadingLg children="Project Name" />
             <ParagraphBlue2 children={project?.name} />
+          </div>
+          <div>
+            <button className="cursor-pointer">Edit</button>
+          </div>
           </div>
           <div className="flex justify-start items-center gap-5">
             <HeadingLg children="Description" />
@@ -284,16 +347,14 @@ const ViewProject = ({ project, onClose, user }) => {
               {/* ))} */}
             </div>
           )}
-          {
-            isAddMeetingModalOpen && (
-              <AddMeetingModal
+          {isAddMeetingModalOpen && (
+            <AddMeetingModal
               onClose={closeAddMeetingModal}
               project={project}
               user={user}
               refetchMeetings={fetchMeetings}
-              />
-            )
-          }
+            />
+          )}
           <div className="flex justify-end py-3">
             <Pagination
               currentPage={2}

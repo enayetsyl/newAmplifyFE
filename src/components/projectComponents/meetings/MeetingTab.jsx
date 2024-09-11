@@ -186,8 +186,8 @@ const MeetingTab = ({ meetings }) => {
 
       {isShareMeetingModalOpen && (
         <ShareMeetingModal
-          closeModal={() => setIsShareMeetingModalOpen(false)}
-          meeting={selectedMeeting}
+        meeting={selectedMeeting}
+        onClose={() => setIsShareMeetingModalOpen(false)}
         />
       )}
     </div>

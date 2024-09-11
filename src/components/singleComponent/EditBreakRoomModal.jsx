@@ -118,7 +118,7 @@ const EditBreakoutRoomModal = ({
             options={participantsOptions}
             selectedOption="Select Participant"
             onSelect={(option) => {
-              const participant = formData.participants.find(
+              const participant = formData?.participants?.find(
                 (p) => `${p.name} (${p.email})` === option
               );
               addParticipantToRoom(participant);

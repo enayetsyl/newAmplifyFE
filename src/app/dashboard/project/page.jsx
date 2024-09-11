@@ -22,11 +22,11 @@ const Page = () => {
   const [totalPages, setTotalPages] = useState(1);
  const {user} = useGlobalContext()
 
-  const fetchProjects = async (page = 1) => {
+  const fetchProjects = async (userId, page = 1) => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://amplifymeetingbe.onrender.com/api/get-all/project/${user._id}`,
+        `http://localhost:8008/api/get-all/project/${userId}`,
         {
           params: { page, limit: 10 },
         }
@@ -41,8 +41,8 @@ const Page = () => {
   };
 
   useEffect(() => {
-    fetchProjects();
-  }, []);
+    fetchProjects(user?._id);
+  }, [user]);
 
   const handleSearch = (term) => {
     setSearchTerm(term);
@@ -98,7 +98,10 @@ const Page = () => {
         {loading ? (
           <p>Loading...</p>
         ) : projects && projects.length > 0 ? (
-          <ProjectTable projects={projects} setProjects={setProjects} />
+          <ProjectTable projects={projects} setProjects={setProjects} 
+          fetchProjects={fetchProjects}
+          user={user}
+          />
         ) : (
           <NoSearchResult />
         )}

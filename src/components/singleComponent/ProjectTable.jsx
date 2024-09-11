@@ -12,14 +12,14 @@ import ViewProject from "./ViewProject";
 import { useGlobalContext } from "@/context/GlobalContext";
 import ShareProjectModal from "../projectComponents/ShareProjectModal";
 
-const ProjectTable = ({ projects, setProjects }) => {
+const ProjectTable = ({ projects, setProjects, fetchProjects, user }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
   const [selectedProject, setSelectedProject] = useState(null);
   const [viewProject, setViewProject] = useState(false);
   const [isShareProjectModalOpen, setIsShareProjectModalOpen] = useState(false);
   const modalRef = useRef();
-  const { user } = useGlobalContext()
+  
   
   console.log('isShareProjectModalOpen', isShareProjectModalOpen)
 
@@ -220,6 +220,7 @@ const ProjectTable = ({ projects, setProjects }) => {
       ) : (
         <ViewProject project={selectedProject} onClose={closeViewProject} 
         user={user}
+        fetchProjects={fetchProjects}
         />
       )}
 
