@@ -22,7 +22,7 @@ const ChatDashboard = ({ receiverId }) => {
 
   useEffect(() => {
     // Fetch users from the database
-    fetch("https://amplifymeetingbe.onrender.com/api/users")
+    fetch("http://localhost:8008/api/users")
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -35,7 +35,7 @@ const ChatDashboard = ({ receiverId }) => {
   }, []);
 
   useEffect(() => {
-    const newSocket = io("https://amplifymeetingbe.onrender.com/user-namespace", {
+    const newSocket = io("http://localhost:8008/user-namespace", {
       auth: {
         token: user._id,
       },
@@ -73,7 +73,7 @@ const ChatDashboard = ({ receiverId }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("https://amplifymeetingbe.onrender.com/save-chat", {
+    fetch("http://localhost:8008/save-chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -32,7 +32,7 @@ const Page = () => {
     e.preventDefault();
 
  try {
-  const response = await axios.post(`https://amplifymeetingbe.onrender.com/api/live-meeting/join-meeting-participant`, {name: formData.fullName, role:"Participant", meetingId: meetingId});
+  const response = await axios.post(`http://localhost:8008/api/live-meeting/join-meeting-participant`, {name: formData.fullName, role:"Participant", meetingId: meetingId});
 
 
   if(response?.data?.message === "Participant added to waiting room"){

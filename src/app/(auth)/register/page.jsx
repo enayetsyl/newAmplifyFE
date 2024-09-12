@@ -52,7 +52,7 @@ const Register = () => {
     if (!validateForm()) return;
     try {
       const response = await axios.post(
-        `https://amplifymeetingbe.onrender.com/api/users/create`,
+        `http://localhost:8008/api/users/create`,
         {
           firstName: formData.firstName,
           lastName: formData.lastName,

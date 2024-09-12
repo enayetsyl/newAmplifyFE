@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import InputField from "../shared/InputField";
 import Button from "../shared/button";
 import { useGlobalContext } from "@/context/GlobalContext";
+import toast from "react-hot-toast";
 
 const AddContactModal = ({
   onClose,
@@ -42,8 +43,8 @@ const AddContactModal = ({
     try {
       const response = await fetch(
         isEditing
-          ? `https://amplifymeetingbe.onrender.com/api/update-contact/${contactToEdit._id}`
-          : `https://amplifymeetingbe.onrender.com/api/create/contact`,
+          ? `http://localhost:8008/api/update-contact/${contactToEdit._id}`
+          : `http://localhost:8008/api/create/contact`,
         {
           method: isEditing ? "PUT" : "POST",
           headers: {
@@ -77,11 +78,15 @@ const AddContactModal = ({
             responseData.message ||
               "Invalid data provided. Please check your input."
           );
+          toast.error(`${responseData.message}`)
         } else if (response.status === 401) {
           setError("Unauthorized access. Please verify your credentials.");
+          toast.error(`${responseData.message}`)
         } else if (response.status === 500) {
           setError("Internal server error. Please try again later.");
+          toast.error(`${responseData.message}`)
         } else {
+          toast.error(`${responseData.message}`)
           setError("An unexpected error occurred. Please try again.");
         }
         setSuccessMessage(null);

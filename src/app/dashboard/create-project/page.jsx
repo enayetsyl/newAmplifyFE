@@ -52,7 +52,7 @@ const Page = () => {
       meetingPasscode: "",
     },
   });
-  console.log("form data", formData);
+
 
   useEffect(() => {
     fetchContacts();
@@ -62,7 +62,7 @@ const Page = () => {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `https://amplifymeetingbe.onrender.com/api/get-all/contact/${user?._id}`
+        `http://localhost:8008/api/get-all/contact/${user?._id}`
       );
       if (!response.ok) {
         throw new Error(`Failed to fetch contacts: ${response.statusText}`);
@@ -106,7 +106,8 @@ const Page = () => {
       },
       status,
     };
-    console.log("updated form data", updatedFormData);
+   
+    
     try {
       const response = await axios.post(
         `http://localhost:8008/api/create/project`,

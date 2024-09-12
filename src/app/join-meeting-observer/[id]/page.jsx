@@ -37,7 +37,7 @@ const page = () => {
 
  try {
 
-  const response = await axios.post(`https://amplifymeetingbe.onrender.com/api/live-meeting/join-meeting-observer`, {name: formData.fullName, role:"observer", passcode: formData.passcode, meetingId: meetingId});
+  const response = await axios.post(`http://localhost:8008/api/live-meeting/join-meeting-observer`, {name: formData.fullName, role:"observer", passcode: formData.passcode, meetingId: meetingId});
 
   if (response?.data?.message === "Observer added to the meeting") {
     const { isStreaming } = response.data;

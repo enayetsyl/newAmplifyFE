@@ -12,11 +12,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Button from "@/components/shared/button";
 import { useGlobalContext } from "@/context/GlobalContext";
+import toast from "react-hot-toast";
 const Login = () => {
   const router = useRouter();
   const { setUser } = useGlobalContext();
   const [formData, setFormData] = useState({
-    email: "enayet@gmail.com",
+    email: "user2@gmail.com",
     password: "Ab123456@",
   });
   const [showPassword, setShowPassword] = useState(false);
@@ -34,7 +35,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `https://amplifymeetingbe.onrender.com/api/users/signin`,
+        `http://localhost:8008/api/users/signin`,
         {
           email: formData.email,
           password: formData.password,
@@ -48,8 +49,9 @@ const Login = () => {
       router.push(`/dashboard/my-profile/${response.data._id}`);
       // Handle successful sign-in (e.g., redirect to dashboard, store token, etc.)
     } catch (error) {
-      console.error("Error signing in:", error);
-      setError("Invalid email or password");
+      
+      toast.error(`${error.response.data.message}`)
+      setError(`${error.response.data.message}`);
     }
   };
 

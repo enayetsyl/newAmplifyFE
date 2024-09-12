@@ -6,6 +6,7 @@ import { timeZone } from "@/constant/Index";
 import { generatePasscode } from "@/utils/generatePasscode";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FaCircle } from "react-icons/fa";
 
 const AddMeetingModal = ({ onClose, project, user, refetchMeetings }) => {
@@ -36,7 +37,7 @@ const AddMeetingModal = ({ onClose, project, user, refetchMeetings }) => {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `https://amplifymeetingbe.onrender.com/api/get-all/contact/${user._id}`
+        `http://localhost:8008/api/get-all/contact/${user._id}`
       );
       if (!response.ok) {
         throw new Error(`Failed to fetch contacts: ${response.statusText}`);
@@ -94,7 +95,7 @@ const AddMeetingModal = ({ onClose, project, user, refetchMeetings }) => {
       projectId: project._id,
     };
     try {
-      const response = await axios.post(`https://amplifymeetingbe.onrender.com/api/create/meeting`, updatedFormData);
+      const response = await axios.post(`http://localhost:8008/api/create/meeting`, updatedFormData);
       
       if (response.status === 201) { 
         refetchMeetings(); 
@@ -103,6 +104,8 @@ const AddMeetingModal = ({ onClose, project, user, refetchMeetings }) => {
       onClose();
     } catch (error) {
       console.error("Error creating meeting:", error);
+      console.error("Error creating meeting data:", error.response.data.error);
+      toast.error(`${error.response.data.error}`)
     }
   };
 

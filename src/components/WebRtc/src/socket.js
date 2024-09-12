@@ -1,6 +1,6 @@
 import io from "socket.io-client";
 
-// const ENDPOINT = 'https://amplifymeetingbe.onrender.com';
+// const ENDPOINT = 'http://localhost:8008';
 const ENDPOINT = "http://localhost:8008/"; // Uncomment this line for production
 
 const socket = io(ENDPOINT, {
