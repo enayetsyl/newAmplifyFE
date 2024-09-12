@@ -14,6 +14,9 @@ import AddMeetingModal from "../projectComponents/meetings/AddMeetingModal";
 import EditProjectModal from "../projectComponents/EditProjectModal";
 import toast from "react-hot-toast";
 import MembersTab from "../projectComponents/MembersTab";
+import AddContactModal from "./AddContactModal";
+import MemberTabAddMember from "../projectComponents/MemberTabAddMember";
+import MemberBulkUpdate from "../projectComponents/MemberBulkUpdate";
 
 const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,8 +24,14 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [meetings, setMeetings] = useState([]);
   const [isAddMeetingModalOpen, setIsAddMeetingModalOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState(project?.status || '');
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false); 
-  console.log('project', project)
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [showAddContactModal, setShowAddContactModal] = useState(false);
+  const [showBulkUpdateModal, setShowBulkUpdateModal] = useState(false);
+
+  const handleModalClose = () => {
+    setShowAddContactModal(false);
+  };
+
   // Handle edit modal open/close
   const handleEditModal = () => {
     setIsEditModalOpen(true);
@@ -119,6 +128,13 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const closeAddMeetingModal = () => {
     setIsAddMeetingModalOpen(false);
   };
+  const handleBulkUpdateModal = () => {
+    setShowBulkUpdateModal(true);
+  };
+
+  const closeBulkUpdateModal = () => {
+    setShowBulkUpdateModal(false);
+  };
 
 // Function to handle status change
 const handleStatusChange = async (e) => {
@@ -173,7 +189,11 @@ const handleStatusChange = async (e) => {
   }
 };
 
+const handleOpenAddContactModal = () => {
+  setShowAddContactModal(true);
+};
 
+console.log('project', project)
 
   return (
     <div className="my_profile_main_section_shadow bg-[#fafafb] bg-opacity-90 h-full min-h-screen flex flex-col justify-center items-center w-full">
@@ -292,21 +312,25 @@ const handleStatusChange = async (e) => {
             <div className="pt-5">
               <div className="flex justify-between items-center">
               <HeadingLg children="Project Members" />
-              <div className="flex justify-end itece
+              <div className="flex justify-end items-center
                gap-5">
                 <Button className="font-bold"
                 variant="plain"
                 type="submit"
+                onClick={handleBulkUpdateModal}
                 >Bulk Update</Button>
                 <Button 
                 children={"Add"}
                 className="px-5 py-1.5 rounded-xl"
                 variant="secondary"
+                onClick={handleOpenAddContactModal}
                 />
               </div>
               </div>
               <div className="border-[0.5px] border-solid border-custom-dark-blue-1 rounded-xl h-[300px] overflow-y-scroll mt-2">
-             <MembersTab project={project}/>
+             <MembersTab project={project}
+             
+             />
               </div>
                 
             </div>
@@ -400,6 +424,18 @@ const handleStatusChange = async (e) => {
         />
       )}
 
+      {/* Render add member modal if open */}
+      {showAddContactModal && <MemberTabAddMember onClose={handleModalClose}
+      project={project} 
+      fetchProjects={fetchProjects}
+      userId={user._id}
+      />}
+      {/* Render bulk update modal if open */}
+      {showBulkUpdateModal && <MemberBulkUpdate  onClose={closeBulkUpdateModal}
+      project={project} 
+      fetchProjects={fetchProjects}
+      userId={user._id}
+      />}
           <div className="flex justify-end py-3">
             <Pagination
               currentPage={2}
