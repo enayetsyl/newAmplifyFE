@@ -11,6 +11,8 @@ import ParagraphBlue2 from "../shared/ParagraphBlue2";
 import axios from "axios";
 import MeetingTab from "../projectComponents/meetings/MeetingTab";
 import AddMeetingModal from "../projectComponents/meetings/AddMeetingModal";
+import EditProjectModal from "../projectComponents/EditProjectModal";
+import toast from "react-hot-toast";
 
 const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,7 +20,65 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [meetings, setMeetings] = useState([]);
   const [isAddMeetingModalOpen, setIsAddMeetingModalOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState(project?.status || '');
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false); 
 
+  // Handle edit modal open/close
+  const handleEditModal = () => {
+    setIsEditModalOpen(true);
+  };
+
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
+  };
+
+  const handleEditProject = async (updatedProjectData) => {
+    console.log("Updated Project Data:", updatedProjectData);
+    try {
+      const response = await axios.put(
+        `http://localhost:8008/api/update-general-project-info/${project._id}`,
+        updatedProjectData
+      );
+      if (response.status === 200) {
+        console.log("Project updated successfully", response.data);
+        fetchProjects(user?._id); // Refetch projects after successful edit
+        closeEditModal(); 
+        toast.success(`${response.data.message}`)
+      } else {
+        console.error("Failed to update project");
+        alert("Failed to update project. Please try again.");
+      }
+    } catch (error) {
+      if (error.response) {
+        const { status, data } = error.response;
+  
+        if (status === 400) {
+          // Validation error
+          console.error("Validation Error:", data.message);
+          toast.error(`Validation Error: ${data.message}`);
+        } else if (status === 404) {
+          // Project not found
+          console.error("Project not found:", data.message);
+          toast.error(`Error: Project not found.`);
+        } else if (status === 500) {
+          // Server error
+          console.error("Server Error:", data.message);
+          toast.error(`Server Error: ${data.message}`);
+        } else {
+          // Handle other unexpected errors
+          console.error("Unexpected Error:", data.message);
+          toast.error(`Error: ${data.message || "An unexpected error occurred."}`);
+        }
+      } else if (error.request) {
+        // The request was made, but no response was received
+        console.error("No response received from the server:", error.request);
+        toast.error("No response from the server. Please try again later.");
+      } else {
+        // Something went wrong in setting up the request
+        console.error("Error setting up the request:", error.message);
+        toast.error(`Error: ${error.message}`);
+      }
+    }
+  };
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -146,7 +206,7 @@ const handleStatusChange = async (e) => {
             <ParagraphBlue2 children={project?.name} />
           </div>
           <div>
-            <button className="cursor-pointer">Edit</button>
+            <button className="cursor-pointer" onClick={handleEditModal}>Edit</button>
           </div>
           </div>
           <div className="flex justify-start items-center gap-5">
@@ -355,6 +415,16 @@ const handleStatusChange = async (e) => {
               refetchMeetings={fetchMeetings}
             />
           )}
+
+          {/* Render edit modal if open */}
+      {isEditModalOpen && (
+        <EditProjectModal
+          onClose={closeEditModal}
+          project={project}
+          onSave={handleEditProject}
+        />
+      )}
+
           <div className="flex justify-end py-3">
             <Pagination
               currentPage={2}
