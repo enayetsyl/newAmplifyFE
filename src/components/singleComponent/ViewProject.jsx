@@ -13,6 +13,7 @@ import MeetingTab from "../projectComponents/meetings/MeetingTab";
 import AddMeetingModal from "../projectComponents/meetings/AddMeetingModal";
 import EditProjectModal from "../projectComponents/EditProjectModal";
 import toast from "react-hot-toast";
+import MembersTab from "../projectComponents/MembersTab";
 
 const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +22,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [isAddMeetingModalOpen, setIsAddMeetingModalOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState(project?.status || '');
   const [isEditModalOpen, setIsEditModalOpen] = useState(false); 
-
+  console.log('project', project)
   // Handle edit modal open/close
   const handleEditModal = () => {
     setIsEditModalOpen(true);
@@ -289,51 +290,25 @@ const handleStatusChange = async (e) => {
 
           {activeTab === "Members" && (
             <div className="pt-5">
-              <HeadingLg children="Observers List" />
-              <div className="border-[0.5px] border-solid border-custom-dark-blue-1 rounded-xl h-[300px] overflow-y-scroll mt-2">
-                {/* table heading */}
-                <div className="flex justify-start items-center py-3 px-5 shadow-sm">
-                  <div className="w-[30%]">
-                    <HeadingLg children="Name" />
-                  </div>
-                  <div className="w-[70%]">
-                    <HeadingLg children="Email" />
-                  </div>
-                </div>
-                {/* table item */}
-                {/* {formData.participants.map((participant, index) => ( */}
-                <div className="flex justify-start items-center py-3 px-5 shadow-sm">
-                  <div className="w-[30%]">
-                    <ParagraphLg children="Juliet Frazier" />
-                    {/* <ParagraphLg children={participant.name} /> */}
-                  </div>
-                  <div className="w-[70%]">
-                    <ParagraphLg children="JulietFrazier123@gmail.com" />
-                    {/* <ParagraphLg children={participant.email} /> */}
-                  </div>
-                </div>
-                <div className="flex justify-start items-center py-3 px-5 shadow-sm">
-                  <div className="w-[30%]">
-                    <ParagraphLg children="Juliet Frazier" />
-                    {/* <ParagraphLg children={participant.name} /> */}
-                  </div>
-                  <div className="w-[70%]">
-                    <ParagraphLg children="JulietFrazier123@gmail.com" />
-                    {/* <ParagraphLg children={participant.email} /> */}
-                  </div>
-                </div>
-                <div className="flex justify-start items-center py-3 px-5 shadow-sm">
-                  <div className="w-[30%]">
-                    <ParagraphLg children="Juliet Frazier" />
-                    {/* <ParagraphLg children={participant.name} /> */}
-                  </div>
-                  <div className="w-[70%]">
-                    <ParagraphLg children="JulietFrazier123@gmail.com" />
-                    {/* <ParagraphLg children={participant.email} /> */}
-                  </div>
-                </div>
-                {/* ))} */}
+              <div className="flex justify-between items-center">
+              <HeadingLg children="Project Members" />
+              <div className="flex justify-end itece
+               gap-5">
+                <Button className="font-bold"
+                variant="plain"
+                type="submit"
+                >Bulk Update</Button>
+                <Button 
+                children={"Add"}
+                className="px-5 py-1.5 rounded-xl"
+                variant="secondary"
+                />
               </div>
+              </div>
+              <div className="border-[0.5px] border-solid border-custom-dark-blue-1 rounded-xl h-[300px] overflow-y-scroll mt-2">
+             <MembersTab project={project}/>
+              </div>
+                
             </div>
           )}
 

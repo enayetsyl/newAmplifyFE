@@ -83,8 +83,8 @@ const MeetingTab = ({ meetings }) => {
 
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full bg-white shadow-md rounded-lg">
-        <thead>
+      <table className="min-w-full bg-white shadow-md rounded-lg ">
+        <thead className="border-b-[0.5px] border-solid border-custom-dark-blue-1">
           <tr>
             <TableHead >
               Meeting Title
