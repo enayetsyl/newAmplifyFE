@@ -329,7 +329,8 @@ console.log('project', project)
               </div>
               <div className="border-[0.5px] border-solid border-custom-dark-blue-1 rounded-xl h-[300px] overflow-y-scroll mt-2">
              <MembersTab project={project}
-             
+             fetchProjects={fetchProjects}
+             userId={user._id}
              />
               </div>
                 

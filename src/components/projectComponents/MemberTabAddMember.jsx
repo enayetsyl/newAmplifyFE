@@ -72,12 +72,19 @@ const MemberTabAddMember = ({
   };
   
 
+  // Function to copy the registration link
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText("http://localhost:3000/register");
+    alert("Link copied to clipboard!");
+  };
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
       <div className="bg-white p-8 rounded-lg w-[50%]">
         <h2 className="text-2xl font-semibold mb-4 text-custom-dark-blue-2">
         Add New Contact
         </h2>
+        <div className="max-h-96 overflow-y-auto border border-gray-300 rounded-lg">
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
             <tr>
@@ -90,8 +97,13 @@ const MemberTabAddMember = ({
           <tbody>
             {peoples.map((person) => (
               <tr key={person._id}>
-                <td className="px-4 py-2 border border-gray-300">
+                <td className="px-4 py-2 border border-gray-300 text-sm font-semibold">
                   {person.firstName} {person.lastName}
+                  {
+                    !person.isUser && (
+                      <span className="text-xs font-normal block">{person.email}</span>
+                    )
+                  }
                 </td>
                 <td className="px-4 py-2 border border-gray-300 text-center">
                   <input
@@ -99,6 +111,7 @@ const MemberTabAddMember = ({
                     className="cursor-pointer"
                     checked={selectedRoles[person._id]?.includes("Admin") || false}
                     onChange={() => handleRoleChange(person._id, "Admin")}
+                    disabled={!person.isUser}
                   />
                 </td>
                 <td className="px-4 py-2 border border-gray-300 text-center">
@@ -107,6 +120,7 @@ const MemberTabAddMember = ({
                     className="cursor-pointer"
                     checked={selectedRoles[person._id]?.includes("Moderator") || false}
                     onChange={() => handleRoleChange(person._id, "Moderator")}
+                    disabled={!person.isUser}
                   />
                 </td>
                 <td className="px-4 py-2 border border-gray-300 text-center">
@@ -115,12 +129,26 @@ const MemberTabAddMember = ({
                     className="cursor-pointer"
                     checked={selectedRoles[person._id]?.includes("Observer") || false}
                     onChange={() => handleRoleChange(person._id, "Observer")}
+                    disabled={!person.isUser}
                   />
+                </td>
+                <td className="px-4 py-2 border border-gray-300 text-center">
+                  {!person.isUser && (
+                    <Button
+                      className=" text-white px-3 py-1 rounded-lg text-xs"
+                      variant="secondary"
+                      type="button"
+                      onClick={handleCopyLink}
+                    >
+                      Copy Link
+                    </Button>
+                  )}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        </div>
         <div className="flex justify-center items-center gap-5 pt-5">
           <Button
             onClick={onClose}
