@@ -51,7 +51,7 @@ const Page = () => {
   const [userData, setUserData] = useState(null);
   const router = useRouter();
   const { id } = useParams();
-
+console.log('id in my profile page', id)
   const handlePasswordChangeClick = () => {
     setShowModal(true);
   };
@@ -110,9 +110,9 @@ const Page = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `hhttp://localhost:8008/api/users/find-by-id`,
+          `http://localhost:8008/api/users/find-by-id`,
           {
-            params: { id: id }, // replace 'user-id' with actual user ID
+            params: { id: id }, 
           }
         );
         if (response.data.result) {
@@ -128,7 +128,7 @@ const Page = () => {
 
     checkToken();
     fetchUserData();
-  }, [id, router]);
+  }, [id,router]);
 
   const unreadCount = notifications.filter(
     (notification) => !notification.read
