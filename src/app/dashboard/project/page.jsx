@@ -20,7 +20,7 @@ const Page = () => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
- const {user} = useGlobalContext()
+  const { user } = useGlobalContext();
 
   const fetchProjects = async (userId, page = 1) => {
     setLoading(true);
@@ -65,11 +65,10 @@ const Page = () => {
   };
 
   return (
-     <div className="my_profile_main_section_shadow bg-[#fafafb] bg-opacity-90 h-full min-h-screen flex flex-col justify-center items-center">
+    <div className="my_profile_main_section_shadow bg-[#fafafb] bg-opacity-90 h-full min-h-screen flex flex-col justify-center items-center">
       <div className="bg-white h-20 w-full border-b">
-
         {/* Nav bar */}
-        <div className="px-10 flex justify-between items-center pt-5">
+        {/* <div className="px-10 flex justify-between items-center pt-5">
           <div>
             <p className="text-2xl font-bold text-custom-teal">Projects</p>
           </div>
@@ -80,8 +79,43 @@ const Page = () => {
               variant="default"
               icon={<MdAdd />}
               onClick={() => router.push(`/dashboard/create-project`)}
-              className="rounded-xl w-[200px] text-center py-3 shadow-[0px_3px_6px_#2976a54d]"
+              className="rounded-xl w-[200px] text-center py-3 shadow-[0px_3px_6px_#2976a54d] hidden md:block"
             />
+            <Button
+              children=""
+              type="submit"
+              variant="default"
+              icon={<MdAdd size={26} />}
+              onClick={() => router.push(`/dashboard/create-project`)}
+              className="rounded-xl w-[40px] h-[40px] flex justify-center items-center text-center py-2 shadow-[0px_3px_6px_#2976a54d] md:hidden"
+            />
+          </div>
+        </div> */}
+        <div className="bg-white py-5 border-b border-solid border-gray-400 w-full">
+          <div className="md:px-10 flex justify-between items-center">
+            {/* left div */}
+            <div className="flex-grow text-center">
+              <p className="text-2xl font-bold text-custom-teal">Projects</p>
+            </div>
+            {/* right div */}
+            <div className="flex justify-end items-center gap-2">
+              <Button
+                children="Add new Project"
+                type="submit"
+                variant="default"
+                icon={<MdAdd />}
+                className="rounded-xl text-center shadow-[0px_3px_6px_#2976a54d] hidden md:flex w-[200px] py-3"
+                onClick={() => router.push(`/dashboard/create-project`)}
+              />
+              <Button
+                children=""
+                type="submit"
+                variant="default"
+                icon={<MdAdd />}
+                className="rounded-xl text-center py-3 mr-2 shadow-[0px_3px_6px_#2976a54d] md:hidden block pr-2 pl-3"
+                onClick={() => router.push(`/dashboard/create-project`)}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -90,18 +124,18 @@ const Page = () => {
       <div className="w-full bg-white">
         <div className="p-5 flex justify-Start items-center ">
           <Search placeholder="Search project name" onSearch={handleSearch} />
- 
         </div>
       </div>
-
 
       <div className="flex-grow mx-auto w-full">
         {loading ? (
           <p>Loading...</p>
         ) : projects && projects.length > 0 ? (
-          <ProjectTable projects={projects} setProjects={setProjects} 
-          fetchProjects={fetchProjects}
-          user={user}
+          <ProjectTable
+            projects={projects}
+            setProjects={setProjects}
+            fetchProjects={fetchProjects}
+            user={user}
           />
         ) : (
           <NoSearchResult />

@@ -18,22 +18,20 @@ const page = () => {
   const [showAddContactModal, setShowAddContactModal] = useState(false);
   const [contacts, setContacts] = useState([]);
   const [currentContact, setCurrentContact] = useState(null);
-  const [isEditing, setIsEditing] = useState(false)
-  const { user } = useGlobalContext()
+  const [isEditing, setIsEditing] = useState(false);
+  const { user } = useGlobalContext();
 
   useEffect(() => {
     fetchContacts(user?._id);
   }, [user]);
 
-
   const fetchContacts = async (userId) => {
     try {
       const response = await fetch(
-       `http://localhost:8008/api/get-all/contact/${userId}`
+        `http://localhost:8008/api/get-all/contact/${userId}`
       );
       const data = await response.json();
       setContacts(data);
-
     } catch (error) {
       console.error("Error fetching moderators:", error);
     }
@@ -62,32 +60,27 @@ const page = () => {
     <div className="my_profile_main_section_shadow bg-[#fafafb] bg-opacity-90 h-full min-h-screen flex flex-col justify-center items-center">
       {/* Navbar */}
       <div className="bg-white py-5 border-b border-solid border-gray-400 w-full">
-        {" "}
-        <div className="md:px-10 flex justify-between items-center ">
+        <div className="md:px-10 flex justify-between items-center">
           {/* left div */}
-          <div className="w-full text-center flex items-center justify-start">
-            <p className="text-2xl font-bold text-custom-teal -mr-[10rem] sm:mr-[-2rem]">
-              Contacts
-            </p>
+          <div className="flex-grow text-center">
+            <p className="text-2xl font-bold text-custom-teal">Contacts</p>
           </div>
           {/* right div */}
-          <div className="flex justify-center items-center gap-2">
+          <div className="flex justify-end items-center gap-2">
             <Button
               children="Add new Contact"
               type="submit"
               variant="default"
               icon={<MdAdd />}
-              className="rounded-xl  text-center  shadow-[0px_3px_6px_#2976a54d] hidden md:flex w-[200px] py-3"
+              className="rounded-xl text-center shadow-[0px_3px_6px_#2976a54d] hidden md:flex w-[200px] py-3"
               onClick={handleOpenAddContactModal}
             />
-          </div>
-          <div className="flex justify-center items-center gap-4">
             <Button
               children=""
               type="submit"
               variant="default"
               icon={<MdAdd />}
-              className="rounded-xl  text-center py-3 shadow-[0px_3px_6px_#2976a54d] md:hidden block pr-2 pl-3 mr-5"
+              className="rounded-xl text-center py-3 mr-2 shadow-[0px_3px_6px_#2976a54d] md:hidden block pr-2 pl-3"
               onClick={handleOpenAddContactModal}
             />
           </div>
@@ -95,8 +88,8 @@ const page = () => {
       </div>
 
       {/* search bar */}
-      <div className="border-b border-solid border-gray-400 py-4 w-full bg-white hidden md:block">
-        <div className="px-10 flex justify-start items-center ">
+      <div className="border-b border-solid border-gray-400 py-4 w-full bg-white">
+        <div className="px-10 flex justify-start items-center">
           <div className="flex justify-start items-center gap-5">
             <Search placeholder="Search contact name" onSearch={handleSearch} />
           </div>
@@ -104,28 +97,31 @@ const page = () => {
       </div>
 
       {/* Body */}
-      <div className="flex-grow w-full ">
-       {
-        contacts.length > 0 ? (
-          <ContactTable contacts={contacts} setContacts={setContacts}
-          currentContact={currentContact}
-          setCurrentContact={setCurrentContact}
-          isEditing={isEditing}
-          setIsEditing={setIsEditing}
+      <div className="flex-grow w-full">
+        {contacts.length > 0 ? (
+          <ContactTable
+            contacts={contacts}
+            setContacts={setContacts}
+            currentContact={currentContact}
+            setCurrentContact={setCurrentContact}
+            isEditing={isEditing}
+            setIsEditing={setIsEditing}
           />
         ) : (
-          <div className="flex-grow w-full h-full flex justify-center items-center pt-20" >
+          <div className="flex-grow w-full h-full flex justify-center items-center pt-20">
             <HeadingBlue25px>You have no contacts.</HeadingBlue25px>
           </div>
-        )
-       }
+        )}
       </div>
-      {showAddContactModal && <AddContactModal onClose={handleModalClose} 
-      contactToEdit={currentContact}
-      isEditing={isEditing}
-      fetchContacts={fetchContacts}
-      userId={user._id}
-      />}
+      {showAddContactModal && (
+        <AddContactModal
+          onClose={handleModalClose}
+          contactToEdit={currentContact}
+          isEditing={isEditing}
+          fetchContacts={fetchContacts}
+          userId={user._id}
+        />
+      )}
     </div>
   );
 };
