@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import InputField from "../shared/InputField";
-import Button from "../shared/button";
+import InputField from "../../shared/InputField";
+import Button from "../../shared/button";
 import axios from "axios";
 
 

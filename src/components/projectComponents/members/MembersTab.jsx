@@ -9,8 +9,8 @@ import { BsFillEnvelopeAtFill, BsThreeDotsVertical } from "react-icons/bs";
 import { FaShareAlt, FaUser } from "react-icons/fa";
 import { IoTrashSharp } from "react-icons/io5";
 import { RiPencilFill } from "react-icons/ri";
-import EditMemberModal from "./EditMemberModal";
 import toast from "react-hot-toast";
+import EditMemberModal from "./EditMemberModal";
 
 
 const MembersTab = ({ project, fetchProjects, userId }) => {

@@ -1,5 +1,6 @@
+import Button from '@/components/shared/button';
 import React, { useState, useEffect } from 'react';
-import Button from '../shared/button';
+
 
 const EditMemberModal = ({ member, onClose, onSave }) => {
   const [selectedRoles, setSelectedRoles] = useState([]);

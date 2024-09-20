@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import InputField from "../shared/InputField";
-import Button from "../shared/button";
 import axios from "axios";
+import Button from "@/components/shared/button";
 
 
 const MemberBulkUpdate= ({

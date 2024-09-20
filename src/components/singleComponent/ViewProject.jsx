@@ -13,10 +13,12 @@ import MeetingTab from "../projectComponents/meetings/MeetingTab";
 import AddMeetingModal from "../projectComponents/meetings/AddMeetingModal";
 import EditProjectModal from "../projectComponents/EditProjectModal";
 import toast from "react-hot-toast";
-import MembersTab from "../projectComponents/MembersTab";
+
 import AddContactModal from "./AddContactModal";
-import MemberTabAddMember from "../projectComponents/MemberTabAddMember";
-import MemberBulkUpdate from "../projectComponents/MemberBulkUpdate";
+import MemberTabAddMember from "../projectComponents/members/MemberTabAddMember";
+
+import MembersTab from "../projectComponents/members/MembersTab";
+import MemberBulkUpdate from "../projectComponents/members/MemberBulkUpdate";
 
 const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [isLoading, setIsLoading] = useState(false);
