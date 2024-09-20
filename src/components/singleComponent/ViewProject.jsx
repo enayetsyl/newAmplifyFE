@@ -23,7 +23,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [activeTab, setActiveTab] = useState("Meetings");
   const [meetings, setMeetings] = useState([]);
   const [isAddMeetingModalOpen, setIsAddMeetingModalOpen] = useState(false);
-  const [selectedStatus, setSelectedStatus] = useState(project?.status || '');
+  const [selectedStatus, setSelectedStatus] = useState(project?.status || "");
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [showAddContactModal, setShowAddContactModal] = useState(false);
   const [showBulkUpdateModal, setShowBulkUpdateModal] = useState(false);
@@ -51,8 +51,8 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
       if (response.status === 200) {
         console.log("Project updated successfully", response.data);
         fetchProjects(user?._id); // Refetch projects after successful edit
-        closeEditModal(); 
-        toast.success(`${response.data.message}`)
+        closeEditModal();
+        toast.success(`${response.data.message}`);
       } else {
         console.error("Failed to update project");
         alert("Failed to update project. Please try again.");
@@ -60,7 +60,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     } catch (error) {
       if (error.response) {
         const { status, data } = error.response;
-  
+
         if (status === 400) {
           // Validation error
           console.error("Validation Error:", data.message);
@@ -76,7 +76,9 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
         } else {
           // Handle other unexpected errors
           console.error("Unexpected Error:", data.message);
-          toast.error(`Error: ${data.message || "An unexpected error occurred."}`);
+          toast.error(
+            `Error: ${data.message || "An unexpected error occurred."}`
+          );
         }
       } else if (error.request) {
         // The request was made, but no response was received
@@ -136,64 +138,64 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     setShowBulkUpdateModal(false);
   };
 
-// Function to handle status change
-const handleStatusChange = async (e) => {
-  const newStatus = e.target.value;
-  setSelectedStatus(newStatus);
+  // Function to handle status change
+  const handleStatusChange = async (e) => {
+    const newStatus = e.target.value;
+    setSelectedStatus(newStatus);
 
-  try {
-    // Sending request to change project status
-    const response = await axios.put(
-      `http://localhost:8008/api/change-project-status/${project._id}`, 
-      { status: newStatus }
-    );
+    try {
+      // Sending request to change project status
+      const response = await axios.put(
+        `http://localhost:8008/api/change-project-status/${project._id}`,
+        { status: newStatus }
+      );
 
-    if (response.status === 200) {
-      console.log('Status updated successfully');
-      fetchProjects(user?._id)
-      // You can also add logic here to display success message to the user
-    } else {
-      console.error('Failed to update status');
-      // Show a generic error message to the user
-      alert('Failed to update status. Please try again.');
-    }
-  } catch (error) {
-    // Handle error based on the response or error message
-    if (error.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      const { status, data } = error.response;
-
-      if (status === 400) {
-        // Handle bad request, possibly due to validation error
-        alert(`Validation Error: ${data.message}`);
-      } else if (status === 404) {
-        // Handle project not found error
-        alert(`Error: Project not found`);
-      } else if (status === 500) {
-        // Handle internal server error
-        alert(`Server Error: ${data.message}`);
+      if (response.status === 200) {
+        console.log("Status updated successfully");
+        fetchProjects(user?._id);
+        // You can also add logic here to display success message to the user
       } else {
-        // Handle any other errors
-        alert(`Error: ${data.message || 'An unexpected error occurred'}`);
+        console.error("Failed to update status");
+        // Show a generic error message to the user
+        alert("Failed to update status. Please try again.");
       }
-    } else if (error.request) {
-      // The request was made but no response was received
-      console.error('No response received:', error.request);
-      alert('No response from the server. Please try again later.');
-    } else {
-      // Something happened in setting up the request that triggered an Error
-      console.error('Error setting up the request:', error.message);
-      alert(`Error: ${error.message}`);
+    } catch (error) {
+      // Handle error based on the response or error message
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        const { status, data } = error.response;
+
+        if (status === 400) {
+          // Handle bad request, possibly due to validation error
+          alert(`Validation Error: ${data.message}`);
+        } else if (status === 404) {
+          // Handle project not found error
+          alert(`Error: Project not found`);
+        } else if (status === 500) {
+          // Handle internal server error
+          alert(`Server Error: ${data.message}`);
+        } else {
+          // Handle any other errors
+          alert(`Error: ${data.message || "An unexpected error occurred"}`);
+        }
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error("No response received:", error.request);
+        alert("No response from the server. Please try again later.");
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error("Error setting up the request:", error.message);
+        alert(`Error: ${error.message}`);
+      }
     }
-  }
-};
+  };
 
-const handleOpenAddContactModal = () => {
-  setShowAddContactModal(true);
-};
+  const handleOpenAddContactModal = () => {
+    setShowAddContactModal(true);
+  };
 
-console.log('project', project)
+  console.log("project", project);
 
   return (
     <div className="my_profile_main_section_shadow bg-[#fafafb] bg-opacity-90 h-full min-h-screen flex flex-col justify-center items-center w-full">
@@ -222,13 +224,15 @@ console.log('project', project)
         {/*  general information  div*/}
         <div className="bg-white shadow-[0px_0px_12px_#00000029] rounded-xl p-5 w-full">
           <div className="flex justify-between items-center">
-          <div className="flex justify-start items-center gap-5">
-            <HeadingLg children="Project Name" />
-            <ParagraphBlue2 children={project?.name} />
-          </div>
-          <div>
-            <button className="cursor-pointer" onClick={handleEditModal}>Edit</button>
-          </div>
+            <div className="flex justify-start items-center gap-5">
+              <HeadingLg children="Project Name" />
+              <ParagraphBlue2 children={project?.name} />
+            </div>
+            <div>
+              <button className="cursor-pointer" onClick={handleEditModal}>
+                Edit
+              </button>
+            </div>
           </div>
           <div className="flex justify-start items-center gap-5">
             <HeadingLg children="Description" />
@@ -255,7 +259,7 @@ console.log('project', project)
         {/* participants, observers, breakout rooms and pools div container */}
         <div className="bg-white shadow-[0px_0px_12px_#00000029] rounded-xl p-5 mt-3 mb-10">
           {/* tab navigation */}
-          <div className="flex justify-around space-x-10  border-b">
+          <div className="flex justify-around space-x-10 overflow-x-auto border-b">
             <button
               className={`py-2 border-custom-dark-blue-1 ${
                 activeTab === "Meetings" ? "border-b-2 " : "opacity-25"
@@ -311,28 +315,30 @@ console.log('project', project)
           {activeTab === "Members" && (
             <div className="pt-5">
               <div className="flex justify-between items-center">
-              <HeadingLg children="Project Members" />
-              <div className="flex justify-end items-center
-               gap-5">
-                <Button className="font-bold"
-                variant="plain"
-                type="submit"
-                onClick={handleBulkUpdateModal}
-                >Bulk Update</Button>
-                <Button 
-                children={"Add"}
-                className="px-5 py-1.5 rounded-xl"
-                variant="secondary"
-                onClick={handleOpenAddContactModal}
-                />
-              </div>
+                <HeadingLg children="Project Members" />
+                <div
+                  className="flex justify-end items-center
+               gap-5"
+                >
+                  <Button
+                    className="font-bold"
+                    variant="plain"
+                    type="submit"
+                    onClick={handleBulkUpdateModal}
+                  >
+                    Bulk Update
+                  </Button>
+                  <Button
+                    children={"Add"}
+                    className="px-5 py-1.5 rounded-xl"
+                    variant="secondary"
+                    onClick={handleOpenAddContactModal}
+                  />
+                </div>
               </div>
               <div className="border-[0.5px] border-solid border-custom-dark-blue-1 rounded-xl h-[300px] overflow-y-scroll mt-2">
-             <MembersTab project={project}
-             
-             />
+                <MembersTab project={project} />
               </div>
-                
             </div>
           )}
 
@@ -416,26 +422,32 @@ console.log('project', project)
           )}
 
           {/* Render edit modal if open */}
-      {isEditModalOpen && (
-        <EditProjectModal
-          onClose={closeEditModal}
-          project={project}
-          onSave={handleEditProject}
-        />
-      )}
+          {isEditModalOpen && (
+            <EditProjectModal
+              onClose={closeEditModal}
+              project={project}
+              onSave={handleEditProject}
+            />
+          )}
 
-      {/* Render add member modal if open */}
-      {showAddContactModal && <MemberTabAddMember onClose={handleModalClose}
-      project={project} 
-      fetchProjects={fetchProjects}
-      userId={user._id}
-      />}
-      {/* Render bulk update modal if open */}
-      {showBulkUpdateModal && <MemberBulkUpdate  onClose={closeBulkUpdateModal}
-      project={project} 
-      fetchProjects={fetchProjects}
-      userId={user._id}
-      />}
+          {/* Render add member modal if open */}
+          {showAddContactModal && (
+            <MemberTabAddMember
+              onClose={handleModalClose}
+              project={project}
+              fetchProjects={fetchProjects}
+              userId={user._id}
+            />
+          )}
+          {/* Render bulk update modal if open */}
+          {showBulkUpdateModal && (
+            <MemberBulkUpdate
+              onClose={closeBulkUpdateModal}
+              project={project}
+              fetchProjects={fetchProjects}
+              userId={user._id}
+            />
+          )}
           <div className="flex justify-end py-3">
             <Pagination
               currentPage={2}

@@ -37,7 +37,7 @@ export default function DashboardLayout({ children }) {
             user={user}
           />
         </div>
-        <div className="flex-grow h-full ">{children}</div>
+        <div className="overflow-x-hidden flex-grow h-full">{children}</div>
       </div>
       {isLogoutModalOpen && <LogoutModal onClose={handleCloseLogoutModal} />}
       {/* footer */}

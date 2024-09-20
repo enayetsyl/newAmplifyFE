@@ -19,15 +19,14 @@ const ProjectTable = ({ projects, setProjects, fetchProjects, user }) => {
   const [viewProject, setViewProject] = useState(false);
   const [isShareProjectModalOpen, setIsShareProjectModalOpen] = useState(false);
   const modalRef = useRef();
-  
-  
-  console.log('isShareProjectModalOpen', isShareProjectModalOpen)
+
+  console.log("isShareProjectModalOpen", isShareProjectModalOpen);
 
   const getRole = (project) => {
     if (project.createdBy === user._id) {
       return "Admin";
     } else {
-      const person = project?.people?.find(p => p.userId === user._id);
+      const person = project?.people?.find((p) => p.userId === user._id);
       return person ? person.role : "No Role";
     }
   };
@@ -90,16 +89,15 @@ const ProjectTable = ({ projects, setProjects, fetchProjects, user }) => {
     }
   };
 
-  const handleShareProject =  (project) => {
-    setSelectedProject(project)
+  const handleShareProject = (project) => {
+    setSelectedProject(project);
     setIsShareProjectModalOpen(true);
     closeModal();
-  
-};
+  };
 
   const handleView = (project) => {
     setSelectedProject(project);
-    setViewProject(true); 
+    setViewProject(true);
     closeModal();
   };
 
@@ -107,7 +105,6 @@ const ProjectTable = ({ projects, setProjects, fetchProjects, user }) => {
     setViewProject(false); // Hide ViewProject component
     setSelectedProject(null);
   };
-
 
   const toggleModal = (event, project) => {
     const { top, left } = event.currentTarget.getBoundingClientRect();
@@ -118,7 +115,7 @@ const ProjectTable = ({ projects, setProjects, fetchProjects, user }) => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-   };
+  };
 
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -138,12 +135,10 @@ const ProjectTable = ({ projects, setProjects, fetchProjects, user }) => {
     };
   }, [isModalOpen]);
 
-  
-
   return (
     <div className="overflow-hidden">
       {!viewProject ? (
-        <div className="min-w-full overflow-x-auto p-8 border">
+        <div className="min-w-full overflow-x-auto p-3 md:p-8 border">
           <table className="min-w-full divide-y divide-gray-200 rounded-lg">
             <thead className="bg-custom-gray-2 rounded-lg py-2 w-full">
               <tr className="shadow-[0px_0px_26px_#00000029] w-full">
@@ -218,9 +213,11 @@ const ProjectTable = ({ projects, setProjects, fetchProjects, user }) => {
           </table>
         </div>
       ) : (
-        <ViewProject project={selectedProject} onClose={closeViewProject} 
-        user={user}
-        fetchProjects={fetchProjects}
+        <ViewProject
+          project={selectedProject}
+          onClose={closeViewProject}
+          user={user}
+          fetchProjects={fetchProjects}
         />
       )}
 
@@ -266,7 +263,7 @@ const ProjectTable = ({ projects, setProjects, fetchProjects, user }) => {
         </div>
       )}
 
-{isShareProjectModalOpen && (
+      {isShareProjectModalOpen && (
         <ShareProjectModal
           project={selectedProject}
           onClose={() => setIsShareProjectModalOpen(false)}

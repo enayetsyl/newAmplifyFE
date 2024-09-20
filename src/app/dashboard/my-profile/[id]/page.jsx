@@ -90,12 +90,9 @@ const Page = () => {
 
   const deleteUser = async () => {
     try {
-      await axios.delete(
-        `http://localhost:8008/api/users/delete-by-id`,
-        {
-          params: { id: id }, // replace with actual user ID
-        }
-      );
+      await axios.delete(`http://localhost:8008/api/users/delete-by-id`, {
+        params: { id: id }, // replace with actual user ID
+      });
       router.push("/register"); // Redirect to registration page
     } catch (error) {
       console.error("Error deleting user:", error);
@@ -113,7 +110,7 @@ const Page = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8008/api/users/find-by-id`,
+          `hhttp://localhost:8008/api/users/find-by-id`,
           {
             params: { id: id }, // replace 'user-id' with actual user ID
           }
@@ -239,44 +236,24 @@ const Page = () => {
           <DeleteModal onClose={handleCloseDeleteModal} onDelete={deleteUser} />
         )}
       </div>
-      <div className="md:hidden my_profile_main_section_shadow bg-[#fafafb] bg-opacity-90 h-full min-h-screen flex flex-col-reverse justify-start items-center p-5 relative">
-        <div className="fixed  top-2 right-5 flex items-center justify-center">
-          <Link href={`/dashboard/edit-profile/${id}`}>
-            <Button
-              children=""
-              type="submit"
-              variant="secondary"
-              icon={<RiPencilFill />}
-              className="rounded-xl w-full   py-3 shadow-[0px_3px_6px_#2976a54d] pl-3 pr-2 flex items-center justify-center"
-            />
-          </Link>
-        </div>
-        <div>
-          <p className="text-xl md:text-2xl font-bold text-custom-teal absolute top-4 left-40">
+      <div className="md:hidden my_profile_main_section_shadow bg-[#fafafb] bg-opacity-90 h-full min-h-screen flex flex-col justify-start items-center p-5 relative">
+        <div className="w-full flex justify-between items-center absolute top-0 left-0 px-5 pt-5">
+          <p className="text-xl md:text-2xl font-bold text-custom-teal text-center flex-grow">
             My Profile
           </p>
-        </div>
-        <div className="bg-white w-full pb-5 relative">
-          <div className="flex flex-col md:flex-row justify-between items-center pt-5">
-            <div className="flex flex-col md:flex-row justify-center items-center gap-4 mt-5 md:mt-0 relative w-full">
+          <div className="flex items-center justify-center">
+            <Link href={`/dashboard/edit-profile/${id}`}>
               <Button
-                children="Change Password"
+                children=""
                 type="submit"
-                onClick={handlePasswordChangeClick}
-                icon={<MdLockReset />}
-                className="rounded-xl w-full md:w-[200px] text-center py-3 shadow-[0px_3px_6px_#2976a54d] cursor-pointer"
+                variant="secondary"
+                icon={<RiPencilFill />}
+                className="rounded-xl w-full py-3 shadow-[0px_3px_6px_#2976a54d] pl-3 pr-2 flex items-center justify-center"
               />
-              <Button
-                children="Delete My Account"
-                type="submit"
-                variant="primary"
-                icon={<IoTrashSharp />}
-                onClick={handleDeleteModalOpen}
-                className="rounded-xl w-full md:w-[200px] text-center py-3 shadow-[0px_3px_6px_#FF66004D] cursor-pointer"
-              />
-            </div>
+            </Link>
           </div>
         </div>
+
         <div className="flex-grow w-full">
           <div className="pt-16">
             <div className="flex flex-col md:flex-row justify-start items-center gap-8">
@@ -288,7 +265,7 @@ const Page = () => {
                 className="rounded-full"
               />
               <div className="flex-grow items-center justify-center">
-                <h1 className="text-3xl md:text-3xl font-semibold  text-center text-custom-teal">
+                <h1 className="text-3xl md:text-3xl font-semibold text-center text-custom-teal">
                   {userData ? userData.firstName.toUpperCase() : "Loading..."}
                 </h1>
                 <p className="text-sm text-center text-gray-400">
@@ -296,6 +273,7 @@ const Page = () => {
                 </p>
               </div>
             </div>
+
             <div>
               <h1 className="text-xl md:text-2xl font-semibold text-custom-dark-blue-1 pt-10">
                 Personal Details
@@ -314,6 +292,29 @@ const Page = () => {
                   paragraph={userData && userData.email}
                 />
               </div>
+            </div>
+          </div>
+        </div>
+        <div className="bg-white w-full pb-5 relative mt-5">
+          {" "}
+          {/* Added margin-top to push content below the header */}
+          <div className="flex flex-col md:flex-row justify-between items-center pt-5">
+            <div className="flex flex-col md:flex-row justify-center items-center gap-4 mt-5 md:mt-0 relative w-full">
+              <Button
+                children="Change Password"
+                type="submit"
+                onClick={handlePasswordChangeClick}
+                icon={<MdLockReset />}
+                className="rounded-xl w-full md:w-[200px] text-center py-3 shadow-[0px_3px_6px_#2976a54d] cursor-pointer"
+              />
+              <Button
+                children="Delete My Account"
+                type="submit"
+                variant="primary"
+                icon={<IoTrashSharp />}
+                onClick={handleDeleteModalOpen}
+                className="rounded-xl w-full md:w-[200px] text-center py-3 shadow-[0px_3px_6px_#FF66004D] cursor-pointer"
+              />
             </div>
           </div>
         </div>
