@@ -64,8 +64,8 @@ const MemberTabAddMember = ({
         people: selectedPeople,
       });
       console.log(response)
-      fetchProjects(); // Refresh projects after submission
-      onClose(); // Close the modal
+      fetchProjects(userId); 
+      onClose(); 
     } catch (error) {
       console.error("Error adding people:", error);
     }
