@@ -152,7 +152,7 @@ const RightSidebar = ({
       className={`flex ${
         isSidebarOpen
           ? "w-80"
-          : "md:w-24 w-5 bg-orange-300 md:bg-white h-5 pr-[2rem] sm:pr-0"
+          : "md:w-24 w-5 bg-custum-meet-bg md:bg-white h-5 pr-[2rem] sm:pr-0"
       } transition-width duration-300 md:bg-white h-screen md:rounded-l-xl relative`}
     >
       {isSidebarOpen ? (

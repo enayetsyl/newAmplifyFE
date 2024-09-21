@@ -171,7 +171,7 @@ const LeftSidebar = ({
     <div>
       <div
         className={`flex ${
-          isSidebarOpen ? "w-80" : "w-8 bg-orange-300 md:bg-white md:w-24"
+          isSidebarOpen ? "w-80" : "w-8 bg-custum-meet-bg md:bg-white md:w-24"
         } transition-width duration-300 md:bg-white h-screen md:rounded-r-xl relative ${
           role == "Observer" && "hidden"
         }`}
