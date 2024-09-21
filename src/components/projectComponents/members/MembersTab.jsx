@@ -9,26 +9,68 @@ import { BsFillEnvelopeAtFill, BsThreeDotsVertical } from "react-icons/bs";
 import { FaShareAlt, FaUser } from "react-icons/fa";
 import { IoTrashSharp } from "react-icons/io5";
 import { RiPencilFill } from "react-icons/ri";
+import toast from "react-hot-toast";
+import EditMemberModal from "./EditMemberModal";
 
 
-const MembersTab = ({ project }) => {
+const MembersTab = ({ project, fetchProjects, userId }) => {
 
+
+  const [selectedMember, setSelectedMember] = useState(null); // Store the selected member for editing
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleEditMember = (member) => {
-    // Handle edit logic here, e.g., open an edit modal
-    console.log("Edit Member:", member);
+    setSelectedMember(member);
+    setIsModalOpen(true); // Open the modal
   };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedMember(null); // Clear the selected member when modal closes
+  };
+
+  // Function to handle saving the edited member role
+
+  const handleSaveMember = async (updatedMember) => {
+
+      try {
+        const response = await axios.put(
+          `http://localhost:8008/api/edit-member-role/${project._id}`,
+          {
+            updatedMember: updatedMember
+          }
+        );
+
+        if(response.status === 200) {
+          toast.success(`${response.data.message}`)
+          fetchProjects(userId);
+        } 
+        
+        
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+        toast.error(`${error.response.data.message}`)
+      } 
+    
+    
+    setIsModalOpen(false); 
+    
+  }
 
   const handleRemoveMember = async (memberId) => {
     // Handle remove logic here, e.g., make an API call to remove the member
     console.log("Remove Member ID:", memberId);
     try {
-      await axios.delete(`http://localhost:8008/api/remove-member/${memberId}`);
-      alert("Member removed successfully");
-      // You can refresh the project members here after successful removal
+      const response = await axios.delete(`http://localhost:8008/api/delete-member-from-project/${project._id}/${memberId}`);
+
+      if(response.status === 200) {
+        toast.success(`${response.data.message}`)
+        fetchProjects(userId);
+      } 
+      
     } catch (error) {
       console.error("Error removing member:", error);
-      alert("Failed to remove member. Please try again.");
+      toast.error(`${error.response.data.message}`)
     }
   };
 
@@ -80,6 +122,14 @@ const MembersTab = ({ project }) => {
           ))}
         </tbody>
       </table>
+      {isModalOpen && (
+        <EditMemberModal
+          member={selectedMember}
+          onClose={handleCloseModal}
+          onSave={handleSaveMember}
+          
+        />
+      )}
     </div>
   );
 };

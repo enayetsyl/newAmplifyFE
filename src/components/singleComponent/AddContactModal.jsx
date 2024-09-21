@@ -27,7 +27,7 @@ const AddContactModal = ({
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const { user } = useGlobalContext();
- 
+
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
     setRoles((prevRoles) => ({
@@ -70,7 +70,7 @@ const AddContactModal = ({
             : "Contact created successfully."
         );
         setError(null);
-        fetchContacts(userId)
+        fetchContacts(userId);
       } else {
         // Handle different types of errors returned from the server
         if (response.status === 400) {
@@ -78,16 +78,16 @@ const AddContactModal = ({
             responseData.message ||
               "Invalid data provided. Please check your input."
           );
-          toast.error(`${responseData.message}`)
+          toast.error(`${responseData.message}`);
         } else if (response.status === 401) {
           setError("Unauthorized access. Please verify your credentials.");
-          toast.error(`${responseData.message}`)
+          toast.error(`${responseData.message}`);
         } else if (response.status === 500) {
           setError("Internal server error. Please try again later.");
-          toast.error(`${responseData.message}`)
+          toast.error(`${responseData.message}`);
         } else {
-          toast.error(`${responseData.message}`)
           setError("An unexpected error occurred. Please try again.");
+          toast.error(`${responseData.message}`);
         }
         setSuccessMessage(null);
       }
@@ -97,7 +97,7 @@ const AddContactModal = ({
       setSuccessMessage(null);
     } finally {
       console.error(error);
-      
+
       onClose();
     }
   };
@@ -192,6 +192,13 @@ const AddContactModal = ({
 
           {/* Button */}
           <div className="flex justify-end gap-4 mt-4">
+            <Button
+              variant="cancel"
+              onClick={onClose}
+              className="rounded-xl text-center py-2 px-5 shadow-[0px_3px_6px_#09828F69]"
+            >
+              {"Cancel"}
+            </Button>
             <Button
               type="submit"
               variant="save"
