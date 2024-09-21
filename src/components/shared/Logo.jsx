@@ -3,7 +3,7 @@ import logo from '../../../public/logo.svg'
 
 const Logo = () => {
   return (
-    <div>
+    <div className='hidden md:flex'>
         <Image
         src={logo}
         alt='logo'

@@ -169,7 +169,7 @@ const LeftSidebarOpenUi = ({
   return (
     <>
       {isBreakoutRoom && role !== "Participant" ? (
-        <div className="flex flex-col flex-grow px-4 pb-2 pt-4 bg-custom-gray-8 mb-4 rounded-xl overflow-y-auto mx-4 mt-16 ">
+        <div className=" flex-col flex-grow px-4 pb-2 pt-4 bg-custom-gray-8 mb-4 rounded-xl overflow-y-auto mx-4 mt-16 hidden md:flex">
           {/* top heading */}
 
           <div className="flex items-center justify-between">
@@ -235,7 +235,7 @@ const LeftSidebarOpenUi = ({
           </div>
         </div>
       ) : (
-        <div className="">
+        <div className=" md:pt-0 pt-16">
           {/* Whiteboard and local recording */}
           <div className=" lg:pt-10 px-4">
             <Button
@@ -273,7 +273,7 @@ const LeftSidebarOpenUi = ({
           </div>
 
           {/* Backroom chat and icon */}
-          <div className="flex justify-start items-center gap-2 lg:py-4 mx-4">
+          <div className="flex justify-start items-center gap-2 lg:py-4 mx-4 pt-10 sm:pt-20">
             <BsChatSquareFill className="text-custom-dark-blue-1" />
             <HeadingLg children="BACKROOM CHAT" />
           </div>

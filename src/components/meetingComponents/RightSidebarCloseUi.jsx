@@ -25,7 +25,7 @@ const RightSidebarCloseUi = ({
   return (
     <>
       {/* Backroom chat and icon */}
-      <div className="flex flex-col justify-center items-center gap-2 pt-10  lg:pb-2 px-2">
+      <div className=" flex-col justify-center items-center gap-2 pt-10  lg:pb-2 px-2 hidden md:flex">
         <div className="bg-custom-black flex justify-center items-center gap-1 px-2 py-1 rounded-xl text-[10px]">
           <FaEye className="text-custom-orange-1" />
           <p className=" text-white">Viewers</p>
@@ -35,7 +35,7 @@ const RightSidebarCloseUi = ({
       </div>
 
       {/* chat container */}
-      <div className="flex flex-col pb-2 pt-4 bg-custom-gray-8 mb-2 rounded-xl overflow-y-auto mx-1">
+      <div className="hidden sm:flex flex-col pb-2 pt-4 bg-custom-gray-8 mb-2 rounded-xl overflow-y-auto mx-1">
         {/* Tab buttons */}
         <div className="flex flex-col justify-center items-center gap-2 pb-2 px-2 ">
           <Button
@@ -114,7 +114,7 @@ const RightSidebarCloseUi = ({
           ))}
       </div>
 
-      <div className="mb-2">
+      <div className="mb-2 hidden md:flex">
         {/* heading */}
         <div className="flex flex-col justify-center items-center pb-2 space-y-2 ">
           <IoIosDocument className="text-custom-dark-blue-1 text-xl" />
