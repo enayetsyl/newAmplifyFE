@@ -26,6 +26,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("Meetings");
   const [meetings, setMeetings] = useState([]);
+  const [polls, setPolls] = useState([]);
   const [isAddMeetingModalOpen, setIsAddMeetingModalOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState(project?.status || "");
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -123,9 +124,31 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
       setIsLoading(false);
     }
   };
+  // Fetching project meetings
+  const fetchPools = async (page=1) => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(
+        `http://localhost:8008/api/get-all/poll/${project._id}`,
+        {
+          params: { page, limit: 10 },
+        }
+      );
+      console.log('pool response ',response.data);
+      setPolls(response.data.polls);
+      // setTotalPages(response.data.totalPages);
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  console.log('pools', polls)
 
   useEffect(() => {
     fetchMeetings();
+    fetchPools();
   }, []);
 
   const handleAddMeetingModal = () => {
@@ -204,7 +227,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     setShowAddContactModal(true);
   };
 
-  console.log("project", project);
+  // console.log("project", project);
 
   const [formData, setFormData] = useState({
     polls: [
@@ -435,6 +458,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
                   project={project}
                   fetchProjects={fetchProjects}
                   userId={user?._id}
+                  polls={polls}
                 />
               </div>
             </div>

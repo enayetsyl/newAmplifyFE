@@ -2,6 +2,7 @@ import Button from '@/components/shared/button';
 import FormDropdownLabel from '@/components/shared/FormDropdownLabel';
 import HeadingBlue25px from '@/components/shared/HeadingBlue25px';
 import InputField from '@/components/shared/InputField';
+import { useGlobalContext } from '@/context/GlobalContext';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { FiMinus } from 'react-icons/fi';
@@ -9,6 +10,7 @@ import { GoPlus } from 'react-icons/go';
 import { IoTrashSharp } from 'react-icons/io5';
 
 const AddPoolModal = ({onClose, formData, setFormData, poolToEdit, project, refetchMeetings}) => {
+  const { user } = useGlobalContext();
   const [newPool, setNewPool] = useState({
     poolName: '',
     isActive: false,
@@ -20,6 +22,8 @@ const AddPoolModal = ({onClose, formData, setFormData, poolToEdit, project, refe
       },
     ],
   });
+
+  console.log('user', user)
 
   useEffect(() => {
     if (poolToEdit) {
@@ -88,7 +92,8 @@ const AddPoolModal = ({onClose, formData, setFormData, poolToEdit, project, refe
     try {
       // Send data to backend via Axios POST request
       const dataToSend = {
-        project: project._id, // Include project ID
+        project: project._id, 
+        createdBy: user._id,
         pollName: newPool.poolName,
         isActive: newPool.isActive,
         questions: newPool.questions,
