@@ -512,7 +512,7 @@ const page = () => {
 
   return (
     <>
-      <div className="flex justify-between min-h-screen max-h-screen meeting_bg">
+      <div className="flex justify-between min-h-screen max-h-screen meeting_bg ">
         {userRole === "Participant" && !isAdmitted ? (
           <div className="flex items-center justify-center w-full min-h-screen bg-white ">
             <h1 className="text-2xl font-bold">
@@ -545,7 +545,7 @@ const page = () => {
                 removeParticipant={removeParticipant}
               />
             </div>
-            <div className="flex-1 w-full max-h-[100vh] overflow-hidden">
+            <div className="flex-1 w-full max-h-[100vh] overflow-hidden bg-orange-600">
               <MeetingView
                 role={userRole}
                 users={participants}

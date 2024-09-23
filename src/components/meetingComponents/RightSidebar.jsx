@@ -13,10 +13,9 @@ const RightSidebar = ({
   breakoutRooms,
   setBreakoutRooms,
   observersMessages,
-  userName, 
+  userName,
   meetingId,
-  sendMessageObserver
-
+  sendMessageObserver,
 }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -151,19 +150,33 @@ const RightSidebar = ({
   return (
     <div
       className={`flex ${
-        isSidebarOpen ? "w-80" : "w-24"
-      } transition-width duration-300 bg-white h-screen rounded-l-xl relative`}
+        isSidebarOpen
+          ? "w-80"
+          : "md:w-24 w-5 bg-custum-meet-bg md:bg-white h-5 pr-[2rem] sm:pr-0"
+      } transition-width duration-300 md:bg-white h-screen md:rounded-l-xl relative`}
     >
       {isSidebarOpen ? (
-        <LuArrowRightToLine
-          className="absolute top-4 left-2 text-black text-sm cursor-pointer "
-          onClick={toggleSidebar}
-        />
+        <>
+          <LuArrowRightToLine
+            className="absolute top-4 left-2 text-black text-sm cursor-pointer bg-white h-6 w-6 p-1 mr-6 rounded-full md:hidden"
+            onClick={toggleSidebar}
+          />
+          <LuArrowRightToLine
+            className="absolute top-4 left-2 text-black text-sm cursor-pointer h-6 w-6 p-1"
+            onClick={toggleSidebar}
+          />
+        </>
       ) : (
-        <LuArrowLeftToLine
-          className="absolute top-4 left-2 text-black text-sm cursor-pointer "
-          onClick={toggleSidebar}
-        />
+        <>
+          <LuArrowLeftToLine
+            className="absolute top-4 left-2 text-black text-sm cursor-pointer bg-white h-6 w-6 p-1 mr-6 rounded-full md:hidden"
+            onClick={toggleSidebar}
+          />
+          <LuArrowLeftToLine
+            className="absolute top-4 left-2 text-black text-sm cursor-pointer hidden md:block h-6 w-6 p-1"
+            onClick={toggleSidebar}
+          />
+        </>
       )}
 
       <div className="flex flex-col w-full ">
@@ -187,8 +200,8 @@ const RightSidebar = ({
             handleSearch={handleSearch}
             observersMessages={observersMessages}
             userName={userName}
-          meetingId={meetingId}
-          sendMessageObserver={sendMessageObserver}
+            meetingId={meetingId}
+            sendMessageObserver={sendMessageObserver}
           />
         ) : (
           <RightSidebarCloseUi

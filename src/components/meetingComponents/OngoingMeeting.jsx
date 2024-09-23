@@ -43,7 +43,7 @@ const OngoingMeeting = ({ users, iframeLink, role }) => {
   };
 
   return (
-    <div>
+    <div className="md:block hidden">
       <h1>
         Welcome, {fullName}
         {breakRoomID}
@@ -65,7 +65,7 @@ const OngoingMeeting = ({ users, iframeLink, role }) => {
         className=""
         style={{ width: "100%", paddingBottom: "56.25%", position: "relative" }}
       >
-        <Main breakRoomID={showbreak && breakRoomID} />
+        {/* <Main breakRoomID={showbreak && breakRoomID} /> */}
       </div>
       {/* <div ref={logContainerRef}></div> */}
     </div>
