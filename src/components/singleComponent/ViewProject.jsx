@@ -19,6 +19,8 @@ import MemberTabAddMember from "../projectComponents/members/MemberTabAddMember"
 
 import MembersTab from "../projectComponents/members/MembersTab";
 import MemberBulkUpdate from "../projectComponents/members/MemberBulkUpdate";
+import PoolsTab from "../projectComponents/pools/PoolsTab";
+import AddPoolModal from "../projectComponents/pools/AddPoolModal";
 
 const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,6 +31,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [showAddContactModal, setShowAddContactModal] = useState(false);
   const [showBulkUpdateModal, setShowBulkUpdateModal] = useState(false);
+  const [isAddPollModalOpen, setIsAddPoolModalOpen] = useState(false);
 
   const handleModalClose = () => {
     setShowAddContactModal(false);
@@ -129,6 +132,10 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     setIsAddMeetingModalOpen(true);
   };
 
+  const handleOpenAddPoolModal = () => {
+    setIsAddPoolModalOpen(true);
+  };
+
   const closeAddMeetingModal = () => {
     setIsAddMeetingModalOpen(false);
   };
@@ -198,6 +205,65 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   };
 
   console.log("project", project);
+
+  const [formData, setFormData] = useState({
+    polls: [
+      {
+        poolName: "Customer Satisfaction Survey",
+        isActive: true,
+        questions: [
+          {
+            question: "How satisfied are you with our service?",
+            type: "single",
+            answers: [
+              { answer: "Very Satisfied" },
+              { answer: "Satisfied" },
+              { answer: "Neutral" },
+              { answer: "Dissatisfied" },
+            ],
+          },
+          {
+            question: "What could we improve?",
+            type: "multiple",
+            answers: [
+              { answer: "Speed of service" },
+              { answer: "Product quality" },
+              { answer: "Customer support" },
+              { answer: "Pricing" },
+            ],
+          },
+        ],
+      },
+      {
+        poolName: "Product Feedback",
+        isActive: false,
+        questions: [
+          {
+            question: "How would you rate the product?",
+            type: "single",
+            answers: [
+              { answer: "Excellent" },
+              { answer: "Good" },
+              { answer: "Fair" },
+              { answer: "Poor" },
+            ],
+          },
+          {
+            question: "What features do you like the most?",
+            type: "multiple",
+            answers: [
+              { answer: "Design" },
+              { answer: "Functionality" },
+              { answer: "Durability" },
+              { answer: "Price" },
+            ],
+          },
+        ],
+      },
+    ],
+  });
+
+  const poolToEdit = false;
 
   return (
     <div className="my_profile_main_section_shadow bg-[#fafafb] bg-opacity-90 h-full min-h-screen flex flex-col justify-center items-center w-full">
@@ -339,43 +405,67 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
                 </div>
               </div>
               <div className="border-[0.5px] border-solid border-custom-dark-blue-1 rounded-xl h-[300px] overflow-y-scroll mt-2">
-             <MembersTab project={project}
-             fetchProjects={fetchProjects}
-             userId={user?._id}
-             />
+                <MembersTab
+                  project={project}
+                  fetchProjects={fetchProjects}
+                  userId={user?._id}
+                />
               </div>
             </div>
           )}
 
           {activeTab === "Pools" && (
             <div className="pt-5">
-              <div className="flex justify-stat items-center px-3">
-                <div className="w-[25%]">
-                  <HeadingLg children="Name" />
-                </div>
-                <div className="w-[20%]">
-                  <HeadingLg children="Participants" />
-                </div>
-                <div className="w-[55%]">
-                  <HeadingLg children="Interpreter" />
-                </div>
-              </div>
-              {/* {formData.breakoutRooms.map((room, index) => ( */}
-              <div className="py-3 space-y-3">
-                <div className="flex justify-start items-center bg-white rounded-xl shadow-[0px_0px_6px_#00000029] p-3">
-                  <ParagraphLg className="w-[25%]">Sistine Chapel</ParagraphLg>
-                  <ParagraphLg className="w-[20%]">5</ParagraphLg>
-                  <ParagraphLg className="w-[50%]">Sara Meyer</ParagraphLg>
-                </div>
-
-                <div className="flex justify-start items-center bg-white rounded-xl shadow-[0px_0px_6px_#00000029] p-3 ">
-                  <ParagraphLg className="w-[25%]">Sistine Chapel</ParagraphLg>
-                  <ParagraphLg className="w-[20%]">5</ParagraphLg>
-                  <ParagraphLg className="w-[50%]">Adam Wood</ParagraphLg>
+              <div className="flex justify-between items-center">
+                <HeadingLg children="Pools List" />
+                <div
+                  className="flex justify-end items-center
+             gap-5"
+                >
+                  <Button
+                    children={"Add Pool"}
+                    className="px-5 py-1.5 rounded-xl"
+                    variant="secondary"
+                    onClick={handleOpenAddPoolModal}
+                  />
                 </div>
               </div>
-              {/* ))} */}
+              <div className="border-[0.5px] border-solid border-custom-dark-blue-1 rounded-xl h-[300px] overflow-y-scroll mt-2">
+                <PoolsTab
+                  project={project}
+                  fetchProjects={fetchProjects}
+                  userId={user?._id}
+                />
+              </div>
             </div>
+            // <div className="pt-5">
+            //   <div className="flex justify-stat items-center px-3">
+            //     <div className="w-[25%]">
+            //       <HeadingLg children="Name" />
+            //     </div>
+            //     <div className="w-[20%]">
+            //       <HeadingLg children="Participants" />
+            //     </div>
+            //     <div className="w-[55%]">
+            //       <HeadingLg children="Interpreter" />
+            //     </div>
+            //   </div>
+            //   {/* {formData.breakoutRooms.map((room, index) => ( */}
+            //   <div className="py-3 space-y-3">
+            //     <div className="flex justify-start items-center bg-white rounded-xl shadow-[0px_0px_6px_#00000029] p-3">
+            //       <ParagraphLg className="w-[25%]">Sistine Chapel</ParagraphLg>
+            //       <ParagraphLg className="w-[20%]">5</ParagraphLg>
+            //       <ParagraphLg className="w-[50%]">Sara Meyer</ParagraphLg>
+            //     </div>
+
+            //     <div className="flex justify-start items-center bg-white rounded-xl shadow-[0px_0px_6px_#00000029] p-3 ">
+            //       <ParagraphLg className="w-[25%]">Sistine Chapel</ParagraphLg>
+            //       <ParagraphLg className="w-[20%]">5</ParagraphLg>
+            //       <ParagraphLg className="w-[50%]">Adam Wood</ParagraphLg>
+            //     </div>
+            //   </div>
+            //   {/* ))} */}
+            // </div>
           )}
 
           {activeTab === "Repository" && (
@@ -451,6 +541,17 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
               project={project}
               fetchProjects={fetchProjects}
               userId={user._id}
+            />
+          )}
+          {/* Render add pool modal if open */}
+          {isAddPollModalOpen && (
+            <AddPoolModal
+              onClose={() => setIsAddPoolModalOpen(false)}
+              formData={formData}
+              setFormData={setFormData}
+              poolToEdit={poolToEdit}
+              project={project}
+              refetchMeetings={fetchMeetings}
             />
           )}
           <div className="flex justify-end py-3">
