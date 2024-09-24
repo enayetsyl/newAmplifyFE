@@ -4,19 +4,20 @@ import TableHead from "@/components/shared/TableHead";
 import { useState } from "react";
 import { IoTrashSharp } from "react-icons/io5";
 import { RiPencilFill } from "react-icons/ri";
+import PollDetailsModal from "./PollDetailsModal";
 
 const PoolsTab = ({ project, fetchProjects, userId, polls }) => {
-  const [selectedMember, setSelectedMember] = useState(null); // Store the selected member for editing
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPoll, setSelectedPoll] = useState(null); 
+  const [isViewPollModalOpen, setIsViewPollModalOpen] = useState(false);
 
-  const handleEditMember = (member) => {
-    setSelectedMember(member);
-    setIsModalOpen(true); // Open the modal
+  const handleViewPoll = (poll) => {
+    setSelectedPoll(poll);
+    setIsViewPollModalOpen(true); 
   };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedMember(null); // Clear the selected member when modal closes
+    setIsViewPollModalOpen(false);
+    setSelectedPoll(null); 
   };
 
   // Function to handle saving the edited member role
@@ -70,7 +71,9 @@ const PoolsTab = ({ project, fetchProjects, userId, polls }) => {
             <TableHead>Created By</TableHead>
             <TableHead>Added Date</TableHead>
             <TableHead>Last Updated On</TableHead>
+            <TableHead></TableHead>
             <TableHead>Action</TableHead>
+            <TableHead></TableHead>
           </tr>
         </thead>
         <tbody>
@@ -96,7 +99,7 @@ const PoolsTab = ({ project, fetchProjects, userId, polls }) => {
               <TableData>
                 <Button 
                 children={"View"}
-                
+                onClick={() => handleViewPoll(poll)}
                 className=" font-semibold " variant="plain" type="button"/>
                 
               </TableData>
@@ -110,18 +113,28 @@ const PoolsTab = ({ project, fetchProjects, userId, polls }) => {
                   </button>
                 </div>
               </TableData>
+              <TableData>
+              <div className="flex items-center space-x-2">
+                <Button 
+                children={"Active"}
+                className=" font-semibold " variant="plain" type="button"/>
+                <Button 
+                children={"Inactive"}
+                className=" font-semibold " variant="plain" type="button"/>
+              </div>
+              </TableData>
             </tr>
           ))}
         </tbody>
       </table>
-      {/* {isModalOpen && (
-        <EditMemberModal
-          member={selectedMember}
+      {
+        isViewPollModalOpen && (
+          <PollDetailsModal
+          poll={selectedPoll}
           onClose={handleCloseModal}
-          onSave={handleSaveMember}
-          
-        />
-      )} */}
+          />
+        )
+      }
     </div>
   );
 };

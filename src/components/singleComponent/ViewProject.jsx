@@ -575,7 +575,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
               setFormData={setFormData}
               poolToEdit={poolToEdit}
               project={project}
-              refetchMeetings={fetchMeetings}
+              fetchProjects={fetchProjects}
             />
           )}
           <div className="flex justify-end py-3">

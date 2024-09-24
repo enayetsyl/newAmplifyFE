@@ -9,7 +9,7 @@ import { FiMinus } from 'react-icons/fi';
 import { GoPlus } from 'react-icons/go';
 import { IoTrashSharp } from 'react-icons/io5';
 
-const AddPoolModal = ({onClose, formData, setFormData, poolToEdit, project, refetchMeetings}) => {
+const AddPoolModal = ({onClose, formData, setFormData, poolToEdit, project, fetchProjects}) => {
   const { user } = useGlobalContext();
   const [newPool, setNewPool] = useState({
     poolName: '',
@@ -104,8 +104,8 @@ const AddPoolModal = ({onClose, formData, setFormData, poolToEdit, project, refe
 
       if (response.status === 201) {
         // Handle successful creation (e.g., refetch data or notify the user)
-        // refetchMeetings();
-        console.log('Poll saved successfully', response.data);
+       console.log('status 201', response)
+       fetchProjects()
         onClose(); // Close modal
       }
     } catch (error) {
