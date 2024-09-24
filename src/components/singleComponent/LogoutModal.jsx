@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import Button from '../shared/button';
+import Button from '../shared/Button';
 import { useRouter } from 'next/navigation';
 import { useGlobalContext } from '@/context/GlobalContext';
 

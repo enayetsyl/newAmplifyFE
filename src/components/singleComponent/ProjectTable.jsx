@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import Button from "../shared/button";
+import Button from "../shared/Button";
 import TableHead from "../shared/TableHead";
 import TableData from "../shared/TableData";
 import { BsFillEnvelopeAtFill, BsThreeDotsVertical } from "react-icons/bs";

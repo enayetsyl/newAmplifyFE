@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import InputField from "../shared/InputField";
-import Button from "../shared/button";
+import Button from "../shared/Button";
 
 const InviteModeratorModal = ({ onClose, projectId }) => {
   const [firstName, setFirstName] = useState("");

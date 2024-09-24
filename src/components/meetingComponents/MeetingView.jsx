@@ -6,7 +6,7 @@ import {
   FaVideo,
   FaVideoSlash,
 } from "react-icons/fa";
-import Button from "../shared/button";
+import Button from "../shared/Button";
 import HeadingBlue25px from "../shared/HeadingBlue25px";
 import { IoCaretDownSharp, IoLogOutSharp } from "react-icons/io5";
 import Image from "next/image";

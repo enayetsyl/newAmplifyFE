@@ -4,7 +4,7 @@ import React from 'react'
 import Error500Image from '../../../public/500.png'
 import HeadingBlue25px from '../shared/HeadingBlue25px'
 import ParagraphBlue2 from '../shared/ParagraphBlue2'
-import Button from '../shared/button'
+import Button from '../shared/Button'
 import Footer from '../shared/Footer'
 import { useRouter } from 'next/navigation'
 

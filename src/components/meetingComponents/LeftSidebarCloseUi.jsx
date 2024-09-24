@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "../shared/button";
+import Button from "../shared/Button";
 import { LuClipboardSignature } from "react-icons/lu";
 import { FaAngleDown, FaVideo } from "react-icons/fa";
 import { BsChatSquareFill } from "react-icons/bs";

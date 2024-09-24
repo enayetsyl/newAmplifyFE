@@ -1,5 +1,5 @@
 'use client';
-import Button from '@/components/shared/button';
+import Button from '@/components/shared/Button';
 import Dropdown from '@/components/shared/Dropdown';
 import Search from '@/components/singleComponent/Search';
 import { projectStatusOptions } from '@/constant/Index';

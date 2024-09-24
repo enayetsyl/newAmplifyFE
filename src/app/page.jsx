@@ -1,4 +1,4 @@
-import Button from "@/components/shared/button";
+
 import accountActivation from "@/components/authComponent/AccountActivation";
 import { FaUserEdit, FaKey, FaTrashAlt, FaBell } from 'react-icons/fa';
 import AccountActivation from "@/components/authComponent/AccountActivation";
@@ -10,6 +10,7 @@ import Error500 from "@/components/errorComponent/Error500";
 import Error404 from "@/components/errorComponent/Error404";
 import Link from "next/link";
 import HeadingBlue25px from "@/components/shared/HeadingBlue25px";
+import Button from "@/components/shared/Button";
 
 export default function Home() {
   return (

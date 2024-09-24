@@ -1,4 +1,4 @@
-import Button from "@/components/shared/button";
+import Button from "@/components/shared/Button";
 import TableData from "@/components/shared/TableData";
 import TableHead from "@/components/shared/TableHead";
 import { useState } from "react";

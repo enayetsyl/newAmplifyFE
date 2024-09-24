@@ -8,7 +8,7 @@ import Logo from "@/components/shared/Logo";
 import registerImage from "../../../../public/register.jpg";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Button from "@/components/shared/button";
+import Button from "@/components/shared/Button";
 
 const Register = () => {
   const router = useRouter();

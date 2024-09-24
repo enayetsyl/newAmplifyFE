@@ -1,4 +1,4 @@
-import Button from "@/components/shared/button";
+import Button from "@/components/shared/Button";
 import FormDropdownLabel from "@/components/shared/FormDropdownLabel";
 import HeadingBlue25px from "@/components/shared/HeadingBlue25px";
 import InputField from "@/components/shared/InputField";

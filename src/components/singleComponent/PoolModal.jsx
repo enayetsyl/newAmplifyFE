@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import HeadingBlue25px from '../shared/HeadingBlue25px';
 import InputField from '../shared/InputField';
-import Button from '../shared/button';
+import Button from '../shared/Button';
 import { IoTrashSharp } from 'react-icons/io5';
 import { GoPlus } from 'react-icons/go';
 import FormDropdownLabel from '../shared/FormDropdownLabel';

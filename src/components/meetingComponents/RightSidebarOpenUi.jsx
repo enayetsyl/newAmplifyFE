@@ -1,6 +1,6 @@
 // RightSidebarOpenUi.js
 import React, { useEffect, useState } from "react";
-import Button from "../shared/button";
+import Button from "../shared/Button";
 import Image from "next/image";
 import { LuClipboardSignature } from "react-icons/lu";
 import { FaFolder, FaTrash, FaVideo } from "react-icons/fa";

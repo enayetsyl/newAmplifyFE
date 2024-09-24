@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import HeadingBlue25px from '../shared/HeadingBlue25px';
 import { GoPlus } from 'react-icons/go';
-import Button from '../shared/button';
+import Button from '../shared/Button';
 import BreakoutRoomModal from '../singleComponent/BreakoutRoomModal';
 import EditBreakoutRoomModal from '../singleComponent/EditBreakRoomModal'; // Import the new EditBreakoutRoomModal
 import { IoTrashSharp } from 'react-icons/io5';

@@ -1,7 +1,7 @@
 'use client'
 import HeadingH1 from '../shared/HeadingH1'
 import ParagraphBlue2 from '../shared/ParagraphBlue2'
-import Button from '../shared/button'
+import Button from '../shared/Button'
 import BackToLogin from '../shared/BackToLogin'
 import { FaEnvelopeOpenText } from 'react-icons/fa'
 import { FaEye, FaEyeSlash } from 'react-icons/fa';

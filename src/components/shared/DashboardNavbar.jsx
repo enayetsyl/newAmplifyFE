@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "./button";
+import Button from "./Button";
 import { RiPencilFill } from "react-icons/ri";
 import { IoTrashSharp } from "react-icons/io5";
 import { MdLockReset } from "react-icons/md";

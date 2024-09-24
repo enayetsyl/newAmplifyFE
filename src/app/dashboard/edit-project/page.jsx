@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-import Button from "@/components/shared/button";
+import Button from "@/components/shared/Button";
 import Step1 from "@/components/createProjectFormComponent/Step1";
 import Step2 from "@/components/createProjectFormComponent/Step2";
 import Step3 from "@/components/createProjectFormComponent/Step3";

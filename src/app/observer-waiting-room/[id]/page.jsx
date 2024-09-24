@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/shared/button";
+import Button from "@/components/shared/Button";
 import HeadingBlue25px from "@/components/shared/HeadingBlue25px";
 import Logo from "@/components/shared/Logo";
 import axios from "axios";

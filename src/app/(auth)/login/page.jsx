@@ -10,7 +10,7 @@ import registerImage from "../../../../public/register.jpg";
 import logo from "../../../../public/logo.jpg";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Button from "@/components/shared/button";
+import Button from "@/components/shared/Button";
 import { useGlobalContext } from "@/context/GlobalContext";
 import toast from "react-hot-toast";
 const Login = () => {
