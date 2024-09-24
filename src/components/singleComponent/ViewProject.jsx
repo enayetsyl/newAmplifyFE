@@ -289,13 +289,13 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   return (
     <div className="my_profile_main_section_shadow bg-[#fafafb] bg-opacity-90 h-full min-h-screen flex flex-col justify-center items-center w-full">
       {/* navbar */}
-      <div className="pt-5 w-full px-10 flex justify-between items-center ">
+      <div className="pt-5 w-full px-6 flex justify-between items-center ">
         <div>
           <HeadingBlue25px children="View Project Details" />
         </div>
       </div>
       {/* body */}
-      <div className="flex-grow px-10 w-full">
+      <div className="flex-grow px-6 w-full">
         {/* project status change button */}
         <div className="flex justify-end py-5">
           <select
@@ -311,36 +311,52 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
           </select>
         </div>
         {/*  general information  div*/}
-        <div className="bg-white shadow-[0px_0px_12px_#00000029] rounded-xl p-5 w-full">
+        <div className="bg-white shadow-[0px_0px_12px_#00000029] rounded-xl p-5 w-full relative">
           <div className="flex justify-between items-center">
-            <div className="flex justify-start items-center gap-5">
-              <HeadingLg children="Project Name" />
+            <div className="flex justify-between items-center gap-3">
+              <p className=" md:text-custom-dark-blue-1 text-base font-semibold sm:text-lg">
+                Project Name:
+              </p>
               <ParagraphBlue2 children={project?.name} />
             </div>
             <div>
-              <button className="cursor-pointer" onClick={handleEditModal}>
+              <button className="cursor-pointer absolute top-2 right-3" onClick={handleEditModal}>
                 Edit
               </button>
             </div>
           </div>
-          <div className="flex justify-start items-center gap-5">
-            <HeadingLg children="Description" />
+          <div className="flex justify-start items-center gap-3 sm:gap-5">
+            <p className=" md:text-custom-dark-blue-1 text-base font-semibold sm:text-lg">
+              Description:
+            </p>
             <ParagraphBlue2 children={project?.description} />
           </div>
-          <div className="flex justify-start items-center gap-5">
-            <HeadingLg children="Opened On" />
+          <div className="flex justify-start items-center gap-1 sm:gap-5">
+            <p className=" md:text-custom-dark-blue-1 text-base font-semibold sm:text-lg">
+              Opened On:
+            </p>
+            {/* <HeadingLg children="Opened On" /> */}
             <ParagraphBlue2 children={project?.startDate} />
           </div>
-          <div className="flex justify-start items-center gap-5">
-            <HeadingLg children="Expires In" />
+          <div className="flex justify-start items-center gap-3 sm:gap-5">
+            <p className=" md:text-custom-dark-blue-1 text-base font-semibold sm:text-lg">
+              Expires In:
+            </p>
+            {/* <HeadingLg children="Expires In" /> */}
             <ParagraphBlue2 children={project?.endDate} />
           </div>
-          <div className="flex justify-start items-center gap-5">
-            <HeadingLg children="Passcode" />
+          <div className="flex justify-start items-center gap-3 sm:gap-5">
+            <p className=" md:text-custom-dark-blue-1 text-base font-semibold sm:text-lg">
+              Passcode:
+            </p>
+            {/* <HeadingLg children="Passcode" /> */}
             <ParagraphBlue2 children={project?.projectPasscode} />
           </div>
-          <div className="flex justify-start items-center gap-5">
-            <HeadingLg children="Project Status" />
+          <div className="flex justify-start items-center gap-3 sm:gap-5">
+            <p className=" md:text-custom-dark-blue-1 text-base font-semibold sm:text-lg">
+              Project Status:
+            </p>
+            {/* <HeadingLg children="Project Status" /> */}
             <ParagraphBlue2 children={project?.status} />
           </div>
         </div>
