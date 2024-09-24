@@ -71,7 +71,7 @@ const page = () => {
               onClick={handleOpenAddContactModal}
             />
             <Button
-              children=""
+              children="."
               type="submit"
               variant="default"
               icon={<MdAdd />}
