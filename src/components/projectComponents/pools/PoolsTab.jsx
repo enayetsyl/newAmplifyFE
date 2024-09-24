@@ -5,10 +5,13 @@ import { useState } from "react";
 import { IoTrashSharp } from "react-icons/io5";
 import { RiPencilFill } from "react-icons/ri";
 import PollDetailsModal from "./PollDetailsModal";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const PoolsTab = ({ project, fetchProjects, userId, polls }) => {
   const [selectedPoll, setSelectedPoll] = useState(null); 
   const [isViewPollModalOpen, setIsViewPollModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleViewPoll = (poll) => {
     setSelectedPoll(poll);
@@ -20,6 +23,26 @@ const PoolsTab = ({ project, fetchProjects, userId, polls }) => {
     setSelectedPoll(null); 
   };
 
+  const handleStatusChange = async (poll, newStatus) => {
+    setIsLoading(true);
+    try {
+      const response = await axios.patch(
+        `http://localhost:8008/api/change-active-status/${poll._id}`,
+        { isActive: newStatus }
+      );
+
+      if (response.status === 200) {
+        toast.success(response.data.message);
+        fetchProjects(userId); 
+      }
+    } catch (error) {
+      console.error("Error updating poll status:", error);
+      toast.error("Error updating poll status");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
   // Function to handle saving the edited member role
 
   const handleSaveMember = async (updatedMember) => {
@@ -117,10 +140,18 @@ const PoolsTab = ({ project, fetchProjects, userId, polls }) => {
               <div className="flex items-center space-x-2">
                 <Button 
                 children={"Active"}
-                className=" font-semibold " variant="plain" type="button"/>
+                disabled={poll.isActive || isLoading}
+                onClick={() => handleStatusChange(poll, true)}
+                className=" font-semibold " variant="plain" type="button"
+                />
+                
                 <Button 
                 children={"Inactive"}
-                className=" font-semibold " variant="plain" type="button"/>
+                disabled={!poll.isActive || isLoading}
+                    onClick={() => handleStatusChange(poll, false)}
+                className=" font-semibold " variant="plain" type="button"
+                
+                />
               </div>
               </TableData>
             </tr>
