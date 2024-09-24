@@ -1,16 +1,14 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import Button from "../shared/Button";
 import TableHead from "../shared/TableHead";
 import TableData from "../shared/TableData";
 import { BsFillEnvelopeAtFill, BsThreeDotsVertical } from "react-icons/bs";
 import { FaShareAlt, FaUser } from "react-icons/fa";
 import { RiPencilFill } from "react-icons/ri";
-import { IoTrashSharp } from "react-icons/io5";
 import ViewProject from "./ViewProject";
-import { useGlobalContext } from "@/context/GlobalContext";
 import ShareProjectModal from "../projectComponents/ShareProjectModal";
+import Button from "../shared/Button";
 
 const ProjectTable = ({ projects, setProjects, fetchProjects, user }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);

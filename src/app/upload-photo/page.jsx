@@ -6,10 +6,10 @@ import axios from 'axios';
 import Image from 'next/image';
 import { FaCamera } from 'react-icons/fa';
 import Logo from '@/components/shared/Logo';
-import Button from '@/components/shared/Button';
 import Footer from '@/components/shared/Footer';
 import joinMeetingImage from '../../../public/join-meeting-edited.png';
 import uploadPlaceHolderImage from '../../../public/placeholder-image.png';
+import Button from '@/components/shared/Button';
 
 const Page = () => {
   const [selectedFile, setSelectedFile] = useState(null);

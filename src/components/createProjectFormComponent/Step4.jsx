@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import HeadingBlue25px from '../shared/HeadingBlue25px';
 import { GoPlus } from 'react-icons/go';
-import Button from '../shared/Button';
 import BreakoutRoomModal from '../singleComponent/BreakoutRoomModal';
 import EditBreakoutRoomModal from '../singleComponent/EditBreakRoomModal'; // Import the new EditBreakoutRoomModal
 import { IoTrashSharp } from 'react-icons/io5';
 import HeadingLg from '../shared/HeadingLg';
 import { RiPencilFill } from 'react-icons/ri';
 import ParagraphLg from '../shared/ParagraphLg';
-import Pagination from '../shared/Pagination'; // Make sure to import your Pagination component
+import Button from '../shared/Button';
 
 const Step4 = ({ formData, setFormData }) => {
   const [isBreakoutRoomModalOpen, setIsBreakoutRoomModalOpen] = useState(false);

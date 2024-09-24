@@ -1,24 +1,14 @@
 import React from "react";
 import Logo from "../shared/Logo";
 import {
-  FaHeadphones,
-  FaUserFriends,
   FaVideo,
-  FaVideoSlash,
 } from "react-icons/fa";
-import Button from "../shared/Button";
 import HeadingBlue25px from "../shared/HeadingBlue25px";
-import { IoCaretDownSharp, IoLogOutSharp } from "react-icons/io5";
-import Image from "next/image";
-import meetingImage from "../../../public/meeting.jpeg";
-import { MdCallEnd, MdScreenShare, MdVerifiedUser } from "react-icons/md";
-import { BsThreeDots } from "react-icons/bs";
-import { PiLineVerticalBold } from "react-icons/pi";
-import { CgMenuGridR } from "react-icons/cg";
-import { IoIosMicOff } from "react-icons/io";
+import {  IoLogOutSharp } from "react-icons/io5";
 import WhiteBoard from "./WhiteBoard";
 import OngoingMeeting from "./OngoingMeeting";
 import EndOFMeeting from "./EndOFMeeting";
+import Button from "../shared/Button";
 
 const MeetingView = ({
   role,

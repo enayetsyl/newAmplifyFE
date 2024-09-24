@@ -6,7 +6,6 @@ import HeadingLg from "../shared/HeadingLg";
 import { FaCheckCircle } from "react-icons/fa";
 import ParagraphLg from "../shared/ParagraphLg";
 import Button from "../shared/Button";
-import { FaClock } from "react-icons/fa6";
 
 const ViewModeratorModal = ({ user, onClose }) => {
   // Format the date to yy-mm-dd

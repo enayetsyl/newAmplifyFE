@@ -1,8 +1,8 @@
 import React from 'react'
 import HeadingH1 from '../shared/HeadingH1'
 import ParagraphBlue2 from '../shared/ParagraphBlue2'
-import Button from '../shared/Button'
 import { FaEnvelopeOpenText } from 'react-icons/fa'
+import Button from '../shared/Button'
 
 const AccountCreatedUI = () => {
   return (

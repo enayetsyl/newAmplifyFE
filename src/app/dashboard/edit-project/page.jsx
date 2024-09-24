@@ -1,7 +1,5 @@
 "use client";
 import React, { useState } from "react";
-
-import Button from "@/components/shared/Button";
 import Step1 from "@/components/createProjectFormComponent/Step1";
 import Step2 from "@/components/createProjectFormComponent/Step2";
 import Step3 from "@/components/createProjectFormComponent/Step3";
@@ -12,6 +10,7 @@ import { PiNotebookFill, PiSquaresFourFill } from "react-icons/pi";
 import { FaCheck, FaUserClock, FaUsers } from "react-icons/fa";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
 import { HiOutlineMinus } from "react-icons/hi2";
+import Button from "@/components/shared/Button";
 
 const Page = () => {
   const [currentStep, setCurrentStep] = useState(5);

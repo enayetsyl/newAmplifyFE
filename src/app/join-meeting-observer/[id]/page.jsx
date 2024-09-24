@@ -3,12 +3,12 @@ import Image from "next/image";
 import React, { useState } from "react";
 import Logo from "@/components/shared/Logo";
 import InputField from "@/components/shared/InputField";
-import Button from "@/components/shared/Button";
 import joinMeetingImage from "../../../../public/join-meeting-edited.png";
 import Footer from "@/components/shared/Footer";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useParams, useRouter } from 'next/navigation';
 import axios from "axios";
+import Button from "@/components/shared/Button";
 
 const page = () => {
   const [formData, setFormData] = useState({

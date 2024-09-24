@@ -2,12 +2,10 @@ import TableData from "@/components/shared/TableData";
 import TableHead from "@/components/shared/TableHead";
 import { useGlobalContext } from "@/context/GlobalContext";
 import axios from "axios";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { BsFillEnvelopeAtFill, BsThreeDotsVertical } from "react-icons/bs";
 import { FaShareAlt, FaUser } from "react-icons/fa";
-import { IoTrashSharp } from "react-icons/io5";
 import { RiPencilFill } from "react-icons/ri";
 import ShareMeetingModal from "./ShareMeetingModal";
 

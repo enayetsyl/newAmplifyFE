@@ -24,7 +24,7 @@ export default page
 
 
 // 'use client';
-// import Button from '@/components/shared/Button';
+
 // import HeadingBlue25px from '@/components/shared/HeadingBlue25px';
 // import HeadingLg from '@/components/shared/HeadingLg';
 // import Pagination from '@/components/shared/Pagination';

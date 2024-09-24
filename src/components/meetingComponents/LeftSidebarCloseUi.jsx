@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Button from "../shared/Button";
 import { LuClipboardSignature } from "react-icons/lu";
 import { FaAngleDown, FaVideo } from "react-icons/fa";
 import { BsChatSquareFill } from "react-icons/bs";
 import { MdMoveDown } from "react-icons/md";
 import Image from "next/image";
 import { PiCirclesFourFill } from "react-icons/pi";
+import Button from "../shared/Button";
 
 const LeftSidebarCloseUi = ({
   users,

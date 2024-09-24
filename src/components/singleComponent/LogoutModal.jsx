@@ -1,8 +1,8 @@
 'use client'
 import React from 'react';
-import Button from '../shared/Button';
 import { useRouter } from 'next/navigation';
 import { useGlobalContext } from '@/context/GlobalContext';
+import Button from '../shared/Button';
 
 const LogoutModal = ({ onClose }) => {
   const {  setUser } = useGlobalContext();

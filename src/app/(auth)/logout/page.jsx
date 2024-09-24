@@ -11,7 +11,7 @@ import Logo from "@/components/shared/Logo";
 import Link from "next/link";
 import HeadingH1 from "@/components/shared/HeadingH1";
 import ParagraphBlue2 from "@/components/shared/ParagraphBlue2";
-import Button from "@/components/shared/Button"
+import Button from "@/components/shared/Button";
 
 const Login = () => {
   const [formData, setFormData] = useState({

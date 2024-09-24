@@ -1,17 +1,12 @@
 "use client";
-import Button from "@/components/shared/Button";
-import Dropdown from "@/components/shared/Dropdown";
 import Search from "@/components/singleComponent/Search";
-import { projectStatusOptions } from "@/constant/Index";
 import { useEffect, useState } from "react";
-import { FiRefreshCw } from "react-icons/fi";
 import { MdAdd } from "react-icons/md";
-import { BsEnvelopeCheckFill } from "react-icons/bs";
-import ModeratorTable from "@/components/singleComponent/ModeratorTable";
 import ContactTable from "@/components/singleComponent/ContactTable";
 import AddContactModal from "@/components/singleComponent/AddContactModal";
 import { useGlobalContext } from "@/context/GlobalContext";
 import HeadingBlue25px from "@/components/shared/HeadingBlue25px";
+import Button from "@/components/shared/Button";
 
 const page = () => {
   const [selectedStatus, setSelectedStatus] = useState("Active");

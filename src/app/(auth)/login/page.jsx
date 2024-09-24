@@ -7,12 +7,11 @@ import Image from "next/image";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "@/components/shared/Logo";
 import registerImage from "../../../../public/register.jpg";
-import logo from "../../../../public/logo.jpg";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Button from "@/components/shared/Button";
 import { useGlobalContext } from "@/context/GlobalContext";
 import toast from "react-hot-toast";
+import Button from "@/components/shared/Button";
 const Login = () => {
   const router = useRouter();
   const { setUser } = useGlobalContext();

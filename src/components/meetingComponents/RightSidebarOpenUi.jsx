@@ -1,25 +1,17 @@
 // RightSidebarOpenUi.js
 import React, { useEffect, useState } from "react";
-import Button from "../shared/Button";
-import Image from "next/image";
-import { LuClipboardSignature } from "react-icons/lu";
-import { FaFolder, FaTrash, FaVideo } from "react-icons/fa";
+import { FaFolder, FaTrash } from "react-icons/fa";
 import {
   BsChatSquareDotsFill,
   BsChatSquareFill,
-  BsThreeDotsVertical,
 } from "react-icons/bs";
-import HeadingLg from "../shared/HeadingLg";
 import Search from "../singleComponent/Search";
-import { IoIosDocument, IoMdMic } from "react-icons/io";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import userImage from "../../../public/user.jpg";
-import groupChatImage from "../../../public/group-chat.png";
-import { IoClose, IoRemoveCircle, IoSend } from "react-icons/io5";
-import { MdInsertEmoticon, MdMoveDown } from "react-icons/md";
-import RemoveUserModal from "../singleComponent/RemoveUserModal";
-import MoveToWaitingRoomModal from "../singleComponent/MoveToWaitingRoomModal";
+import { IoIosDocument } from "react-icons/io";
+import { FaEye } from "react-icons/fa";
+import { IoClose,  IoSend } from "react-icons/io5";
+import { MdInsertEmoticon } from "react-icons/md";
 import axios from "axios";
+import Button from "../shared/Button";
 
 const RightSidebarOpenUi = ({
   observers,

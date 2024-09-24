@@ -12,9 +12,9 @@ import { FaBell } from "react-icons/fa";
 import PasswordModal from "@/components/singleComponent/PasswordModal";
 import DeleteModal from "@/components/singleComponent/DeleteModal";
 import NotificationModal from "@/components/singleComponent/NotificationModal";
-import Button from "@/components/shared/Button";
 import HeadingParagaraph from "@/components/shared/HeadingParagaraph";
 import Link from "next/link";
+import Button from "@/components/shared/Button";
 
 const initialNotifications = [
   {

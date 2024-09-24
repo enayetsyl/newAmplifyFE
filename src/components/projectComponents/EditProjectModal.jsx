@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState,  } from "react";
 import InputField from "@/components/shared/InputField";
-import Button from "@/components/shared/Button";
-import axios from "axios";
+import Button from "../shared/Button";
+
 
 // EditProjectModal Component
 const EditProjectModal = ({ onClose, project, onSave }) => {

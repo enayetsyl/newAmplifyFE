@@ -4,9 +4,9 @@ import React from 'react'
 import Error403Image from '../../../public/403.png'
 import HeadingBlue25px from '../shared/HeadingBlue25px'
 import ParagraphBlue2 from '../shared/ParagraphBlue2'
-import Button from '../shared/Button'
 import Footer from '../shared/Footer'
 import { useRouter } from 'next/navigation'
+import Button from '../shared/Button'
 
 const Error403 = () => {
   const router = useRouter()

@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import HeadingH1 from '../shared/HeadingH1';
 import ParagraphBlue2 from '../shared/ParagraphBlue2';
-import Button from '../shared/Button';
 import BackToLogin from '../shared/BackToLogin';
 import { FaEnvelopeOpenText } from 'react-icons/fa';
 import InputField from '../shared/InputField';
+import Button from '../shared/Button';
 
 const ForgotPasswordUI = () => {
   const [email, setEmail] = useState('');

@@ -1,6 +1,5 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
-import Button from '../shared/Button';
 import TableHead from '../shared/TableHead';
 import TableData from '../shared/TableData';
 import { BsThreeDotsVertical } from 'react-icons/bs';
@@ -8,6 +7,7 @@ import { FaUser } from 'react-icons/fa';
 import { RiPencilFill } from 'react-icons/ri';
 import ViewModeratorModal from './ViewModeratorModal';
 import EditModeratorModal from './EditModeratorModal';
+import Button from '../shared/Button';
 
 const ModeratorTable = () => {
   const [moderators, setModerators] = useState([]);

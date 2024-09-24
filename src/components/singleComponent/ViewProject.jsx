@@ -1,12 +1,9 @@
 "use client";
-import Button from "@/components/shared/Button";
 import HeadingBlue25px from "@/components/shared/HeadingBlue25px";
 import HeadingLg from "@/components/shared/HeadingLg";
 import Pagination from "@/components/shared/Pagination";
 import ParagraphLg from "@/components/shared/ParagraphLg";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { RiPencilFill } from "react-icons/ri";
 import ParagraphBlue2 from "../shared/ParagraphBlue2";
 import axios from "axios";
 import MeetingTab from "../projectComponents/meetings/MeetingTab";
@@ -14,13 +11,13 @@ import AddMeetingModal from "../projectComponents/meetings/AddMeetingModal";
 import EditProjectModal from "../projectComponents/EditProjectModal";
 import toast from "react-hot-toast";
 
-import AddContactModal from "./AddContactModal";
 import MemberTabAddMember from "../projectComponents/members/MemberTabAddMember";
 
 import MembersTab from "../projectComponents/members/MembersTab";
 import MemberBulkUpdate from "../projectComponents/members/MemberBulkUpdate";
 import PoolsTab from "../projectComponents/pools/PoolsTab";
 import AddPoolModal from "../projectComponents/pools/AddPoolModal";
+import Button from "../shared/Button";
 
 const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [isLoading, setIsLoading] = useState(false);
