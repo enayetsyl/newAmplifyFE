@@ -134,7 +134,6 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
           params: { page, limit: 10 },
         }
       );
-      console.log('pool response ',response.data);
       setPolls(response.data.polls);
       // setTotalPages(response.data.totalPages);
     } catch (error) {
@@ -144,7 +143,6 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     }
   };
 
-  console.log('pools', polls)
 
   useEffect(() => {
     fetchMeetings();
@@ -286,7 +284,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     ],
   });
 
-  const poolToEdit = false;
+
 
   return (
     <div className="my_profile_main_section_shadow bg-[#fafafb] bg-opacity-90 h-full min-h-screen flex flex-col justify-center items-center w-full">
@@ -571,9 +569,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
           {isAddPollModalOpen && (
             <AddPoolModal
               onClose={() => setIsAddPoolModalOpen(false)}
-              formData={formData}
-              setFormData={setFormData}
-              poolToEdit={poolToEdit}
+              poolToEdit={null}
               project={project}
               fetchProjects={fetchProjects}
             />
