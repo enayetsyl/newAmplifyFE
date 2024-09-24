@@ -32,7 +32,7 @@ const PasswordModal = ({ onClose, id }) => {
     if (validateForm()) {
      let token = localStorage.getItem("Token")
       try {
-        const response = await axios.post(`http://localhost:8008/api/users/reset_password'`, {
+        const response = await axios.post(`https://amplifybe-1.onrender.com/api/users/reset_password'`, {
           token: token,
           newPassword: newPassword,
         });

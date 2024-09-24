@@ -35,7 +35,7 @@ const MembersTab = ({ project, fetchProjects, userId }) => {
 
       try {
         const response = await axios.put(
-          `http://localhost:8008/api/edit-member-role/${project._id}`,
+          `https://amplifybe-1.onrender.com/api/edit-member-role/${project._id}`,
           {
             updatedMember: updatedMember
           }
@@ -61,7 +61,7 @@ const MembersTab = ({ project, fetchProjects, userId }) => {
     // Handle remove logic here, e.g., make an API call to remove the member
     console.log("Remove Member ID:", memberId);
     try {
-      const response = await axios.delete(`http://localhost:8008/api/delete-member-from-project/${project._id}/${memberId}`);
+      const response = await axios.delete(`https://amplifybe-1.onrender.com/api/delete-member-from-project/${project._id}/${memberId}`);
 
       if(response.status === 200) {
         toast.success(`${response.data.message}`)

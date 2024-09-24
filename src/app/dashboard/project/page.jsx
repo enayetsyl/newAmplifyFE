@@ -26,7 +26,7 @@ const Page = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:8008/api/get-all/project/${userId}`,
+        `https://amplifybe-1.onrender.com/api/get-all/project/${userId}`,
         {
           params: { page, limit: 10 },
         }
