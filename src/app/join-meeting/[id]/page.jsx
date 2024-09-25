@@ -6,7 +6,7 @@ import Image from "next/image";
 import axios from "axios";
 import Logo from "@/components/shared/Logo";
 import InputField from "@/components/shared/InputField";
-import Button from "@/components/shared/button";
+import Button from "@/components/shared/Button";
 import joinMeetingImage from "../../../../public/join-meeting.png";
 import Footer from "@/components/shared/Footer";
 
@@ -32,7 +32,7 @@ const Page = () => {
     e.preventDefault();
 
  try {
-  const response = await axios.post(`http://localhost:8008/api/live-meeting/join-meeting-participant`, {name: formData.fullName, role:"Participant", meetingId: meetingId});
+  const response = await axios.post(`https://amplifybe-1.onrender.com/api/live-meeting/join-meeting-participant`, {name: formData.fullName, role:"Participant", meetingId: meetingId});
 
 
   if(response?.data?.message === "Participant added to waiting room"){

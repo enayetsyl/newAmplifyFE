@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Button from "@/components/shared/button";
+import Button from "@/components/shared/Button";
 
 
 const MemberBulkUpdate= ({
@@ -24,12 +24,12 @@ const MemberBulkUpdate= ({
   const handleRoleChange = (personId, role) => {
     setMembers((prevMembers) =>
       prevMembers.map((member) => {
-        if (member.userId === personId) {
+        if (member?.userId === personId) {
           if (member.roles.includes(role)) {
             // Remove the role if already included
             return {
               ...member,
-              roles: member.roles.filter((r) => r !== role),
+              roles: member?.roles?.filter((r) => r !== role),
             };
           } else {
             // Add the role if not included
@@ -46,7 +46,7 @@ const MemberBulkUpdate= ({
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post(`http://localhost:8008/api/project/updateBulkMembers`, {
+      const response = await axios.post(`https://amplifybe-1.onrender.com/api/project/updateBulkMembers`, {
         projectId: project._id,
         members: members,
       });
@@ -74,23 +74,23 @@ const MemberBulkUpdate= ({
             </tr>
           </thead>
           <tbody>
-            {members.map((member) => (
-              <tr key={member.userId}>
+            {members?.map((member) => (
+              <tr key={member?.userId}>
                 <td className="px-4 py-2 border border-gray-300">
-                  {member.userId.firstName} {member.userId.lastName}
+                  {member?.userId?.firstName} {member?.userId?.lastName}
                 </td>
                 <td className="px-4 py-2 border border-gray-300 text-center">
                   <input
                     type="checkbox"
-                    checked={member.roles.includes("Admin")}
-                    onChange={() => handleRoleChange(member.userId, "Admin")}
+                    checked={member?.roles?.includes("Admin")}
+                    onChange={() => handleRoleChange(member?.userId, "Admin")}
                     className="cursor-pointer"
                   />
                 </td>
                 <td className="px-4 py-2 border border-gray-300 text-center">
                   <input
                     type="checkbox"
-                    checked={member.roles.includes("Moderator")}
+                    checked={member?.roles.includes("Moderator")}
                     onChange={() => handleRoleChange(member.userId, "Moderator")}
                     className="cursor-pointer"
                   />
@@ -98,7 +98,7 @@ const MemberBulkUpdate= ({
                 <td className="px-4 py-2 border border-gray-300 text-center">
                   <input
                     type="checkbox"
-                    checked={member.roles.includes("Observer")}
+                    checked={member?.roles.includes("Observer")}
                     onChange={() => handleRoleChange(member.userId, "Observer")}
                     className="cursor-pointer"
                   />

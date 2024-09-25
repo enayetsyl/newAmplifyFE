@@ -4,9 +4,9 @@ import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import { FaSave } from "react-icons/fa";
-import Button from "@/components/shared/button";
 import InputField from "@/components/shared/InputField";
 import userImage from "../../../../../public/placeholder-image.png";
+import Button from "@/components/shared/Button";
 
 const Page = () => {
   const { id } = useParams();
@@ -21,7 +21,7 @@ const Page = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8008/api/users/find-by-id`,
+          `https://amplifybe-1.onrender.com/api/users/find-by-id`,
           {
             params: { id },
           }
@@ -50,7 +50,7 @@ const Page = () => {
   const handleSave = async () => {
     try {
       await axios.put(
-        `http://localhost:8008/api/users/update`,
+        `https://amplifybe-1.onrender.com/api/users/update`,
         user
       );
       alert("Profile updated successfully");

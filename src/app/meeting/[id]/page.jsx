@@ -257,7 +257,7 @@ const page = () => {
     const getRemovedParticipantsList = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8008/api/live-meeting/get-removed-participants-list/${params.id}`
+          `https://amplifybe-1.onrender.com/api/live-meeting/get-removed-participants-list/${params.id}`
         );
   
         // Check if the current user has been removed
@@ -288,7 +288,7 @@ const page = () => {
   const getWaitingList = async (meetingId) => {
     try {
       const response = await axios.get(
-        `http://localhost:8008/api/live-meeting/waiting-list/${meetingId}`
+        `https://amplifybe-1.onrender.com/api/live-meeting/waiting-list/${meetingId}`
       );
       setWaitingRoom(response?.data?.waitingRoom);
     } catch (error) {
@@ -299,7 +299,7 @@ const page = () => {
   const getParticipantList = async (meetingId) => {
     try {
       const response = await axios.get(
-        `http://localhost:8008/api/live-meeting/participant-list/${meetingId}`
+        `https://amplifybe-1.onrender.com/api/live-meeting/participant-list/${meetingId}`
       );
       setParticipants(response?.data?.participantsList);
     } catch (error) {
@@ -311,7 +311,7 @@ const page = () => {
   const getObserverList = async (meetingId) => {
     try {
       const response = await axios.get(
-        `http://localhost:8008/api/live-meeting/observer-list/${meetingId}`
+        `https://amplifybe-1.onrender.com/api/live-meeting/observer-list/${meetingId}`
       );
       setObservers(response?.data?.observersList);
     } catch (error) {
@@ -322,7 +322,7 @@ const page = () => {
   const acceptParticipant = async (participant) => {
     try {
       const response = await axios.put(
-        `http://localhost:8008/api/live-meeting/accept-from-waiting-list`,
+        `https://amplifybe-1.onrender.com/api/live-meeting/accept-from-waiting-list`,
         {
           participant: participant,
           meetingId: params.id,
@@ -336,7 +336,7 @@ const page = () => {
   const getMeetingStatus = async (meetingId) => {
     try {
       const response = await axios.get(
-        `http://localhost:8008/api/live-meeting/get-meeting-status/${meetingId}`
+        `https://amplifybe-1.onrender.com/api/live-meeting/get-meeting-status/${meetingId}`
       );
 
       if (response?.data?.meetingStatus === true) {
@@ -352,7 +352,7 @@ const page = () => {
   const getWebRtcMeetingId = async (meetingId) => {
     try {
       const response = await axios.get(
-        `http://localhost:8008/api/live-meeting/get-webrtc-meeting-id/${meetingId}`
+        `https://amplifybe-1.onrender.com/api/live-meeting/get-webrtc-meeting-id/${meetingId}`
       );
       // https://serverzoom-mpbv.onrender.com/room/
       // https://testing--inspiring-cendol-60afd6.netlify.app
@@ -367,7 +367,7 @@ const page = () => {
   const getIframeLinkMeetingId = async (meetingId) => {
     try {
       const response = await axios.get(
-        `http://localhost:8008/api/live-meeting/get-iframe-link/${meetingId}`
+        `https://amplifybe-1.onrender.com/api/live-meeting/get-iframe-link/${meetingId}`
       );
       // https://serverzoom-mpbv.onrender.com/room/
       // https://testing--inspiring-cendol-60afd6.netlify.app
@@ -384,7 +384,7 @@ const page = () => {
   const sendMessageParticipant = async (message) => {
     try {
       const response = await axios.post(
-        `http://localhost:8008/api/live-meeting/send-message-to-participant`,
+        `https://amplifybe-1.onrender.com/api/live-meeting/send-message-to-participant`,
         {
           message: message,
           meetingId: params.id,
@@ -400,7 +400,7 @@ const page = () => {
   const sendMessageObserver = async (message) => {
     try {
       const response = await axios.post(
-        `http://localhost:8008/api/live-meeting/send-message-to-observer`,
+        `https://amplifybe-1.onrender.com/api/live-meeting/send-message-to-observer`,
         {
           message: message,
           meetingId: params.id,
@@ -417,7 +417,7 @@ const page = () => {
   const getParticipantChat = async (meetingId) => {
     try {
       const response = await axios.get(
-        `http://localhost:8008/api/live-meeting/get-participant-chat/${meetingId}`
+        `https://amplifybe-1.onrender.com/api/live-meeting/get-participant-chat/${meetingId}`
       );
 
       if (
@@ -433,7 +433,7 @@ const page = () => {
   const getObserverChat = async (meetingId) => {
     try {
       const response = await axios.get(
-        `http://localhost:8008/api/live-meeting/get-observer-chat/${meetingId}`
+        `https://amplifybe-1.onrender.com/api/live-meeting/get-observer-chat/${meetingId}`
       );
 
       if (response?.data?.message === "Observers chat retrieved successfully") {
@@ -447,7 +447,7 @@ const page = () => {
   const removeParticipant = async (name, role, meetingId) => {
     try {
       response = await axios.put(
-        `http://localhost:8008/api/live-meeting/remove-participant-from-meeting`,
+        `https://amplifybe-1.onrender.com/api/live-meeting/remove-participant-from-meeting`,
         {
           name: name,
           role: role,
@@ -465,7 +465,7 @@ const page = () => {
   const participantLeft = async (name, role, meetingId) => {
     try {
       response = await axios.put(
-        `http://localhost:8008/api/live-meeting/remove-participant-from-meeting`,
+        `https://amplifybe-1.onrender.com/api/live-meeting/remove-participant-from-meeting`,
         {
           name: name,
           role: role,
@@ -484,7 +484,7 @@ const page = () => {
   const setStartStreaming = async (meetingId) => {
     try {
       const response = await axios.put(
-        `http://localhost:8008/api/live-meeting/start-streaming`,
+        `https://amplifybe-1.onrender.com/api/live-meeting/start-streaming`,
         {
           meetingId: meetingId,
         }

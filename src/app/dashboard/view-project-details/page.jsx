@@ -1,5 +1,13 @@
 
+import React from 'react'
 
+const page = () => {
+  return (
+    <div>page</div>
+  )
+}
+
+export default page
 
 
 
@@ -16,7 +24,7 @@
 
 
 // 'use client';
-// import Button from '@/components/shared/button';
+
 // import HeadingBlue25px from '@/components/shared/HeadingBlue25px';
 // import HeadingLg from '@/components/shared/HeadingLg';
 // import Pagination from '@/components/shared/Pagination';

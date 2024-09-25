@@ -8,7 +8,6 @@ import Logo from "@/components/shared/Logo";
 import registerImage from "../../../../public/register.jpg";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Button from "@/components/shared/button";
 
 const Register = () => {
   const router = useRouter();
@@ -52,7 +51,7 @@ const Register = () => {
     if (!validateForm()) return;
     try {
       const response = await axios.post(
-        `http://localhost:8008/api/users/create`,
+        `https://amplifybe-1.onrender.com/api/users/create`,
         {
           firstName: formData.firstName,
           lastName: formData.lastName,
@@ -185,12 +184,12 @@ const Register = () => {
                 .
               </p>
             </div>
-            <Button
+            <button
               type="submit"
               className="w-full bg-custom-orange-1 text-white font-semibold py-2 rounded-lg hover:bg-orange-600"
             >
               Create Account
-            </Button>
+            </button>
           </form>
           <p className="mt-4 text-center">
             Already have an account?

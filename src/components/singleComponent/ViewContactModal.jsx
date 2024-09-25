@@ -1,12 +1,7 @@
 import React from "react";
-import Image from "next/image";
-import userImage from "../../../public/user.jpg"; // replace with the path to the user's image
-import { RxCrossCircled } from "react-icons/rx";
 import HeadingLg from "../shared/HeadingLg";
-import { FaCheckCircle } from "react-icons/fa";
 import ParagraphLg from "../shared/ParagraphLg";
-import Button from "../shared/button";
-import { FaClock } from "react-icons/fa6";
+import Button from "../shared/Button";
 
 const ViewContactModal = ({ user, onClose }) => {
 

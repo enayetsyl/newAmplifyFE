@@ -3,12 +3,12 @@ import Image from "next/image";
 import React, { useState } from "react";
 import Logo from "@/components/shared/Logo";
 import InputField from "@/components/shared/InputField";
-import Button from "@/components/shared/button";
 import joinMeetingImage from "../../../../public/join-meeting-edited.png";
 import Footer from "@/components/shared/Footer";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useParams, useRouter } from 'next/navigation';
 import axios from "axios";
+import Button from "@/components/shared/Button";
 
 const page = () => {
   const [formData, setFormData] = useState({
@@ -37,7 +37,7 @@ const page = () => {
 
  try {
 
-  const response = await axios.post(`http://localhost:8008/api/live-meeting/join-meeting-observer`, {name: formData.fullName, role:"observer", passcode: formData.passcode, meetingId: meetingId});
+  const response = await axios.post(`https://amplifybe-1.onrender.com/api/live-meeting/join-meeting-observer`, {name: formData.fullName, role:"observer", passcode: formData.passcode, meetingId: meetingId});
 
   if (response?.data?.message === "Observer added to the meeting") {
     const { isStreaming } = response.data;

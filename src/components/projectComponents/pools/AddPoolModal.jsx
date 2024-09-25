@@ -1,59 +1,59 @@
-import Button from '@/components/shared/button';
-import FormDropdownLabel from '@/components/shared/FormDropdownLabel';
-import HeadingBlue25px from '@/components/shared/HeadingBlue25px';
-import InputField from '@/components/shared/InputField';
-import { useGlobalContext } from '@/context/GlobalContext';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { FiMinus } from 'react-icons/fi';
-import { GoPlus } from 'react-icons/go';
-import { IoTrashSharp } from 'react-icons/io5';
+import Button from "@/components/shared/Button";
+import FormDropdownLabel from "@/components/shared/FormDropdownLabel";
+import HeadingBlue25px from "@/components/shared/HeadingBlue25px";
+import InputField from "@/components/shared/InputField";
+import { useGlobalContext } from "@/context/GlobalContext";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { FiMinus } from "react-icons/fi";
+import { GoPlus } from "react-icons/go";
+import { IoTrashSharp } from "react-icons/io5";
 
-const AddPoolModal = ({onClose, formData, setFormData, poolToEdit, project, fetchProjects}) => {
+const AddPoolModal = ({ onClose, poolToEdit, project, fetchProjects }) => {
   const { user } = useGlobalContext();
-  const [newPool, setNewPool] = useState({
-    poolName: '',
+  const [newPoll, setNewPoll] = useState({
+    pollName: "",
     isActive: false,
     questions: [
       {
-        question: '',
-        type: 'single',
-        answers: [{ answer: '' }, { answer: '' }],
+        question: "",
+        type: "single",
+        answers: [{ answer: "" }, { answer: "" }],
       },
     ],
   });
 
-  console.log('user', user)
-
   useEffect(() => {
     if (poolToEdit) {
-      setNewPool(poolToEdit);
+      console.log("pollToEdit:", poolToEdit);
+      setNewPoll(poolToEdit);
     }
   }, [poolToEdit]);
 
   const addQuestion = () => {
-    setNewPool({
-      ...newPool,
+    setNewPoll({
+      ...newPoll,
       questions: [
-        ...newPool.questions,
+        ...newPoll.questions,
         {
-          question: '',
-          type: 'single',
-          answers: [{ answer: '' }, { answer: '' }],
+          question: "",
+          type: "single",
+          answers: [{ answer: "" }, { answer: "" }],
         },
       ],
     });
   };
 
   const updateQuestion = (index, field, value) => {
-    const updatedQuestions = newPool.questions.map((q, i) =>
+    const updatedQuestions = newPoll.questions.map((q, i) =>
       i === index ? { ...q, [field]: value } : q
     );
-    setNewPool({ ...newPool, questions: updatedQuestions });
+    setNewPoll({ ...newPoll, questions: updatedQuestions });
   };
 
   const updateAnswer = (qIndex, aIndex, value) => {
-    const updatedQuestions = newPool.questions.map((q, i) =>
+    const updatedQuestions = newPoll.questions.map((q, i) =>
       i === qIndex
         ? {
             ...q,
@@ -63,75 +63,73 @@ const AddPoolModal = ({onClose, formData, setFormData, poolToEdit, project, fetc
           }
         : q
     );
-    setNewPool({ ...newPool, questions: updatedQuestions });
+    setNewPoll({ ...newPoll, questions: updatedQuestions });
   };
 
   const addAnswer = (index) => {
-    const updatedQuestions = newPool.questions.map((q, i) =>
-      i === index ? { ...q, answers: [...q.answers, { answer: '' }] } : q
+    const updatedQuestions = newPoll.questions.map((q, i) =>
+      i === index ? { ...q, answers: [...q.answers, { answer: "" }] } : q
     );
-    setNewPool({ ...newPool, questions: updatedQuestions });
+    setNewPoll({ ...newPoll, questions: updatedQuestions });
   };
 
   const removeAnswer = (qIndex, aIndex) => {
-    const updatedQuestions = newPool.questions.map((q, i) =>
+    const updatedQuestions = newPoll.questions.map((q, i) =>
       i === qIndex
         ? { ...q, answers: q.answers.filter((_, j) => j !== aIndex) }
         : q
     );
-    setNewPool({ ...newPool, questions: updatedQuestions });
+    setNewPoll({ ...newPoll, questions: updatedQuestions });
   };
 
   const removeQuestion = (index) => {
-    const updatedQuestions = newPool.questions.filter((_, i) => i !== index);
-    setNewPool({ ...newPool, questions: updatedQuestions });
+    const updatedQuestions = newPoll.questions.filter((_, i) => i !== index);
+    setNewPoll({ ...newPoll, questions: updatedQuestions });
   };
-
 
   const handleSave = async () => {
     try {
-      // Send data to backend via Axios POST request
       const dataToSend = {
-        project: project._id, 
+        project: project._id,
         createdBy: user._id,
-        pollName: newPool.poolName,
-        isActive: newPool.isActive,
-        questions: newPool.questions,
+        pollName: newPoll.pollName,
+        isActive: newPoll.isActive,
+        questions: newPoll.questions,
       };
-      console.log('data to send', dataToSend)
 
-      const response = await axios.post('http://localhost:8008/api/create/poll', dataToSend);
+      console.log("data to send:", dataToSend);
 
-      if (response.status === 201) {
-        // Handle successful creation (e.g., refetch data or notify the user)
-       console.log('status 201', response)
-       fetchProjects()
-        onClose(); // Close modal
+      if (poolToEdit) {
+        // If editing, send PUT request to update the poll
+        const response = await axios.put(
+          `https://amplifybe-1.onrender.com/api/update-poll/${poolToEdit._id}`,
+          dataToSend
+        );
+
+        if (response.status === 200) {
+          toast.success("Poll updated successfully");
+        }
+      } else {
+        // If adding a new poll, send POST request
+        const response = await axios.post(
+          "https://amplifybe-1.onrender.com/api/create/poll",
+          dataToSend
+        );
+
+        if (response.status === 201) {
+          toast.success("Poll created successfully");
+        }
       }
+
+      fetchProjects(); // Refresh project data
+      onClose(); // Close the modal
     } catch (error) {
-      console.error('Error saving the poll:', error);
-      // Handle error (e.g., show an error notification)
+      console.error("Error saving the poll:", error);
+      toast.error("Error saving the poll");
     }
   };
 
-  // const handleSave = () => {
-  //   let updatedPolls = [...formData.polls];
-    
-  //   if (poolToEdit) {
-  //     // Update existing poll
-  //     updatedPolls[poolToEdit.index] = newPool;
-  //   } else {
-  //     // Add new poll
-  //     updatedPolls.push(newPool);
-  //   }
-
-  //   setFormData({
-  //     ...formData,
-  //     polls: updatedPolls,
-  //   });
-  //   onClose();
-  // };
-  
+  console.log("new poll", newPoll);
 
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
@@ -141,22 +139,24 @@ const AddPoolModal = ({onClose, formData, setFormData, poolToEdit, project, fetc
           <InputField
             label="Title"
             type="text"
-            value={newPool.poolName}
-            onChange={(e) => setNewPool({ ...newPool, poolName: e.target.value })}
+            value={newPoll.pollName}
+            onChange={(e) =>
+              setNewPoll({ ...newPoll, pollName: e.target.value })
+            }
           />
         </div>
         <div className="flex items-center mt-2">
           <input
             type="checkbox"
-            checked={newPool.isActive}
+            checked={newPoll.isActive}
             onChange={(e) =>
-              setNewPool({ ...newPool, isActive: e.target.checked })
+              setNewPoll({ ...newPoll, isActive: e.target.checked })
             }
           />
           <FormDropdownLabel children="Active" className="ml-2 " />
         </div>
         <div className="bg-[#f3f3f3] -mx-6 p-6 mt-3">
-          {newPool.questions.map((question, qIndex) => (
+          {newPoll.questions.map((question, qIndex) => (
             <div key={qIndex} className="mt-4 ">
               <div className="flex justify-between items-center">
                 <FormDropdownLabel
@@ -171,23 +171,23 @@ const AddPoolModal = ({onClose, formData, setFormData, poolToEdit, project, fetc
                 className="w-full mt-2 p-2 border-[0.5px] border-custom-dark-blue-1 bg-white rounded-xl"
                 value={question.question}
                 onChange={(e) =>
-                  updateQuestion(qIndex, 'question', e.target.value)
+                  updateQuestion(qIndex, "question", e.target.value)
                 }
               />
               <div className="flex items-center mt-2 pl-5">
                 <input
                   type="radio"
                   name={`type-${qIndex}`}
-                  checked={question.type === 'single'}
-                  onChange={() => updateQuestion(qIndex, 'type', 'single')}
+                  checked={question.type === "single"}
+                  onChange={() => updateQuestion(qIndex, "type", "single")}
                 />
                 <FormDropdownLabel children="Single Choice" className="ml-2" />
                 <input
                   type="radio"
                   name={`type-${qIndex}`}
                   className="ml-4"
-                  checked={question.type === 'multiple'}
-                  onChange={() => updateQuestion(qIndex, 'type', 'multiple')}
+                  checked={question.type === "multiple"}
+                  onChange={() => updateQuestion(qIndex, "type", "multiple")}
                 />
                 <FormDropdownLabel
                   children="Multiple Choice"
@@ -261,4 +261,4 @@ const AddPoolModal = ({onClose, formData, setFormData, poolToEdit, project, fetc
   );
 };
 
-export default AddPoolModal
+export default AddPoolModal;

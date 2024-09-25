@@ -1,11 +1,11 @@
 "use client";
 
-import Button from "@/components/shared/button";
+import Button from "@/components/shared/Button";
 import HeadingBlue25px from "@/components/shared/HeadingBlue25px";
 import Logo from "@/components/shared/Logo";
 import axios from "axios";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { FaVideo } from "react-icons/fa";
 import { IoLogOutSharp } from "react-icons/io5";
@@ -22,7 +22,7 @@ const page = () => {
   const getStreamingStatus = async (meetingId) => {
     try {
       const response = await axios.get(
-        `http://localhost:8008/api/live-meeting/get-streaming-status/${meetingId}`
+        `https://amplifybe-1.onrender.com/api/live-meeting/get-streaming-status/${meetingId}`
       );
 
       if (response.data.isStreaming) {

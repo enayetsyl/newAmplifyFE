@@ -7,12 +7,12 @@ import Image from "next/image";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Logo from "@/components/shared/Logo";
 import registerImage from "../../../../public/register.jpg";
-import logo from "../../../../public/logo.jpg";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Button from "@/components/shared/button";
 import { useGlobalContext } from "@/context/GlobalContext";
 import toast from "react-hot-toast";
+import Button from "@/components/shared/Button";
+
 const Login = () => {
   const router = useRouter();
   const { setUser } = useGlobalContext();
@@ -35,7 +35,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `http://localhost:8008/api/users/signin`,
+        `https://amplifybe-1.onrender.com/api/users/signin`,
         {
           email: formData.email,
           password: formData.password,
@@ -120,12 +120,12 @@ const Login = () => {
                 Forgot Password
               </p>
             </div>
-            <Button
+            <button
               type="submit"
               className="w-full bg-custom-orange-1 text-white font-semibold py-2 rounded-lg hover:bg-orange-600"
             >
               Login
-            </Button>
+            </button>
           </form>
           <p className="mt-4 text-center">
             Don't have an Account?{" "}

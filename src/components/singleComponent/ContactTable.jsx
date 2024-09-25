@@ -1,16 +1,14 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
-import Button from "../shared/button";
+import React, { useState,  useRef } from "react";
 import TableHead from "../shared/TableHead";
 import TableData from "../shared/TableData";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
 import { RiPencilFill } from "react-icons/ri";
-import ViewModeratorModal from "./ViewModeratorModal";
-import EditModeratorModal from "./EditModeratorModal";
 import ViewContactModal from "./ViewContactModal";
 import AddContactModal from "./AddContactModal";
 import { IoTrashBin } from "react-icons/io5";
+import Button from "../shared/Button";
 
 const ContactTable = ({
   contacts,
@@ -111,7 +109,7 @@ const ContactTable = ({
   const handleDeleteContact = async (contactId) => {
     try {
       const response = await fetch(
-        `http://localhost:8008/api/delete/contact/${contactId}`,
+        `https://amplifybe-1.onrender.com/api/delete/contact/${contactId}`,
         {
           method: "DELETE",
         }

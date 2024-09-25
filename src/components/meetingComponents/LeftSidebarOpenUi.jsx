@@ -1,6 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import Button from "../shared/button";
-import Image from "next/image";
 import { LuClipboardSignature } from "react-icons/lu";
 import { FaAngleDown, FaVideo } from "react-icons/fa";
 import {
@@ -11,17 +9,13 @@ import {
 import HeadingLg from "../shared/HeadingLg";
 import Search from "../singleComponent/Search";
 import { IoMdMic } from "react-icons/io";
-import userImage from "../../../public/user.jpg";
-import groupChatImage from "../../../public/group-chat.png";
 import { IoClose, IoRemoveCircle, IoSend } from "react-icons/io5";
 import { MdInsertEmoticon, MdMoveDown } from "react-icons/md";
 import RemoveUserModal from "../singleComponent/RemoveUserModal";
 import MoveToWaitingRoomModal from "../singleComponent/MoveToWaitingRoomModal";
-import toast from "react-hot-toast";
 import notify from "@/utils/notify";
 import { PiCirclesFourFill } from "react-icons/pi";
-import Dropdown from "../shared/Dropdown";
-import ChatDashboard from "./ChatDashboard";
+import Button from "../shared/Button";
 
 const LeftSidebarOpenUi = ({
   users,

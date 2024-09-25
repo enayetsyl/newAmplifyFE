@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Button from "@/components/shared/button";
 import Step1 from "@/components/createProjectFormComponent/Step1";
 import Step2 from "@/components/createProjectFormComponent/Step2";
 import Step3 from "@/components/createProjectFormComponent/Step3";
@@ -10,6 +9,7 @@ import { FaUserClock, FaUsers } from "react-icons/fa";
 import { HiOutlineMinus } from "react-icons/hi2";
 import { useRouter } from "next/navigation";
 import { useGlobalContext } from "@/context/GlobalContext";
+import Button from "@/components/shared/Button";
 
 const Page = () => {
   const router = useRouter();
@@ -62,7 +62,7 @@ const Page = () => {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `http://localhost:8008/api/get-all/contact/${user?._id}`
+        `https://amplifybe-1.onrender.com/api/get-all/contact/${user?._id}`
       );
       if (!response.ok) {
         throw new Error(`Failed to fetch contacts: ${response.statusText}`);
@@ -110,7 +110,7 @@ const Page = () => {
     
     try {
       const response = await axios.post(
-        `http://localhost:8008/api/create/project`,
+        `https://amplifybe-1.onrender.com/api/create/project`,
         updatedFormData
       );
 

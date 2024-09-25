@@ -1,10 +1,10 @@
 import React from "react";
-import Button from "./button";
 import { RiPencilFill } from "react-icons/ri";
 import { IoTrashSharp } from "react-icons/io5";
 import { MdLockReset } from "react-icons/md";
 import { FaBell } from "react-icons/fa";
 import Link from "next/link";
+import Button from "./Button";
 
 const DashboardNavbar = ({ children }) => {
   return (

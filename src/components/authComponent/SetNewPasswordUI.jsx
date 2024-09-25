@@ -1,12 +1,12 @@
 'use client'
 import HeadingH1 from '../shared/HeadingH1'
 import ParagraphBlue2 from '../shared/ParagraphBlue2'
-import Button from '../shared/button'
 import BackToLogin from '../shared/BackToLogin'
 import { FaEnvelopeOpenText } from 'react-icons/fa'
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useState } from 'react'
 import InputField from '../shared/InputField'
+import Button from '../shared/Button'
 const SetNewPasswordUI = () => {
   const [formData, setFormData] = useState({
     newPassword: '',

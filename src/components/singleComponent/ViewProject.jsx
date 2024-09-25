@@ -1,12 +1,9 @@
 "use client";
-import Button from "@/components/shared/button";
 import HeadingBlue25px from "@/components/shared/HeadingBlue25px";
 import HeadingLg from "@/components/shared/HeadingLg";
 import Pagination from "@/components/shared/Pagination";
 import ParagraphLg from "@/components/shared/ParagraphLg";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { RiPencilFill } from "react-icons/ri";
 import ParagraphBlue2 from "../shared/ParagraphBlue2";
 import axios from "axios";
 import MeetingTab from "../projectComponents/meetings/MeetingTab";
@@ -14,17 +11,19 @@ import AddMeetingModal from "../projectComponents/meetings/AddMeetingModal";
 import EditProjectModal from "../projectComponents/EditProjectModal";
 import toast from "react-hot-toast";
 
-import AddContactModal from "./AddContactModal";
 import MemberTabAddMember from "../projectComponents/members/MemberTabAddMember";
 
 import MembersTab from "../projectComponents/members/MembersTab";
 import MemberBulkUpdate from "../projectComponents/members/MemberBulkUpdate";
 import PoolsTab from "../projectComponents/pools/PoolsTab";
 import AddPoolModal from "../projectComponents/pools/AddPoolModal";
+import Button from "../shared/Button";
 
 const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("Meetings");
+  const [secondaryTab, setSecondaryTab] = useState("Documents");
+  const [selectedMeeting, setSelectedMeeting] = useState(null);
   const [meetings, setMeetings] = useState([]);
   const [polls, setPolls] = useState([]);
   const [isAddMeetingModalOpen, setIsAddMeetingModalOpen] = useState(false);
@@ -33,6 +32,10 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [showAddContactModal, setShowAddContactModal] = useState(false);
   const [showBulkUpdateModal, setShowBulkUpdateModal] = useState(false);
   const [isAddPollModalOpen, setIsAddPoolModalOpen] = useState(false);
+  const [repositoryData, setRepositoryData] = useState({
+    documents: [],
+    media: [],
+  });
 
   const handleModalClose = () => {
     setShowAddContactModal(false);
@@ -51,7 +54,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     console.log("Updated Project Data:", updatedProjectData);
     try {
       const response = await axios.put(
-        `http://localhost:8008/api/update-general-project-info/${project._id}`,
+        `https://amplifybe-1.onrender.com/api/update-general-project-info/${project._id}`,
         updatedProjectData
       );
       if (response.status === 200) {
@@ -111,7 +114,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:8008/api/get-all/meeting/${project._id}`
+        `https://amplifybe-1.onrender.com/api/get-all/meeting/${project._id}`
         // {
         //   params: { page, limit: 10 },
         // }
@@ -129,12 +132,11 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:8008/api/get-all/poll/${project._id}`,
+        `https://amplifybe-1.onrender.com/api/get-all/poll/${project._id}`,
         {
           params: { page, limit: 10 },
         }
       );
-      console.log('pool response ',response.data);
       setPolls(response.data.polls);
       // setTotalPages(response.data.totalPages);
     } catch (error) {
@@ -144,7 +146,6 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     }
   };
 
-  console.log('pools', polls)
 
   useEffect(() => {
     fetchMeetings();
@@ -178,7 +179,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     try {
       // Sending request to change project status
       const response = await axios.put(
-        `http://localhost:8008/api/change-project-status/${project._id}`,
+        `https://amplifybe-1.onrender.com/api/change-project-status/${project._id}`,
         { status: newStatus }
       );
 
@@ -226,8 +227,6 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const handleOpenAddContactModal = () => {
     setShowAddContactModal(true);
   };
-
-  // console.log("project", project);
 
   const [formData, setFormData] = useState({
     polls: [
@@ -286,7 +285,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     ],
   });
 
-  const poolToEdit = false;
+
 
   return (
     <div className="my_profile_main_section_shadow bg-[#fafafb] bg-opacity-90 h-full min-h-screen flex flex-col justify-center items-center w-full">
@@ -478,34 +477,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
                 />
               </div>
             </div>
-            // <div className="pt-5">
-            //   <div className="flex justify-stat items-center px-3">
-            //     <div className="w-[25%]">
-            //       <HeadingLg children="Name" />
-            //     </div>
-            //     <div className="w-[20%]">
-            //       <HeadingLg children="Participants" />
-            //     </div>
-            //     <div className="w-[55%]">
-            //       <HeadingLg children="Interpreter" />
-            //     </div>
-            //   </div>
-            //   {/* {formData.breakoutRooms.map((room, index) => ( */}
-            //   <div className="py-3 space-y-3">
-            //     <div className="flex justify-start items-center bg-white rounded-xl shadow-[0px_0px_6px_#00000029] p-3">
-            //       <ParagraphLg className="w-[25%]">Sistine Chapel</ParagraphLg>
-            //       <ParagraphLg className="w-[20%]">5</ParagraphLg>
-            //       <ParagraphLg className="w-[50%]">Sara Meyer</ParagraphLg>
-            //     </div>
-
-            //     <div className="flex justify-start items-center bg-white rounded-xl shadow-[0px_0px_6px_#00000029] p-3 ">
-            //       <ParagraphLg className="w-[25%]">Sistine Chapel</ParagraphLg>
-            //       <ParagraphLg className="w-[20%]">5</ParagraphLg>
-            //       <ParagraphLg className="w-[50%]">Adam Wood</ParagraphLg>
-            //     </div>
-            //   </div>
-            //   {/* ))} */}
-            // </div>
+            
           )}
 
           {activeTab === "Repository" && (
@@ -587,9 +559,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
           {isAddPollModalOpen && (
             <AddPoolModal
               onClose={() => setIsAddPoolModalOpen(false)}
-              formData={formData}
-              setFormData={setFormData}
-              poolToEdit={poolToEdit}
+              poolToEdit={null}
               project={project}
               fetchProjects={fetchProjects}
             />

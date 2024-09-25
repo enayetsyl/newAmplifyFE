@@ -1,11 +1,11 @@
 import React from "react";
-import Button from "../shared/button";
 import { LuClipboardSignature } from "react-icons/lu";
 import { FaEye, FaFolder, FaTrash, FaVideo } from "react-icons/fa";
 import { BsChatSquareFill } from "react-icons/bs";
 import { MdMoveDown } from "react-icons/md";
 import Image from "next/image";
 import { IoIosDocument } from "react-icons/io";
+import Button from "../shared/Button";
 
 const RightSidebarCloseUi = ({
   observers,
