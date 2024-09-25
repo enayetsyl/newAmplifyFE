@@ -108,8 +108,8 @@ const DashboardSidebar = ({
               {/* modal */}
               <div
                 ref={modalRef}
-                className={`absolute hidden md:flex bottom-12 -right-24 z-50 bg-white rounded-lg h-[90px] w-[125px] profile_dropdown_shadow  flex-col justify-center items-start px-3 gap-4  ${
-                  isModalOpen ? "block" : "hidden"
+                className={`absolute   bottom-12 -right-24 z-50 bg-white rounded-lg h-[90px] w-[125px] profile_dropdown_shadow  flex-col justify-center items-start px-3 gap-4  ${
+                  isModalOpen ? "flex" : "hidden"
                 }`}
               >
                 <Link href="/dashboard/my-profile">
