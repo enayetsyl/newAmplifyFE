@@ -1,7 +1,7 @@
 import io from "socket.io-client";
 
-// const ENDPOINT = 'https://amplifybe-2.onrender.com';
-const ENDPOINT = "https://amplifybe-2.onrender.com/"; // Uncomment this line for production
+// const ENDPOINT = 'http://localhost:8008';
+const ENDPOINT = "http://localhost:8008/"; // Uncomment this line for production
 
 const socket = io(ENDPOINT, {
   autoConnect: true,

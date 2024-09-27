@@ -102,7 +102,7 @@ const AddPoolModal = ({ onClose, poolToEdit, project, fetchProjects }) => {
       if (poolToEdit) {
         // If editing, send PUT request to update the poll
         const response = await axios.put(
-          `https://amplifybe-2.onrender.com/api/update-poll/${poolToEdit._id}`,
+          `http://localhost:8008/api/update-poll/${poolToEdit._id}`,
           dataToSend
         );
 
@@ -112,7 +112,7 @@ const AddPoolModal = ({ onClose, poolToEdit, project, fetchProjects }) => {
       } else {
         // If adding a new poll, send POST request
         const response = await axios.post(
-          "https://amplifybe-2.onrender.com/api/create/poll",
+          "http://localhost:8008/api/create/poll",
           dataToSend
         );
 

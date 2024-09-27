@@ -109,7 +109,7 @@ const ContactTable = ({
   const handleDeleteContact = async (contactId) => {
     try {
       const response = await fetch(
-        `https://amplifybe-2.onrender.com/api/delete/contact/${contactId}`,
+        `http://localhost:8008/api/delete/contact/${contactId}`,
         {
           method: "DELETE",
         }

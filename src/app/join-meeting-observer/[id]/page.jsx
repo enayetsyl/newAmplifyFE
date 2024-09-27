@@ -13,7 +13,7 @@ import Button from "@/components/shared/button";
 const page = () => {
   const [formData, setFormData] = useState({
     fullName: "Observer 1",
-    passcode: "BIJEhh",
+    passcode: "MBPGxn",
   });
   const [showPasscode, setShowPasscode] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -45,7 +45,7 @@ const page = () => {
       // Redirect based on the role and the API response
       localStorage.setItem("RoletoSend", response1.data._id);
       const response = await axios.post(
-        `https://amplifybe-2.onrender.com/api/live-meeting/join-meeting-observer`,
+        `http://localhost:8008/api/live-meeting/join-meeting-observer`,
         {
           name: formData.fullName,
           role: "Observer", // Fixed role as Observer
