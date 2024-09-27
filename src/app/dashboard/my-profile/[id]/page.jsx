@@ -14,7 +14,7 @@ import DeleteModal from "@/components/singleComponent/DeleteModal";
 import NotificationModal from "@/components/singleComponent/NotificationModal";
 import HeadingParagaraph from "@/components/shared/HeadingParagaraph";
 import Link from "next/link";
-import Button from "@/components/shared/Button";
+import Button from "@/components/shared/button";
 
 const initialNotifications = [
   {

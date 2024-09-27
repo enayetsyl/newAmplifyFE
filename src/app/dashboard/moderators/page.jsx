@@ -8,7 +8,7 @@ import { MdAdd } from 'react-icons/md';
 import { BsEnvelopeCheckFill } from 'react-icons/bs';
 import InviteModeratorModal from '@/components/singleComponent/InviteModeratorModal';
 import ModeratorTable from '@/components/singleComponent/ModeratorTable';
-import Button from '@/components/shared/Button';
+import Button from '@/components/shared/button';
 
 const page = () => {
   const [selectedStatus, setSelectedStatus] = useState('Active');

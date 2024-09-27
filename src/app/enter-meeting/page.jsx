@@ -5,7 +5,7 @@ import userImage from '../../../public/user.jpg';
 import joinMeetingImage from '../../../public/join-meeting.png';
 import Footer from '@/components/shared/Footer';
 import { FaCamera } from 'react-icons/fa';
-import Button from '@/components/shared/Button';
+import Button from '@/components/shared/button';
 
 const page = () => {
   return (

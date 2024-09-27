@@ -8,7 +8,7 @@ import Footer from "@/components/shared/Footer";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
-import Button from "@/components/shared/Button";
+import Button from "@/components/shared/button";
 
 const page = () => {
   const [formData, setFormData] = useState({

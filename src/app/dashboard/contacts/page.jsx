@@ -6,7 +6,7 @@ import ContactTable from "@/components/singleComponent/ContactTable";
 import AddContactModal from "@/components/singleComponent/AddContactModal";
 import { useGlobalContext } from "@/context/GlobalContext";
 import HeadingBlue25px from "@/components/shared/HeadingBlue25px";
-import Button from "@/components/shared/Button";
+import Button from "@/components/shared/button";
 
 const page = () => {
   const [selectedStatus, setSelectedStatus] = useState("Active");

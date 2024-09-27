@@ -11,7 +11,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useGlobalContext } from "@/context/GlobalContext";
 import toast from "react-hot-toast";
-import Button from "@/components/shared/Button";
+import Button from "@/components/shared/button";
 
 const Login = () => {
   const router = useRouter();

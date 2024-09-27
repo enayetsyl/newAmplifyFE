@@ -9,7 +9,7 @@ import Logo from '@/components/shared/Logo';
 import Footer from '@/components/shared/Footer';
 import joinMeetingImage from '../../../public/join-meeting-edited.png';
 import uploadPlaceHolderImage from '../../../public/placeholder-image.png';
-import Button from '@/components/shared/Button';
+import Button from '@/components/shared/button';
 
 const Page = () => {
   const [selectedFile, setSelectedFile] = useState(null);
