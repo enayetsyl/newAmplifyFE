@@ -44,7 +44,7 @@ const Page = () => {
     try {
       // Call the new API with the extracted role and name
       const response = await axios.post(
-        `https://amplifybe-1.onrender.com/api/user-role`,
+        `https://amplifybe-2.onrender.com/api/user-role`,
         {
           name: formData.fullName,
           role: role,

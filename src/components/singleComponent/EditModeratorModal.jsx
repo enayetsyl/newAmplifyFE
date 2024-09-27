@@ -33,7 +33,7 @@ const EditModeratorModal = ({
 
     try {
       const response = await fetch(
-        `https://amplifybe-1.onrender.com/api/update/moderator/${user._id}`,
+        `https://amplifybe-2.onrender.com/api/update/moderator/${user._id}`,
         {
           method: "PUT",
           headers: {

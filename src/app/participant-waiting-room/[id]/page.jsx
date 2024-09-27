@@ -23,7 +23,7 @@ const page = () => {
   const getParticipantList = async (meetingId) => {
     try {
       const response = await axios.get(
-        `https://amplifybe-1.onrender.com/api/live-meeting/participant-list/${meetingId}`
+        `https://amplifybe-2.onrender.com/api/live-meeting/participant-list/${meetingId}`
       );
       setParticipants(response?.data?.participantsList);
 

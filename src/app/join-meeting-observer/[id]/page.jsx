@@ -35,7 +35,7 @@ const page = () => {
 
     try {
       const response = await axios.post(
-        `https://amplifybe-1.onrender.com/api/live-meeting/join-meeting-observer`,
+        `https://amplifybe-2.onrender.com/api/live-meeting/join-meeting-observer`,
         {
           name: formData.fullName,
           role: "Observer", // Fixed role as Observer

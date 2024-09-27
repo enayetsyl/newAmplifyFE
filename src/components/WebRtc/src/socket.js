@@ -1,7 +1,7 @@
 import io from "socket.io-client";
 
-// const ENDPOINT = 'https://amplifybe-1.onrender.com';
-const ENDPOINT = "https://amplifybe-1.onrender.com/"; // Uncomment this line for production
+// const ENDPOINT = 'https://amplifybe-2.onrender.com';
+const ENDPOINT = "https://amplifybe-2.onrender.com/"; // Uncomment this line for production
 
 const socket = io(ENDPOINT, {
   autoConnect: true,

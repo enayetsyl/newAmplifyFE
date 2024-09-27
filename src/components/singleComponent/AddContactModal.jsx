@@ -43,8 +43,8 @@ const AddContactModal = ({
     try {
       const response = await fetch(
         isEditing
-          ? `https://amplifybe-1.onrender.com/api/update-contact/${contactToEdit._id}`
-          : `https://amplifybe-1.onrender.com/api/create/contact`,
+          ? `https://amplifybe-2.onrender.com/api/update-contact/${contactToEdit._id}`
+          : `https://amplifybe-2.onrender.com/api/create/contact`,
         {
           method: isEditing ? "PUT" : "POST",
           headers: {

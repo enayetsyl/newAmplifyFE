@@ -14,7 +14,7 @@ const InviteModeratorModal = ({ onClose, projectId }) => {
 
     try {
       const response = await fetch(
-        `https://amplifybe-1.onrender.com/api/moderator-invitation/link`,
+        `https://amplifybe-2.onrender.com/api/moderator-invitation/link`,
         {
           method: "POST",
           headers: {

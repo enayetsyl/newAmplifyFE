@@ -14,7 +14,7 @@ const MemberTabAddMember = ({
 
   const fetchContacts = async() => {
     try {
-      const response = await axios.get(`https://amplifybe-1.onrender.com/api/create/contact-from-member-tab/${userId}/${project._id}`);
+      const response = await axios.get(`https://amplifybe-2.onrender.com/api/create/contact-from-member-tab/${userId}/${project._id}`);
       setPeoples(response.data);
     } catch (error) {
       console.error('error', error);
@@ -58,7 +58,7 @@ const MemberTabAddMember = ({
       console.log('selectedPeople and project id',project._id, selectedPeople)
 
     try {
-      const response = await axios.put("https://amplifybe-1.onrender.com/api/app-people-to-project", {
+      const response = await axios.put("https://amplifybe-2.onrender.com/api/app-people-to-project", {
         projectId: project._id,
         people: selectedPeople,
       });
