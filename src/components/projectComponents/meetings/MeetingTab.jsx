@@ -62,7 +62,7 @@ const MeetingTab = ({ meetings }) => {
     if (meeting.moderator.email === user.email) {
       const fullName = `${user.firstName} ${user.lastName}`;
       const postingrole = await axios.post(
-        `http://localhost:8008/api/user-role`,
+        `https://amplifybe-2.onrender.com/api/user-role`,
         { name: `${user.firstName} ${user.lastName}`, role: "Moderator" }
       );
       localStorage.setItem("RoletoSend", postingrole.data._id);
@@ -70,7 +70,7 @@ const MeetingTab = ({ meetings }) => {
       sessionStorage.setItem("username", meeting.name);
       console.log("posting successs", postingrole);
       const response = await axios.post(
-        `http://localhost:8008/api/live-meeting/start-meeting`,
+        `https://amplifybe-2.onrender.com/api/live-meeting/start-meeting`,
         { user, meetingId: meeting._id }
       );
 

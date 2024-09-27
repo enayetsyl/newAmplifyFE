@@ -29,7 +29,7 @@ const PoolsTab = ({ project, fetchProjects, userId, polls }) => {
     setIsLoading(true);
     try {
       const response = await axios.patch(
-        `http://localhost:8008/api/change-active-status/${poll._id}`,
+        `https://amplifybe-2.onrender.com/api/change-active-status/${poll._id}`,
         { isActive: newStatus }
       );
 
@@ -61,7 +61,7 @@ const PoolsTab = ({ project, fetchProjects, userId, polls }) => {
     setIsLoading(true);
     try {
       const response = await axios.delete(
-        `http://localhost:8008/api/delete/poll/${pollId}`
+        `https://amplifybe-2.onrender.com/api/delete/poll/${pollId}`
       );
 
       if (response.status === 200) {
