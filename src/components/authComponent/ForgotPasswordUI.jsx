@@ -21,7 +21,7 @@ const ForgotPasswordUI = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`https://amplifybe-2.onrender.com/api/users/forgotPassword`, {
+      const response = await axios.post(`http://localhost:8008/api/users/forgotPassword`, {
         email: email,
       });
       setMessage('Reset link sent to your email');

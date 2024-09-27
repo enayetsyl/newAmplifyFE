@@ -10,19 +10,19 @@ const ParticipantLeftSidebarOpenUI = () => {
     },
     {
       id: 2,
-      name: "John Doe",
+      name: "John Doe1",
     },
     {
       id: 3,
-      name: "John Doe",
+      name: "John Doe2",
     },
     {
       id: 4,
-      name: "John Doe",
+      name: "John Doe3",
     },
     {
       id: 5,
-      name: "John Doe",
+      name: "John Doe4",
     },
   ];
 

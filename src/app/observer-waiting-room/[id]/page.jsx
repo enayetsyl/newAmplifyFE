@@ -22,7 +22,7 @@ const page = () => {
   const getStreamingStatus = async (meetingId) => {
     try {
       const response = await axios.get(
-        `https://amplifybe-2.onrender.com/api/live-meeting/get-streaming-status/${meetingId}`
+        `http://localhost:8008/api/live-meeting/get-streaming-status/${meetingId}`
       );
 
       if (response.data.isStreaming) {

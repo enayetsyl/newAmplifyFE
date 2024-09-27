@@ -54,7 +54,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     console.log("Updated Project Data:", updatedProjectData);
     try {
       const response = await axios.put(
-        `https://amplifybe-2.onrender.com/api/update-general-project-info/${project._id}`,
+        `http://localhost:8008/api/update-general-project-info/${project._id}`,
         updatedProjectData
       );
       if (response.status === 200) {
@@ -114,7 +114,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `https://amplifybe-2.onrender.com/api/get-all/meeting/${project._id}`
+        `http://localhost:8008/api/get-all/meeting/${project._id}`
         // {
         //   params: { page, limit: 10 },
         // }
@@ -132,7 +132,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `https://amplifybe-2.onrender.com/api/get-all/poll/${project._id}`,
+        `http://localhost:8008/api/get-all/poll/${project._id}`,
         {
           params: { page, limit: 10 },
         }
@@ -179,7 +179,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     try {
       // Sending request to change project status
       const response = await axios.put(
-        `https://amplifybe-2.onrender.com/api/change-project-status/${project._id}`,
+        `http://localhost:8008/api/change-project-status/${project._id}`,
         { status: newStatus }
       );
 

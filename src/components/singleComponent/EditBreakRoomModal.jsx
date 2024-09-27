@@ -29,7 +29,7 @@ const EditBreakoutRoomModal = ({
     const fetchBreakoutRoom = async () => {
       try {
         const response = await axios.get(
-          `https://amplifybe-2.onrender.com/get-breakout-room/${breakoutRoomId}`
+          `http://localhost:8008/get-breakout-room/${breakoutRoomId}`
         );
         const data = response.data;
 
@@ -68,7 +68,7 @@ const EditBreakoutRoomModal = ({
   const handleSave = async () => {
     try {
       const response = await axios.put(
-        `https://amplifybe-2.onrender.com/update-breakout-room/${breakoutRoomId}`,
+        `http://localhost:8008/update-breakout-room/${breakoutRoomId}`,
         {
           name: newRoom.name,
           participants: newRoom.participants.map((p) => p._id),
