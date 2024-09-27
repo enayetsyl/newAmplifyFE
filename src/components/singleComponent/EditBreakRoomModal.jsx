@@ -8,7 +8,7 @@ import FormDropdownLabel from "../shared/FormDropdownLabel";
 import HeadingLg from "../shared/HeadingLg";
 import ParagraphLg from "../shared/ParagraphLg";
 import axios from "axios";
-import Button from "../shared/Button";
+import Button from "../shared/button";
 
 const EditBreakoutRoomModal = ({
   onClose,

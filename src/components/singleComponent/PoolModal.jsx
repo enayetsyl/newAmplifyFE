@@ -5,7 +5,7 @@ import { IoTrashSharp } from 'react-icons/io5';
 import { GoPlus } from 'react-icons/go';
 import FormDropdownLabel from '../shared/FormDropdownLabel';
 import { FiMinus } from 'react-icons/fi';
-import Button from '../shared/Button';
+import Button from '../shared/button';
 
 const PoolModal = ({ onClose, formData, setFormData, poolToEdit }) => {
   const [newPool, setNewPool] = useState({

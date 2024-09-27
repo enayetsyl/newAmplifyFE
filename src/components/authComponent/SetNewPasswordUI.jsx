@@ -6,7 +6,7 @@ import { FaEnvelopeOpenText } from 'react-icons/fa'
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useState } from 'react'
 import InputField from '../shared/InputField'
-import Button from '../shared/Button'
+import Button from '../shared/button'
 const SetNewPasswordUI = () => {
   const [formData, setFormData] = useState({
     newPassword: '',

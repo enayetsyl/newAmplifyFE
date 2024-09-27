@@ -7,7 +7,7 @@ import ParagraphBlue2 from '../shared/ParagraphBlue2';
 import BackToLogin from '../shared/BackToLogin';
 import { FaEnvelopeOpenText } from 'react-icons/fa';
 import InputField from '../shared/InputField';
-import Button from '../shared/Button';
+import Button from '../shared/button';
 
 const ForgotPasswordUI = () => {
   const [email, setEmail] = useState('');

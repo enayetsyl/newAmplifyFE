@@ -2,7 +2,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { useGlobalContext } from '@/context/GlobalContext';
-import Button from '../shared/Button';
+import Button from '../shared/button';
 
 const LogoutModal = ({ onClose }) => {
   const {  setUser } = useGlobalContext();

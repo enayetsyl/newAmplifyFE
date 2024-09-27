@@ -11,7 +11,7 @@ import { FaEye } from "react-icons/fa";
 import { IoClose,  IoSend } from "react-icons/io5";
 import { MdInsertEmoticon } from "react-icons/md";
 import axios from "axios";
-import Button from "../shared/Button";
+import Button from "../shared/button";
 
 const RightSidebarOpenUi = ({
   observers,

@@ -7,7 +7,7 @@ import { FaUser } from 'react-icons/fa';
 import { RiPencilFill } from 'react-icons/ri';
 import ViewModeratorModal from './ViewModeratorModal';
 import EditModeratorModal from './EditModeratorModal';
-import Button from '../shared/Button';
+import Button from '../shared/button';
 
 const ModeratorTable = () => {
   const [moderators, setModerators] = useState([]);
