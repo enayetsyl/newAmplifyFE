@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import axios from "axios";
 import Logo from "@/components/shared/Logo";
@@ -17,8 +17,16 @@ const Page = () => {
 
   const params = useParams();
   const meetingId = params.id;
-  const router = useRouter()
+  const router = useRouter();
 
+  // Function to get the role based on the URL
+  const getRoleFromUrl = () => {
+    const urlPath = window.location.pathname;
+    if (urlPath.includes("join-meeting")) {
+      return "Participant";
+    }
+    return "Observer";
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,22 +39,40 @@ const Page = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
- try {
-  const response = await axios.post(`https://amplifybe-1.onrender.com/api/live-meeting/join-meeting-participant`, {name: formData.fullName, role:"Participant", meetingId: meetingId});
+    const role = getRoleFromUrl(); // Extract the role based on URL
 
+    try {
+      // Call the new API with the extracted role and name
+      const response = await axios.post(
+        `https://amplifybe-1.onrender.com/api/user-role`,
+        {
+          name: formData.fullName,
+          role: role,
+        }
+      );
+      console.log(response.data);
+      // Redirect based on the role and the API response
+      localStorage.setItem("RoletoSend", response.data._id);
 
-  if(response?.data?.message === "Participant added to waiting room"){
-    router.push(`/participant-waiting-room/${meetingId}?fullName=${encodeURIComponent(formData.fullName)}&role=Participant`);
-  }  
- } catch (error) {
-  if(error?.response?.data?.message === "Participant already in the meeting" || error?.response?.data?.message === "Participant already in waiting room" ){
-    router.push(`/meeting/${meetingId}?fullName=${encodeURIComponent(formData.fullName)}&role=Participant`);
-  } else{
-    console.error('Received error from backend', error?.response?.data?.message)
-  }
- }
-
-   
+      if (role === "Participant") {
+        router.push(
+          `/participant-waiting-room/${meetingId}?fullName=${encodeURIComponent(
+            formData.fullName
+          )}&role=Participant`
+        );
+      } else {
+        router.push(
+          `/observer-waiting-room/${meetingId}?fullName=${encodeURIComponent(
+            formData.fullName
+          )}&role=Observer`
+        );
+      }
+    } catch (error) {
+      console.error(
+        "Received error from backend",
+        error?.response?.data?.message
+      );
+    }
   };
 
   return (

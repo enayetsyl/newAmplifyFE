@@ -11,19 +11,19 @@ import ShareMeetingModal from "./ShareMeetingModal";
 
 const MeetingTab = ({ meetings }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedMeeting, setSelectedMeeting] = useState(null)
+  const [selectedMeeting, setSelectedMeeting] = useState(null);
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
   const modalRef = useRef();
-  const {user} = useGlobalContext()
+  const { user } = useGlobalContext();
   const [isShareMeetingModalOpen, setIsShareMeetingModalOpen] = useState(false);
 
   const toggleModal = (event, meeting) => {
     const { top, left } = event.currentTarget.getBoundingClientRect();
     setModalPosition({ top, left });
-   setSelectedMeeting(meeting);
+    setSelectedMeeting(meeting);
     setIsModalOpen(!isModalOpen);
   };
-  const router = useRouter()
+  const router = useRouter();
 
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -44,97 +44,90 @@ const MeetingTab = ({ meetings }) => {
   }, [isModalOpen]);
   const closeModal = () => {
     setIsModalOpen(false);
-   };
+  };
 
-   const handleShareMeeting = (meeting) => {
-    console.log('share meeting', meeting)
+  const handleShareMeeting = (meeting) => {
+    console.log("share meeting", meeting);
     setSelectedMeeting(meeting);
     setIsShareMeetingModalOpen(true);
-    closeModal()
-  }
-  
-  const handleView =(meeting) => {
-     console.log('view meeting', meeting)
-    closeModal()
-    
-   }
-   
-   const handleJoinMeeting = async (meeting) => {
-      if(meeting.moderator.email === user.email){
+    closeModal();
+  };
+
+  const handleView = (meeting) => {
+    console.log("view meeting", meeting);
+    closeModal();
+  };
+
+  const handleJoinMeeting = async (meeting) => {
+    if (meeting.moderator.email === user.email) {
       const fullName = `${user.firstName} ${user.lastName}`;
+      const postingrole = await axios.post(
+        `https://amplifybe-1.onrender.com/api/user-role`,
+        { name: `${user.firstName} ${user.lastName}`, role: "Moderator" }
+      );
+      localStorage.setItem("RoletoSend", postingrole.data._id);
+      sessionStorage.setItem("room", meeting._id);
+      sessionStorage.setItem("username", meeting.name);
+      console.log("posting successs", postingrole);
+      const response = await axios.post(
+        `https://amplifybe-1.onrender.com/api/live-meeting/start-meeting`,
+        { user, meetingId: meeting._id }
+      );
 
-      const response = await axios.post(`https://amplifybe-1.onrender.com/api/live-meeting/start-meeting`, {user, meetingId: meeting._id})
-
-      if(response?.data?.liveMeeting?.ongoing){
-        router.push(`/meeting/${meeting._id}?fullName=${encodeURIComponent(fullName)}&role=Moderator`);
-      }else{
-        console.error('Received error from backend', response?.data?.error)
+      if (response?.data?.liveMeeting?.ongoing) {
+        router.push(
+          `/meeting/${meeting._id}?fullName=${encodeURIComponent(
+            fullName
+          )}&role=Moderator`
+        );
+      } else {
+        console.error("Received error from backend", response?.data?.error);
       }
-    } else{
+    } else {
       const fullName = `${user.firstName} ${user.lastName}`;
       // router.push(`/meeting/${meeting._id}?fullName=${encodeURIComponent(fullName)}&role=Admin`);
-
     }
-     
-   }
-   
+  };
 
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full bg-white shadow-md rounded-lg ">
         <thead className="border-b-[0.5px] border-solid border-custom-dark-blue-1">
           <tr>
-            <TableHead >
-              Meeting Title
-            </TableHead>
-        
-            <TableHead >
-              Start Date & Time
-            </TableHead>
-            <TableHead >
-              Time Zone
-            </TableHead>
-            <TableHead >
-              Moderator
-            </TableHead>
-            <TableHead >
-              Action
-            </TableHead>
+            <TableHead>Meeting Title</TableHead>
+
+            <TableHead>Start Date & Time</TableHead>
+            <TableHead>Time Zone</TableHead>
+            <TableHead>Moderator</TableHead>
+            <TableHead>Action</TableHead>
           </tr>
         </thead>
         <tbody>
           {meetings?.map((meeting, index) => (
             <tr key={index} className="hover:bg-gray-100">
-              <TableData >
-                {meeting?.title}
-              </TableData>
+              <TableData>{meeting?.title}</TableData>
               {/*  {new Date(meeting.startDate).toLocaleDateString()}{" "}
                     {meeting.startTime} */}
-              <TableData >
-              {new Date(meeting?.startDate).toLocaleDateString()}{" "}
-              {meeting?.startTime}
+              <TableData>
+                {new Date(meeting?.startDate).toLocaleDateString()}{" "}
+                {meeting?.startTime}
               </TableData>
-              <TableData >
-                {meeting?.timeZone}
-              </TableData>
-              <TableData >
-                {meeting?.moderator?.firstName}
-              </TableData>
-              <TableData >
+              <TableData>{meeting?.timeZone}</TableData>
+              <TableData>{meeting?.moderator?.firstName}</TableData>
+              <TableData>
                 <div className="flex justify-start items-center gap-2">
-               
-                <button className="text-blue-500 hover:text-blue-700"
-                onClick={()=>handleJoinMeeting(meeting)}
-                >
-                  Join
-                </button>
-           
-                <BsThreeDotsVertical
-                onClick={(e) => toggleModal(e, meeting)}
-                      className="cursor-pointer"
-                />
+                  <button
+                    className="text-blue-500 hover:text-blue-700"
+                    onClick={() => handleJoinMeeting(meeting)}
+                  >
+                    Join
+                  </button>
+
+                  <BsThreeDotsVertical
+                    onClick={(e) => toggleModal(e, meeting)}
+                    className="cursor-pointer"
+                  />
                 </div>
-                
               </TableData>
             </tr>
           ))}
@@ -166,9 +159,9 @@ const MeetingTab = ({ meetings }) => {
             </li>
             <li
               className="py-2 px-4 hover:bg-gray-200 cursor-pointer text-[#697e89] flex justify-start items-center gap-2"
-              onClick={() =>handleShareMeeting(selectedMeeting)}
+              onClick={() => handleShareMeeting(selectedMeeting)}
             >
-              <FaShareAlt/>
+              <FaShareAlt />
               <span>Share</span>
             </li>
             <li
@@ -184,8 +177,8 @@ const MeetingTab = ({ meetings }) => {
 
       {isShareMeetingModalOpen && (
         <ShareMeetingModal
-        meeting={selectedMeeting}
-        onClose={() => setIsShareMeetingModalOpen(false)}
+          meeting={selectedMeeting}
+          onClose={() => setIsShareMeetingModalOpen(false)}
         />
       )}
     </div>
