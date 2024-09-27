@@ -236,20 +236,20 @@ const page = () => {
 
   // Use effect for removing user if click close button
 
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      event.preventDefault();
-      event.returnValue =
-        "Are you sure you want to leave? Your changes may not be saved.";
-      participantLeft(fullName, userRole, params.id);
-    };
+  // useEffect(() => {
+  //   const handleBeforeUnload = (event) => {
+  //     event.preventDefault();
+  //     event.returnValue =
+  //       "Are you sure you want to leave? Your changes may not be saved.";
+  //     participantLeft(fullName, userRole, params.id);
+  //   };
 
-    window.addEventListener("beforeunload", handleBeforeUnload);
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
 
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [fullName, userRole, params.id]);
+  //   return () => {
+  //     window.removeEventListener("beforeunload", handleBeforeUnload);
+  //   };
+  // }, [fullName, userRole, params.id]);
 
   // Use effect for removing user when moderator remove user
 
