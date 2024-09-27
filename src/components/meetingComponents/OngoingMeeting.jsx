@@ -52,17 +52,17 @@ const OngoingMeeting = () => {
   });
   return (
     <div className="md:block hidden">
-      <h1>
+      {/* <h1>
         Welcome, {fullName}
         {breakRoomID && ` | Break Room ID: ${breakRoomID}`}
-      </h1>
+      </h1> */}
 
-      <button onClick={createRoom}>Create Room</button>
+      {/* <button onClick={createRoom}>Create Room</button>
       {breakRoomID && (
         <>
           <button onClick={joinRoom}>Join Room {breakRoomID}</button>
         </>
-      )}
+      )} */}
 
       <div
         className=""
