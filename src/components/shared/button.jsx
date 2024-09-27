@@ -1,6 +1,5 @@
 'use client'
-// components/Button.js
-import React from 'react';
+
 
 const Button = ({ children, type = 'button', variant = 'default', onClick = () => {}, icon, className = '', ...props }) => {
   const baseStyles = 'flex items-center justify-center';

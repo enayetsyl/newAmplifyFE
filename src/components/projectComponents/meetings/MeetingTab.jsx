@@ -60,6 +60,8 @@ const MeetingTab = ({ meetings }) => {
    }
    
    const handleJoinMeeting = async (meeting) => {
+    console.log('join meeting', meeting)
+    console.log('moderator email', meeting.moderator.email, 'user email', user.email)
       if(meeting.moderator.email === user.email){
       const fullName = `${user.firstName} ${user.lastName}`;
 
