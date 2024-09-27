@@ -8,7 +8,7 @@ import {  IoLogOutSharp } from "react-icons/io5";
 import WhiteBoard from "./WhiteBoard";
 import OngoingMeeting from "./OngoingMeeting";
 import EndOFMeeting from "./EndOFMeeting";
-import Button from "../shared/Button";
+import Button from "../shared/button";
 
 const MeetingView = ({
   role,

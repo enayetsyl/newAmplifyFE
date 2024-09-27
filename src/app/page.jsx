@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 import HeadingBlue25px from "@/components/shared/HeadingBlue25px";
-import Button from "@/components/shared/Button";
+import Button from "@/components/shared/button";
 
 export default function Home() {
   return (

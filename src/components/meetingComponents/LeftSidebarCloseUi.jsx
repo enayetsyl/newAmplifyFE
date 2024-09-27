@@ -5,7 +5,7 @@ import { BsChatSquareFill } from "react-icons/bs";
 import { MdMoveDown } from "react-icons/md";
 import Image from "next/image";
 import { PiCirclesFourFill } from "react-icons/pi";
-import Button from "../shared/Button";
+import Button from "../shared/button";
 
 const LeftSidebarCloseUi = ({
   users,

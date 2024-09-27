@@ -1,7 +1,7 @@
 "use client";
 
 import ParticipantLeftSideBar from "@/components/participantWaitingRoom/ParticipantLeftSideBar";
-import Button from "@/components/shared/Button";
+import Button from "@/components/shared/button";
 import HeadingBlue25px from "@/components/shared/HeadingBlue25px";
 import Logo from "@/components/shared/Logo";
 import axios from "axios";

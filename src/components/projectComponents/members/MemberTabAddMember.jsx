@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Button from "@/components/shared/Button";
+import Button from "@/components/shared/button";
 
 
 const MemberTabAddMember = ({

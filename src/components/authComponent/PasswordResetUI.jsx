@@ -3,7 +3,7 @@ import HeadingH1 from "../shared/HeadingH1";
 import ParagraphBlue2 from "../shared/ParagraphBlue2";
 import { FaEnvelopeOpenText } from "react-icons/fa";
 import Link from "next/link";
-import Button from "../shared/Button";
+import Button from "../shared/button";
 
 const PasswordResetUI = () => {
   return (

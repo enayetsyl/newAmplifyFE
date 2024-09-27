@@ -8,7 +8,7 @@ import { RiPencilFill } from "react-icons/ri";
 import ViewContactModal from "./ViewContactModal";
 import AddContactModal from "./AddContactModal";
 import { IoTrashBin } from "react-icons/io5";
-import Button from "../shared/Button";
+import Button from "../shared/button";
 
 const ContactTable = ({
   contacts,

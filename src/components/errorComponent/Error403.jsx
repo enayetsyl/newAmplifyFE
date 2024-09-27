@@ -6,7 +6,7 @@ import HeadingBlue25px from '../shared/HeadingBlue25px'
 import ParagraphBlue2 from '../shared/ParagraphBlue2'
 import Footer from '../shared/Footer'
 import { useRouter } from 'next/navigation'
-import Button from '../shared/Button'
+import Button from '../shared/button'
 
 const Error403 = () => {
   const router = useRouter()

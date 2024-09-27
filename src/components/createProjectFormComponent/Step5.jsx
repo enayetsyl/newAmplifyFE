@@ -6,7 +6,7 @@ import { RiPencilFill } from "react-icons/ri";
 import ParagraphLg from "../shared/ParagraphLg";
 import PoolModal from "../singleComponent/PoolModal";
 import HeadingLg from "../shared/HeadingLg";
-import Button from "../shared/Button";
+import Button from "../shared/button";
 
 const Step5 = ({ formData, setFormData }) => {
   const [isPoolModalOpen, setIsPoolModalOpen] = useState(false);

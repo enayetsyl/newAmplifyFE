@@ -1,6 +1,6 @@
 import { BsChatSquareFill } from "react-icons/bs";
 import HeadingLg from "../shared/HeadingLg";
-import Button from "../shared/Button";
+import Button from "../shared/button";
 
 const ParticipantLeftSidebarOpenUI = () => {
   const participant = [

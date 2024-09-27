@@ -7,7 +7,7 @@ import ParagraphBlue2 from "../shared/ParagraphBlue2";
 import Footer from "../shared/Footer";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import Button from "../shared/Button";
+import Button from "../shared/button";
 
 const Error401 = () => {
   const router = useRouter();

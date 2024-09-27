@@ -108,8 +108,8 @@ const DashboardSidebar = ({
               {/* modal */}
               <div
                 ref={modalRef}
-                className={`absolute bottom-12 -right-24 z-50 bg-white rounded-lg h-[90px] w-[125px] profile_dropdown_shadow flex flex-col justify-center items-start px-3 gap-4  ${
-                  isModalOpen ? "block" : "hidden"
+                className={`absolute   bottom-12 -right-24 z-50 bg-white rounded-lg h-[90px] w-[125px] profile_dropdown_shadow  flex-col justify-center items-start px-3 gap-4  ${
+                  isModalOpen ? "flex" : "hidden"
                 }`}
               >
                 <Link href="/dashboard/my-profile">
@@ -178,7 +178,7 @@ const DashboardSidebar = ({
           </div>
 
           {/* User Info Section */}
-          <div className="w-[240px] mx-auto">
+          <div className="w-[240px] mx-auto relative">
             <div className="flex justify-center items-center gap-2 bg-[#f1f1f1] h-20 border-white rounded-lg bg-opacity-70 user_info_div_shadow mb-6 relative pl-2">
               {/* User Image */}
               <Image
@@ -203,6 +203,23 @@ const DashboardSidebar = ({
                 onClick={handleModalOpen}
               />
             </div>
+            {isModalOpen && (
+              <div className=" md:hidden absolute  bottom-20   -right-24 z-50 bg-white rounded-lg h-[90px] w-[125px] flex flex-col justify-center items-start px-3 gap-4">
+                <Link href="/dashboard/my-profile">
+                  <div className="flex justify-start items-center gap-2 cursor-pointer">
+                    <FaUser className="text-[#697e89] h-3 w-3" />
+                    <p className="text-sm text-[#697e89]">My Profile</p>
+                  </div>
+                </Link>
+                <div
+                  className="flex justify-start items-center gap-2 cursor-pointer "
+                  onClick={(e) => handleLogoutModalOpen(e)}
+                >
+                  <IoIosLogOut className="text-[#697e89] h-3 w-3" />
+                  <p className="text-sm text-[#697e89]">Logout</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
         {/* {isLogoutModalOpen && <LogoutModal onClose={handleCloseLogoutModal} />} */}

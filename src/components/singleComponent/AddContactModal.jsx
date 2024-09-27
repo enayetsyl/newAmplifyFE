@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import InputField from "../shared/InputField";
 import { useGlobalContext } from "@/context/GlobalContext";
 import toast from "react-hot-toast";
-import Button from "../shared/Button";
+import Button from "../shared/button";
 
 const AddContactModal = ({
   onClose,

@@ -9,7 +9,7 @@ import { FaUserClock, FaUsers } from "react-icons/fa";
 import { HiOutlineMinus } from "react-icons/hi2";
 import { useRouter } from "next/navigation";
 import { useGlobalContext } from "@/context/GlobalContext";
-import Button from "@/components/shared/Button";
+import Button from "@/components/shared/button";
 
 const Page = () => {
   const router = useRouter();

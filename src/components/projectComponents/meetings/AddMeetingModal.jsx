@@ -1,4 +1,4 @@
-import Button from "@/components/shared/Button";
+import Button from "@/components/shared/button";
 import Dropdown from "@/components/shared/Dropdown";
 import FormDropdownLabel from "@/components/shared/FormDropdownLabel";
 import InputField from "@/components/shared/InputField";
@@ -89,7 +89,7 @@ const AddMeetingModal = ({ onClose, project, user, refetchMeetings }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-   
+
     const updatedFormData = {
       ...formData,
       projectId: project._id,
@@ -105,14 +105,14 @@ const AddMeetingModal = ({ onClose, project, user, refetchMeetings }) => {
     } catch (error) {
       console.error("Error creating meeting:", error);
       console.error("Error creating meeting data:", error.response.data.error);
-      toast.error(`${error.response.data.error}`)
+      toast.error(`${error.response.data.error}`);
     }
   };
 
   return (
-    <div className="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 ">
-      <div className="bg-white rounded-lg w-[600px] max-w-2xl ">
-        <h3 className="text-2xl text-custom-dark-blue-2 font-semibold mx-10 py-5">
+    <div className="fixed top-0 inset-0 flex justify-center items-center bg-gray-800 bg-opacity-50 ">
+      <div className="bg-white rounded-lg w-[600px] max-w-2xl  ">
+        <h3 className="text-2xl text-custom-dark-blue-2 font-semibold mx-10 py-5 leading-[3.75rem] md:leading-8">
           Add New Meeting
         </h3>
 
@@ -125,7 +125,7 @@ const AddMeetingModal = ({ onClose, project, user, refetchMeetings }) => {
               onChange={handleInputChange}
               placeholder="Meeting Title"
             />
-            <div className="">
+            <div className="mb-4 sm:mb-0">
               <label
                 htmlFor="moderator"
                 className="block sm:text-sm font-semibold mb-2 text-sm text-black"
@@ -137,7 +137,7 @@ const AddMeetingModal = ({ onClose, project, user, refetchMeetings }) => {
                 id="moderator"
                 value={formData.moderator}
                 onChange={handleInputChange}
-                className="px-4 py-1 sm:py-2 border border-[#000000] rounded-lg flex items-center justify-between w-full text-custom-dark-blue-1 z-50"
+                className="px-4 py-2 sm:py-2 border border-[#000000] rounded-lg flex items-center justify-between w-full text-custom-dark-blue-1 z-50"
               >
                 <option value="">Select Moderator</option>
                 {contacts.map((contact, index) => (
@@ -179,18 +179,18 @@ const AddMeetingModal = ({ onClose, project, user, refetchMeetings }) => {
                 </div>
               </div>
             </div>
-              <div>
-                <FormDropdownLabel className="mb-2 z-50">
-                  Time Zone
-                </FormDropdownLabel>
-                <Dropdown
-                  options={timeZone}
-                  selectedOption={selectedTimeZone}
-                  onSelect={handleTimeZoneSelect}
-                  className="w-full z-20"
-                />
-              </div>
-            <div className="flex justify-start items-end gap-5 ">
+            <div>
+              <FormDropdownLabel className="mb-2 z-50 mt-3">
+                Time Zone
+              </FormDropdownLabel>
+              <Dropdown
+                options={timeZone}
+                selectedOption={selectedTimeZone}
+                onSelect={handleTimeZoneSelect}
+                className="w-full z-20"
+              />
+            </div>
+            <div className="flex justify-start items-end gap-5 mt-1">
               <InputField
                 label="Duration"
                 type="text"
@@ -199,7 +199,36 @@ const AddMeetingModal = ({ onClose, project, user, refetchMeetings }) => {
                 onChange={handleInputChange}
                 className="w-full"
               />
-              <div className="flex justify-start items-center gap-2">
+              <div className="hidden justify-start items-center gap-2 md:flex">
+                <input
+                  type="checkbox"
+                  name="ongoing"
+                  checked={formData.ongoing}
+                  onChange={handleInputChange}
+                  className="mr-2"
+                />
+                <label htmlFor="ongoing" className="text-sm font-semibold">
+                  Ongoing/TBD
+                </label>
+              </div>
+              <div className="hidden justify-start items-center gap-2 md:flex">
+                <input
+                  type="checkbox"
+                  name="enableBreakoutRoom"
+                  checked={formData.enableBreakoutRoom}
+                  onChange={handleInputChange}
+                  className="mr-2"
+                />
+                <label
+                  htmlFor="enableBreakoutRoom"
+                  className="text-sm font-semibold"
+                >
+                  Breakout Room
+                </label>
+              </div>
+            </div>
+            <div className="flex justify-between mb-2 md:hidden">
+            <div className="flex justify-start items-center gap-2">
                 <input
                   type="checkbox"
                   name="ongoing"
@@ -226,7 +255,7 @@ const AddMeetingModal = ({ onClose, project, user, refetchMeetings }) => {
                   Breakout Room
                 </label>
               </div>
-            </div>
+              </div>
             <div className="flex justify-start items-end gap-5 ">
               <InputField
                 label="Passcode"
@@ -245,22 +274,22 @@ const AddMeetingModal = ({ onClose, project, user, refetchMeetings }) => {
               </div>
             </div>
           </div>
-        <div className="flex justify-center items-center gap-5  pb-8">
-          <Button
-            onClick={onClose}
-            variant="primary"
-            type="submit"
-            children="Close"
-            className="px-5 py-1 rounded-xl"
-          />
-          <Button
-            onClick={handleSubmit}
-            variant="primary"
-            type="submit"
-            children="Save"
-            className="px-5 py-1 rounded-xl"
-          />
-        </div>
+          <div className="flex justify-center items-center gap-5  pb-8">
+            <Button
+              onClick={onClose}
+              variant="primary"
+              type="submit"
+              children="Close"
+              className="px-5 py-1 rounded-xl"
+            />
+            <Button
+              onClick={handleSubmit}
+              variant="primary"
+              type="submit"
+              children="Save"
+              className="px-5 py-1 rounded-xl"
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@ import PollDetailsModal from "./PollDetailsModal";
 import toast from "react-hot-toast";
 import axios from "axios";
 import AddPoolModal from "./AddPoolModal";
-import Button from "@/components/shared/Button";
+import Button from "@/components/shared/button";
 
 const PoolsTab = ({ project, fetchProjects, userId, polls }) => {
   const [selectedPoll, setSelectedPoll] = useState(null);

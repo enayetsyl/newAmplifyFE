@@ -15,7 +15,7 @@ import RemoveUserModal from "../singleComponent/RemoveUserModal";
 import MoveToWaitingRoomModal from "../singleComponent/MoveToWaitingRoomModal";
 import notify from "@/utils/notify";
 import { PiCirclesFourFill } from "react-icons/pi";
-import Button from "../shared/Button";
+import Button from "../shared/button";
 
 const LeftSidebarOpenUi = ({
   users,

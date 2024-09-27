@@ -8,7 +8,7 @@ import { IoTrashSharp } from 'react-icons/io5';
 import HeadingLg from '../shared/HeadingLg';
 import { RiPencilFill } from 'react-icons/ri';
 import ParagraphLg from '../shared/ParagraphLg';
-import Button from '../shared/Button';
+import Button from '../shared/button';
 
 const Step4 = ({ formData, setFormData }) => {
   const [isBreakoutRoomModalOpen, setIsBreakoutRoomModalOpen] = useState(false);

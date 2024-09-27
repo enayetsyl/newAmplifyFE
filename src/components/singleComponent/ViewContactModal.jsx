@@ -1,7 +1,7 @@
 import React from "react";
 import HeadingLg from "../shared/HeadingLg";
 import ParagraphLg from "../shared/ParagraphLg";
-import Button from "../shared/Button";
+import Button from "../shared/button";
 
 const ViewContactModal = ({ user, onClose }) => {
 

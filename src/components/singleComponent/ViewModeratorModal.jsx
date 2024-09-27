@@ -5,7 +5,7 @@ import { RxCrossCircled } from "react-icons/rx";
 import HeadingLg from "../shared/HeadingLg";
 import { FaCheckCircle } from "react-icons/fa";
 import ParagraphLg from "../shared/ParagraphLg";
-import Button from "../shared/Button";
+import Button from "../shared/button";
 
 const ViewModeratorModal = ({ user, onClose }) => {
   // Format the date to yy-mm-dd

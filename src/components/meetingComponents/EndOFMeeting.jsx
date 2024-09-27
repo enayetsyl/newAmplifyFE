@@ -7,7 +7,7 @@ import { IoTrashSharp } from "react-icons/io5";
 import { RiPencilFill } from "react-icons/ri";
 import HeadingBlue25px from "../shared/HeadingBlue25px";
 import { GrDocumentVideo } from "react-icons/gr";
-import Button from "../shared/Button";
+import Button from "../shared/button";
 
 const EndOFMeeting = ({role}) => {
   return (

@@ -8,7 +8,7 @@ import NoSearchResult from "@/components/singleComponent/NoSearchResult";
 import ProjectTable from "@/components/singleComponent/ProjectTable";
 import { useRouter } from "next/navigation";
 import { useGlobalContext } from "@/context/GlobalContext";
-import Button from "@/components/shared/Button";
+import Button from "@/components/shared/button";
 
 const Page = () => {
   const router = useRouter();

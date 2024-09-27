@@ -1,6 +1,6 @@
 import React, { useState,  } from "react";
 import InputField from "@/components/shared/InputField";
-import Button from "../shared/Button";
+import Button from "../shared/button";
 
 
 // EditProjectModal Component

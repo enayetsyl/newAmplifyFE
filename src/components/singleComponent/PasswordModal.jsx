@@ -4,7 +4,7 @@ import axios from 'axios';
 import InputField from '../shared/InputField';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import ErrorModal from './ErrorModal';
-import Button from '../shared/Button';
+import Button from '../shared/button';
 
 const PasswordModal = ({ onClose, id }) => {
 

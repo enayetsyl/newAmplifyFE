@@ -17,7 +17,7 @@ import MembersTab from "../projectComponents/members/MembersTab";
 import MemberBulkUpdate from "../projectComponents/members/MemberBulkUpdate";
 import PoolsTab from "../projectComponents/pools/PoolsTab";
 import AddPoolModal from "../projectComponents/pools/AddPoolModal";
-import Button from "../shared/Button";
+import Button from "../shared/button";
 
 const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [isLoading, setIsLoading] = useState(false);

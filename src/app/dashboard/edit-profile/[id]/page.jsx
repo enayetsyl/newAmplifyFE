@@ -6,7 +6,7 @@ import Image from "next/image";
 import { FaSave } from "react-icons/fa";
 import InputField from "@/components/shared/InputField";
 import userImage from "../../../../../public/placeholder-image.png";
-import Button from "@/components/shared/Button";
+import Button from "@/components/shared/button";
 
 const Page = () => {
   const { id } = useParams();

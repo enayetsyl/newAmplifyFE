@@ -10,7 +10,7 @@ import { PiNotebookFill, PiSquaresFourFill } from "react-icons/pi";
 import { FaCheck, FaUserClock, FaUsers } from "react-icons/fa";
 import { BiSolidBarChartAlt2 } from "react-icons/bi";
 import { HiOutlineMinus } from "react-icons/hi2";
-import Button from "@/components/shared/Button";
+import Button from "@/components/shared/button";
 
 const Page = () => {
   const [currentStep, setCurrentStep] = useState(5);

@@ -8,7 +8,7 @@ import { FaShareAlt, FaUser } from "react-icons/fa";
 import { RiPencilFill } from "react-icons/ri";
 import ViewProject from "./ViewProject";
 import ShareProjectModal from "../projectComponents/ShareProjectModal";
-import Button from "../shared/Button";
+import Button from "../shared/button";
 
 const ProjectTable = ({ projects, setProjects, fetchProjects, user }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
