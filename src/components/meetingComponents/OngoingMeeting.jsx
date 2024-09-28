@@ -56,7 +56,7 @@ const OngoingMeeting = () => {
   allow="camera; microphone; fullscreen; display-capture"
   allowFullScreen
   style={{ border: "none" }}
-  className="rounded-md h-[500px] sm:h-[800px] lg:h-[960px]" // Adjust height for different breakpoints
+  className="rounded-md h-[679px] sm:h-[800px] lg:h-[960px]" // Adjust height for different breakpoints
 ></iframe>
 
         )}
