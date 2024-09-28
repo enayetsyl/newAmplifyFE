@@ -43,7 +43,7 @@ const OngoingMeeting = () => {
   return (
     <div className="md:block hidden">
       <div
-        className=""
+        className="rounded-md"
         style={{ width: "100%", paddingBottom: "56.25%", position: "relative" }}
       >
         {roomId && (
@@ -56,6 +56,7 @@ const OngoingMeeting = () => {
             allow="camera; microphone; fullscreen; display-capture"
             allowFullScreen
             style={{ border: "none" }}
+            className="rounded-md"
           ></iframe>
         )}
       </div>
