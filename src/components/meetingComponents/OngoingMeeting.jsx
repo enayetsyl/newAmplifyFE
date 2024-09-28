@@ -48,16 +48,17 @@ const OngoingMeeting = () => {
       >
         {roomId && (
           <iframe
-            src={`https://harshapmlify-11111.onrender.com/?room=${getRoomIdFromUrl()}&id=${localStorage.getItem(
-              "RoletoSend"
-            )}`}
-            width="100%"
-            height="960"
-            allow="camera; microphone; fullscreen; display-capture"
-            allowFullScreen
-            style={{ border: "none" }}
-            className="rounded-md"
-          ></iframe>
+  src={`https://harshapmlify-11111.onrender.com/?room=${getRoomIdFromUrl()}&id=${localStorage.getItem(
+    "RoletoSend"
+  )}`}
+  width="100%"
+  height="760" // Default height
+  allow="camera; microphone; fullscreen; display-capture"
+  allowFullScreen
+  style={{ border: "none" }}
+  className="rounded-md h-[500px] sm:h-[800px] lg:h-[960px]" // Adjust height for different breakpoints
+></iframe>
+
         )}
       </div>
     </div>
