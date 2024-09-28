@@ -41,7 +41,7 @@ const OngoingMeeting = () => {
   };
 
   return (
-    <div className="md:block hidden">
+    <div className="md:block ">
       <div
         className="rounded-md"
         style={{ width: "100%", paddingBottom: "56.25%", position: "relative" }}
