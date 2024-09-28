@@ -44,7 +44,7 @@ const OngoingMeeting = () => {
     <div className="md:block ">
       <div
         className="rounded-md"
-        style={{ width: "100%", paddingBottom: "56.25%", position: "relative" }}
+        style={{ width: "100%", position: "relative" }}
       >
         {roomId && (
           <iframe
