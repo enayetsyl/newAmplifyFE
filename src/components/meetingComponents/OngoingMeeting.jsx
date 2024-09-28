@@ -52,7 +52,7 @@ const OngoingMeeting = () => {
               "RoletoSend"
             )}`}
             width="100%"
-            height="560"
+            height="960"
             allow="camera; microphone; fullscreen; display-capture"
             allowFullScreen
             style={{ border: "none" }}
