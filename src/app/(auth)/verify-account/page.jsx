@@ -1,39 +1,44 @@
-'use client'
-import VerificationErrorUI from "@/components/authComponent/VerificationErrorUI"
-import VerifyAccountUI from "@/components/authComponent/VerifyAccountUI"
-import Logo from "@/components/shared/Logo"
-import axios from "axios"
-import { useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react"
+'use client';
+import VerificationErrorUI from "@/components/authComponent/VerificationErrorUI";
+import VerifyAccountUI from "@/components/authComponent/VerifyAccountUI";
+import Logo from "@/components/shared/Logo";
+import axios from "axios";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const VerifyAccount = () => {
-  
-  const searchParams = useSearchParams()
-  const id = searchParams.get('id')
-  console.log(id)
-
-  const [verificationStatus, setVerificationStatus] = useState(null); 
-
-
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
+  const [verificationStatus, setVerificationStatus] = useState(null);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    const verifyEmail = async () => {
-      try {
-        console.log('sending verification request')
-        const response = await axios.get(`http://localhost:8008/api/verify?id=${id}`);
+    setIsClient(true); // Ensure the code is running on the client
 
-        console.log('response .data', response.data)
-        if (response.status === 200) {
-          setVerificationStatus('success');
+    if (id) {
+      const verifyEmail = async () => {
+        try {
+          console.log('sending verification request');
+          const response = await axios.get(`http://localhost:8008/api/verify?id=${id}`);
+          console.log('response .data', response.data);
+          
+          if (response.status === 200) {
+            setVerificationStatus('success');
+          }
+        } catch (error) {
+          setVerificationStatus('error');
+          console.error("Verification error:", error);
         }
-      } catch (error) {
-        setVerificationStatus('error');
-        console.error("Verification error:", error);
-      }
-    };
-
-    verifyEmail();
+      };
+      
+      verifyEmail();
+    }
   }, [id]);
+
+  if (!isClient) {
+    // Return a placeholder until the component is fully mounted on the client
+    return <p className="min-h-screen text-center">Loading...</p>;
+  }
 
   return (
     <div>
