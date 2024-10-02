@@ -6,7 +6,9 @@ import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
 
-const VerifyAccountContent = ({ id }) => {
+const VerifyAccountContent = () => {
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
   const [verificationStatus, setVerificationStatus] = useState(null);
 
   useEffect(() => {
@@ -40,9 +42,6 @@ const VerifyAccountContent = ({ id }) => {
 };
 
 const VerifyAccount = () => {
-  const searchParams = useSearchParams();
-  const id = searchParams.get('id');
-  
   return (
     <div>
       <div className="flex justify-center items-center pt-5 lg:hidden">
@@ -52,7 +51,7 @@ const VerifyAccount = () => {
         <Logo />
       </div>
       <Suspense fallback={<p className="min-h-screen text-center">Loading...</p>}>
-        <VerifyAccountContent id={id} />
+        <VerifyAccountContent />
       </Suspense>
     </div>
   );
