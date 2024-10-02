@@ -3,7 +3,7 @@ import VerificationErrorUI from "@/components/authComponent/VerificationErrorUI"
 import VerifyAccountUI from "@/components/authComponent/VerifyAccountUI"
 import Logo from "@/components/shared/Logo"
 import axios from "axios"
-import { useParams, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 
 const VerifyAccount = () => {

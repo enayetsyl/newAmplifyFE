@@ -1,7 +1,7 @@
 import React from 'react';
 import ParagraphBlue2 from '../shared/ParagraphBlue2';
 import HeadingH1 from '../shared/HeadingH1';
-import Button from '../shared/Button';
+import Button from '../shared/button';
 import { FaExclamationTriangle } from 'react-icons/fa';
 import Link from 'next/link';
 
