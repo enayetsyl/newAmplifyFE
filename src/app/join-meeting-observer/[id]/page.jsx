@@ -34,8 +34,18 @@ const page = () => {
     e.preventDefault();
 
     try {
+      const response1 = await axios.post(
+        `https://amplifybe-2.onrender.com/api/user-role`,
+        {
+          name: formData.fullName,
+          role: "Observer", // Fixed role as Observer,
+        }
+      );
+      console.log(response1.data);
+      // Redirect based on the role and the API response
+      localStorage.setItem("RoletoSend", response1.data._id);
       const response = await axios.post(
-        `http://localhost:8008/api/live-meeting/join-meeting-observer`,
+        `https://amplifybe-2.onrender.com/api/live-meeting/join-meeting-observer`,
         {
           name: formData.fullName,
           role: "Observer", // Fixed role as Observer

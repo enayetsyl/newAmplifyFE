@@ -28,7 +28,7 @@ const MeetingView = ({
 
   return (
     <div className="px-5 sm:py-5  flex-col justify-between items-between h-full  bg-custum-meet-bg">
-      <div className="h-1/5 ">
+      <div className="md:h-1/5 h-auto py-2">
         {/* First ------ nav bar */}
         <div className="flex justify-between items-center pb-2">
           {/* participant name */}

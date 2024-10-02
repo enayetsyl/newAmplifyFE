@@ -4,13 +4,21 @@ const OngoingMeeting = () => {
   const [breakRoomID, setRoomBreakID] = useState(null);
   const [fullName, setFullName] = useState("Guest");
   const [roomId, setRoomId] = useState("");
-  const [showbreak, setShowBreak] = useState(false);
 
   useEffect(() => {
     const extractedFullName = getFullNameFromQuery();
     const extractedRoomId = getRoomIdFromUrl();
     setFullName(extractedFullName);
     setRoomId(extractedRoomId);
+
+    // Check if the page has already been reloaded
+    const hasReloaded = localStorage.getItem("hasReloaded");
+
+    if (!hasReloaded) {
+      // If not reloaded, reload the page and set the flag
+      localStorage.setItem("hasReloaded", "true");
+      window.location.reload();
+    }
   }, []);
 
   // Function to extract the 'fullName' from the URL
@@ -32,54 +40,25 @@ const OngoingMeeting = () => {
     return "defaultRoomId";
   };
 
-  const createRoom = () => {
-    const randomRoomId = Math.floor(100000 + Math.random() * 900000).toString();
-    setRoomBreakID(randomRoomId);
-  };
-
-  const joinRoom = () => {
-    if (breakRoomID) {
-      setShowBreak(true);
-    }
-  };
-  useEffect(() => {
-    console.log(
-      "IFRAMEURL",
-      `http://localhost:8000/?room=${getRoomIdFromUrl()}&id=${localStorage.getItem(
-        "RoletoSend"
-      )}`
-    );
-  });
   return (
-    <div className="md:block hidden">
-      {/* <h1>
-        Welcome, {fullName}
-        {breakRoomID && ` | Break Room ID: ${breakRoomID}`}
-      </h1> */}
-
-      {/* <button onClick={createRoom}>Create Room</button>
-      {breakRoomID && (
-        <>
-          <button onClick={joinRoom}>Join Room {breakRoomID}</button>
-        </>
-      )} */}
-
+    <div className="md:block ">
       <div
-        className=""
-        style={{ width: "100%", paddingBottom: "56.25%", position: "relative" }}
+        className="rounded-md"
+        style={{ width: "100%", position: "relative" }}
       >
-        {console.log(localStorage.getItem("RoletoSend"))}
         {roomId && (
           <iframe
-            src={`https://harshapmlifywebrtc-1.onrender.com/?room=${getRoomIdFromUrl()}&id=${localStorage.getItem(
-              "RoletoSend"
-            )}`}
-            width="100%"
-            height="600"
-            allow="camera; microphone; fullscreen; display-capture"
-            allowFullScreen
-            style={{ border: "none" }}
-          ></iframe>
+  src={`https://harshapmlify-11111.onrender.com/?room=${getRoomIdFromUrl()}&id=${localStorage.getItem(
+    "RoletoSend"
+  )}`}
+  width="100%"
+  height="760" // Default height
+  allow="camera; microphone; fullscreen; display-capture"
+  allowFullScreen
+  style={{ border: "none" }}
+  className="rounded-md h-[740px]  lg:h-[660px]" // Adjust height for different breakpoints
+></iframe>
+
         )}
       </div>
     </div>
