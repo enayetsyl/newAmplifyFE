@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import HeadingBlue25px from '../shared/HeadingBlue25px';
-import InputField from '../shared/InputField';
-import Dropdown from '../shared/Dropdown';
-import { IoTrashSharp } from 'react-icons/io5';
-import FormDropdownLabel from '../shared/FormDropdownLabel';
-import HeadingLg from '../shared/HeadingLg';
-import ParagraphLg from '../shared/ParagraphLg';
-import axios from 'axios';
-import Button from '../shared/button';
+import React, { useEffect, useState } from "react";
+import HeadingBlue25px from "../shared/HeadingBlue25px";
+import InputField from "../shared/InputField";
+import Dropdown from "../shared/Dropdown";
+import { IoTrashSharp } from "react-icons/io5";
+import FormDropdownLabel from "../shared/FormDropdownLabel";
+import HeadingLg from "../shared/HeadingLg";
+import ParagraphLg from "../shared/ParagraphLg";
+import axios from "axios";
+import Button from "../shared/button";
 
 const BreakoutRoomModal = ({ onClose, formData, setFormData, roomToEdit }) => {
   const [newRoom, setNewRoom] = useState({
-    name: '',
+    name: "",
     participants: [],
     interpreter: false,
-    interpreterName: '',
-    interpreterEmail: '',
-    interpreterLanguage: 'English',
+    interpreterName: "",
+    interpreterEmail: "",
+    interpreterLanguage: "English",
   });
 
   const addParticipantToRoom = (participant) => {
@@ -38,23 +38,25 @@ const BreakoutRoomModal = ({ onClose, formData, setFormData, roomToEdit }) => {
       setNewRoom(roomToEdit);
     }
   }, [roomToEdit]);
-  
 
   const handleSave = async () => {
     try {
-      const response = await axios.post(`${process.env.BACKEND_BASE_URL}/create-breakout-room'`, {
-        project: "66b09e0fa55a6fb9481f7f77", // assuming you have projectId in formData
-        name: newRoom.name,
-        participants: newRoom.participants.map(p => p._id),
-        duration: 60, // Set the duration as needed
-        interpretor: newRoom.interpreter
-          ? {
-              name: newRoom.interpreterName,
-              email: newRoom.interpreterEmail,
-              language: newRoom.interpreterLanguage,
-            }
-          : null,
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/create-breakout-room'`,
+        {
+          project: "66b09e0fa55a6fb9481f7f77", // assuming you have projectId in formData
+          name: newRoom.name,
+          participants: newRoom.participants.map((p) => p._id),
+          duration: 60, // Set the duration as needed
+          interpretor: newRoom.interpreter
+            ? {
+                name: newRoom.interpreterName,
+                email: newRoom.interpreterEmail,
+                language: newRoom.interpreterLanguage,
+              }
+            : null,
+        }
+      );
 
       if (response.status === 201) {
         setFormData({
@@ -64,10 +66,9 @@ const BreakoutRoomModal = ({ onClose, formData, setFormData, roomToEdit }) => {
         onClose();
       }
     } catch (error) {
-      console.error('Error creating breakout room:', error);
+      console.error("Error creating breakout room:", error);
     }
   };
-  
 
   const participantsOptions = formData?.participants?.map(
     (participant) => `${participant.name} (${participant.email})`
@@ -76,7 +77,9 @@ const BreakoutRoomModal = ({ onClose, formData, setFormData, roomToEdit }) => {
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50 ">
       <div className="bg-white rounded-lg p-8 w-full max-w-2xl overflow-y-auto h-[90%]">
-      <HeadingBlue25px children={roomToEdit ? "Edit Breakout Room" : "Add Breakout Room"} />
+        <HeadingBlue25px
+          children={roomToEdit ? "Edit Breakout Room" : "Add Breakout Room"}
+        />
 
         <div className="pt-5">
           <InputField

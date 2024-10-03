@@ -16,7 +16,9 @@ const EditPollModal = ({ onClose, formData, setFormData, polls }) => {
   useEffect(() => {
     const fetchPollById = async () => {
       try {
-        const response = await axios.get(`${process.env.BACKEND_BASE_URL}/api/get/poll-id/${polls}`);
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/get/poll-id/${polls}`
+        );
         setPoll(response.data);
         setLoading(false);
       } catch (error) {
@@ -109,7 +111,7 @@ const EditPollModal = ({ onClose, formData, setFormData, polls }) => {
   const handleSave = async () => {
     try {
       const response = await axios.put(
-        `${process.env.BACKEND_BASE_URL}/api/update-poll/${polls}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/update-poll/${polls}`,
         {
           pollName: newPoll.name,
           isActive: newPoll.active,
@@ -117,14 +119,14 @@ const EditPollModal = ({ onClose, formData, setFormData, polls }) => {
           choice: null, // or any default value if needed
         }
       );
-    //   const updatedPolls = formData.polls
-    //     ? formData.polls.map((p) => (p._id === polls ? response.data : p))
-    //     : [response.data];
+      //   const updatedPolls = formData.polls
+      //     ? formData.polls.map((p) => (p._id === polls ? response.data : p))
+      //     : [response.data];
 
-    //   setFormData({
-    //     ...formData,
-    //     polls: updatedPolls,
-    //   });
+      //   setFormData({
+      //     ...formData,
+      //     polls: updatedPolls,
+      //   });
 
       onClose(); // Close the modal after successful save
     } catch (error) {
@@ -151,7 +153,9 @@ const EditPollModal = ({ onClose, formData, setFormData, polls }) => {
           <input
             type="checkbox"
             checked={newPoll.active}
-            onChange={(e) => setNewPoll({ ...newPoll, active: e.target.checked })}
+            onChange={(e) =>
+              setNewPoll({ ...newPoll, active: e.target.checked })
+            }
           />
           <FormDropdownLabel children="Active" className="ml-2" />
         </div>
@@ -159,7 +163,9 @@ const EditPollModal = ({ onClose, formData, setFormData, polls }) => {
           {newPoll.questions.map((question, qIndex) => (
             <div key={qIndex} className="mt-4">
               <div className="flex justify-between items-center">
-                <FormDropdownLabel children={`${qIndex + 1}. Type your question`} />
+                <FormDropdownLabel
+                  children={`${qIndex + 1}. Type your question`}
+                />
                 <IoTrashSharp
                   className="bg-custom-orange-1 text-white p-2 text-3xl rounded-xl cursor-pointer"
                   onClick={() => removeQuestion(qIndex)}
@@ -168,7 +174,9 @@ const EditPollModal = ({ onClose, formData, setFormData, polls }) => {
               <textarea
                 className="w-full mt-2 p-2 border-[0.5px] border-custom-dark-blue-1 bg-white rounded-xl"
                 value={question.question}
-                onChange={(e) => updateQuestion(qIndex, "question", e.target.value)}
+                onChange={(e) =>
+                  updateQuestion(qIndex, "question", e.target.value)
+                }
               />
               <div className="flex items-center mt-2 pl-5">
                 <input
@@ -185,16 +193,24 @@ const EditPollModal = ({ onClose, formData, setFormData, polls }) => {
                   checked={question.type === "multiple"}
                   onChange={() => updateQuestion(qIndex, "type", "multiple")}
                 />
-                <FormDropdownLabel children="Multiple Choice" className="ml-2" />
+                <FormDropdownLabel
+                  children="Multiple Choice"
+                  className="ml-2"
+                />
               </div>
               {question.answers.map((answer, aIndex) => (
-                <div key={aIndex} className="flex justify-between items-center mt-2 w-full">
+                <div
+                  key={aIndex}
+                  className="flex justify-between items-center mt-2 w-full"
+                >
                   <div className="flex-grow">
                     <InputField
                       label={`Answer ${aIndex + 1}`}
                       type="text"
                       value={answer.answer}
-                      onChange={(e) => updateAnswer(qIndex, aIndex, e.target.value)}
+                      onChange={(e) =>
+                        updateAnswer(qIndex, aIndex, e.target.value)
+                      }
                     />
                   </div>
                   <FiMinus

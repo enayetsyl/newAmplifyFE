@@ -35,7 +35,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `${process.env.BACKEND_BASE_URL}/api/users/signin`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/users/signin`,
         {
           email: formData.email,
           password: formData.password,
@@ -49,8 +49,7 @@ const Login = () => {
       router.push(`/dashboard/my-profile/${response.data._id}`);
       // Handle successful sign-in (e.g., redirect to dashboard, store token, etc.)
     } catch (error) {
-      
-      toast.error(`${error.response.data.message}`)
+      toast.error(`${error.response.data.message}`);
       setError(`${error.response.data.message}`);
     }
   };

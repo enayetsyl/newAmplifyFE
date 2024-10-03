@@ -24,13 +24,16 @@ const Page = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${process.env.BACKEND_BASE_URL}/api/get-all/project/${userId}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/get-all/project/${userId}`,
         {
           params: { page, limit: 10 },
         }
       );
       setProjects(response.data.projects);
-      console.log('project data set using fetchProjects', response.data.projects)
+      console.log(
+        "project data set using fetchProjects",
+        response.data.projects
+      );
       setTotalPages(response.data.totalPages);
     } catch (error) {
       console.error("Error fetching projects:", error);

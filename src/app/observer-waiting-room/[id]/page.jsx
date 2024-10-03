@@ -17,22 +17,32 @@ const page = () => {
   const fullName = searchParams.get("fullName");
   const userRole = searchParams.get("role");
 
-  console.log('params id', params.id, 'fullName', fullName, 'userRole', userRole, );
+  console.log(
+    "params id",
+    params.id,
+    "fullName",
+    fullName,
+    "userRole",
+    userRole
+  );
 
   const getStreamingStatus = async (meetingId) => {
     try {
       const response = await axios.get(
-        `${process.env.BACKEND_BASE_URL}/api/live-meeting/get-streaming-status/${meetingId}`
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/live-meeting/get-streaming-status/${meetingId}`
       );
 
       if (response.data.isStreaming) {
-        router.push(`/meeting/${params.id}?fullName=${encodeURIComponent(fullName)}&role=${encodeURIComponent(userRole)}`);
+        router.push(
+          `/meeting/${params.id}?fullName=${encodeURIComponent(
+            fullName
+          )}&role=${encodeURIComponent(userRole)}`
+        );
       }
     } catch (error) {
       console.error("Error in getting participant list", error);
     }
   };
-
 
   useEffect(() => {
     const meetingId = params?.id; // Ensure params id is used correctly
@@ -49,7 +59,6 @@ const page = () => {
 
   return (
     <div className="flex justify-between min-h-screen max-h-screen meeting_bg">
-      
       {/* Main content */}
       <div className="flex-1 w-full max-h-[100vh] overflow-hidden mb-5">
         <div className="px-5 py-5 flex flex-col justify-between items-between h-full">

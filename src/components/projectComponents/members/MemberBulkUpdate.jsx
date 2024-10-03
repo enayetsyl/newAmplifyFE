@@ -2,16 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "@/components/shared/button";
 
-
-const MemberBulkUpdate= ({
-  onClose,
-  project,
-  fetchProjects,
-  userId,
-}) => {
-
-
-
+const MemberBulkUpdate = ({ onClose, project, fetchProjects, userId }) => {
   const [members, setMembers] = useState([]);
 
   useEffect(() => {
@@ -46,10 +37,13 @@ const MemberBulkUpdate= ({
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post(`${process.env.BACKEND_BASE_URL}/api/project/updateBulkMembers`, {
-        projectId: project._id,
-        members: members,
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/project/updateBulkMembers`,
+        {
+          projectId: project._id,
+          members: members,
+        }
+      );
       console.log("Bulk update response:", response.data);
       fetchProjects(); // Refresh the project data after update
       onClose(); // Close the modal after submission
@@ -62,7 +56,7 @@ const MemberBulkUpdate= ({
     <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
       <div className="bg-white p-8 rounded-lg w-[50%]">
         <h2 className="text-2xl font-semibold mb-4 text-custom-dark-blue-2">
-        Bulk Update
+          Bulk Update
         </h2>
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
@@ -91,7 +85,9 @@ const MemberBulkUpdate= ({
                   <input
                     type="checkbox"
                     checked={member?.roles.includes("Moderator")}
-                    onChange={() => handleRoleChange(member.userId, "Moderator")}
+                    onChange={() =>
+                      handleRoleChange(member.userId, "Moderator")
+                    }
                     className="cursor-pointer"
                   />
                 </td>
@@ -128,4 +124,4 @@ const MemberBulkUpdate= ({
   );
 };
 
-export default MemberBulkUpdate
+export default MemberBulkUpdate;

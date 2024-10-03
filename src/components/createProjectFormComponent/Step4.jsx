@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import HeadingBlue25px from '../shared/HeadingBlue25px';
-import { GoPlus } from 'react-icons/go';
-import BreakoutRoomModal from '../singleComponent/BreakoutRoomModal';
-import EditBreakoutRoomModal from '../singleComponent/EditBreakRoomModal'; // Import the new EditBreakoutRoomModal
-import { IoTrashSharp } from 'react-icons/io5';
-import HeadingLg from '../shared/HeadingLg';
-import { RiPencilFill } from 'react-icons/ri';
-import ParagraphLg from '../shared/ParagraphLg';
-import Button from '../shared/button';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import HeadingBlue25px from "../shared/HeadingBlue25px";
+import { GoPlus } from "react-icons/go";
+import BreakoutRoomModal from "../singleComponent/BreakoutRoomModal";
+import EditBreakoutRoomModal from "../singleComponent/EditBreakRoomModal"; // Import the new EditBreakoutRoomModal
+import { IoTrashSharp } from "react-icons/io5";
+import HeadingLg from "../shared/HeadingLg";
+import { RiPencilFill } from "react-icons/ri";
+import ParagraphLg from "../shared/ParagraphLg";
+import Button from "../shared/button";
 
 const Step4 = ({ formData, setFormData }) => {
   const [isBreakoutRoomModalOpen, setIsBreakoutRoomModalOpen] = useState(false);
-  const [isEditBreakoutRoomModalOpen, setIsEditBreakoutRoomModalOpen] = useState(false); // State for the edit modal
+  const [isEditBreakoutRoomModalOpen, setIsEditBreakoutRoomModalOpen] =
+    useState(false); // State for the edit modal
   const [selectedBreakoutRoomId, setSelectedBreakoutRoomId] = useState(null); // State for selected breakout room ID
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,9 +22,12 @@ const Step4 = ({ formData, setFormData }) => {
   useEffect(() => {
     const fetchBreakoutRooms = async () => {
       try {
-        const response = await axios.get(`${process.env.BACKEND_BASE_URL}/get-all-breakout-rooms`, {
-          params: { page: 1, limit: 10 },
-        });
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/get-all-breakout-rooms`,
+          {
+            params: { page: 1, limit: 10 },
+          }
+        );
         setFormData((prevData) => ({
           ...prevData,
           breakoutRooms: response.data.breakoutRooms,
@@ -60,7 +64,9 @@ const Step4 = ({ formData, setFormData }) => {
   const removeBreakoutRoom = async (index) => {
     const roomToDelete = formData.breakoutRooms[index];
     try {
-      await axios.delete(`${process.env.BACKEND_BASE_URL}/delete-breakout-room/${roomToDelete._id}`);
+      await axios.delete(
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/delete-breakout-room/${roomToDelete._id}`
+      );
       const updatedBreakoutRooms = formData.breakoutRooms.filter(
         (_, i) => i !== index
       );
@@ -88,38 +94,44 @@ const Step4 = ({ formData, setFormData }) => {
         />
       </div>
       <div className="flex justify-start items-center px-3">
-        <div className='w-[25%]'> 
+        <div className="w-[25%]">
           <HeadingLg children="Name" />
         </div>
-        <div className='w-[20%]'>
+        <div className="w-[20%]">
           <HeadingLg children="Participants" />
         </div>
-        <div className='w-[55%]'>
+        <div className="w-[55%]">
           <HeadingLg children="Interpreter" />
         </div>
       </div>
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
-      {!loading && !error && formData.breakoutRooms.map((room, index) => (
-        <div key={index} className="py-3">
-          <div className="flex justify-start items-center bg-white rounded-xl shadow-[0px_0px_6px_#00000029] p-3">
-            <ParagraphLg className='w-[25%]'>{room.name}</ParagraphLg>
-            <ParagraphLg className='w-[20%]'>{room.participants.length}</ParagraphLg>
-            <ParagraphLg className='w-[50%]'>{room.interpretor.name}</ParagraphLg>
-            <div className="flex justify-end space-x-2 w-[5%]">
-              <button onClick={() => editBreakoutRoom(room._id)}>
-                <RiPencilFill className='bg-custom-teal text-white p-2 text-3xl rounded-xl cursor-pointer' />
-              </button>
-              <button onClick={() => removeBreakoutRoom(index)}>
-                <IoTrashSharp className='bg-custom-orange-1 text-white p-2 text-3xl rounded-xl cursor-pointer' />
-              </button>
+      {!loading &&
+        !error &&
+        formData.breakoutRooms.map((room, index) => (
+          <div key={index} className="py-3">
+            <div className="flex justify-start items-center bg-white rounded-xl shadow-[0px_0px_6px_#00000029] p-3">
+              <ParagraphLg className="w-[25%]">{room.name}</ParagraphLg>
+              <ParagraphLg className="w-[20%]">
+                {room.participants.length}
+              </ParagraphLg>
+              <ParagraphLg className="w-[50%]">
+                {room.interpretor.name}
+              </ParagraphLg>
+              <div className="flex justify-end space-x-2 w-[5%]">
+                <button onClick={() => editBreakoutRoom(room._id)}>
+                  <RiPencilFill className="bg-custom-teal text-white p-2 text-3xl rounded-xl cursor-pointer" />
+                </button>
+                <button onClick={() => removeBreakoutRoom(index)}>
+                  <IoTrashSharp className="bg-custom-orange-1 text-white p-2 text-3xl rounded-xl cursor-pointer" />
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
       {/* Pagination */}
       <div className="flex justify-end py-2">
-      {/* {totalPages > 1 && (
+        {/* {totalPages > 1 && (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
@@ -135,7 +147,7 @@ const Step4 = ({ formData, setFormData }) => {
         />
       )}
       {isEditBreakoutRoomModalOpen && (
-         <EditBreakoutRoomModal
+        <EditBreakoutRoomModal
           onClose={handleCloseEditBreakoutRoomModal}
           breakoutRoomId={selectedBreakoutRoomId}
         />

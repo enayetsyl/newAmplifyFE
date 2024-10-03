@@ -13,7 +13,7 @@ const AddRepositoryModal = ({ onClose, project, meetings, fetchProjects }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedMeeting, setSelectedMeeting] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   // Handle file input change
   const handleFileChange = (event) => {
@@ -25,9 +25,9 @@ const AddRepositoryModal = ({ onClose, project, meetings, fetchProjects }) => {
   const toggleDropdown = () => {
     setDropdownOpen((prevState) => !prevState);
   };
- 
-   // Handle meeting selection
-   const handleMeetingSelect = (meeting) => {
+
+  // Handle meeting selection
+  const handleMeetingSelect = (meeting) => {
     setSelectedMeeting(meeting._id);
     setDropdownOpen(false); // Close dropdown after selection
   };
@@ -56,19 +56,23 @@ const AddRepositoryModal = ({ onClose, project, meetings, fetchProjects }) => {
     try {
       setIsLoading(true);
       // Make the API call to upload the file
-      const response = await axios.post(`${process.env.BACKEND_BASE_URL}/api/create/repository`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log('response.data', response.data);
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/create/repository`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("response.data", response.data);
       toast.success(`${response.data.message}`);
-      fetchProjects(); 
-      onClose(); 
+      fetchProjects();
+      onClose();
     } catch (error) {
       console.error("Error uploading file:", error);
       toast.error(`${error.response.data.error}`);
-    } finally{
+    } finally {
       setIsLoading(false);
     }
   };
@@ -80,7 +84,9 @@ const AddRepositoryModal = ({ onClose, project, meetings, fetchProjects }) => {
 
         {/* File input */}
         <div className="mt-5">
-          <label className="block text-sm font-medium text-gray-700">Select File</label>
+          <label className="block text-sm font-medium text-gray-700">
+            Select File
+          </label>
           <input
             type="file"
             onChange={handleFileChange}
@@ -89,15 +95,21 @@ const AddRepositoryModal = ({ onClose, project, meetings, fetchProjects }) => {
         </div>
 
         <div className="mt-5 relative">
-          <label className="block text-sm font-medium text-gray-700">Select Meeting</label>
+          <label className="block text-sm font-medium text-gray-700">
+            Select Meeting
+          </label>
           <div
             className="mt-1 cursor-pointer bg-white border border-gray-300 rounded-md p-2 flex justify-between items-center"
             onClick={toggleDropdown}
           >
-            <span>{selectedMeeting ? meetings.find((m) => m._id === selectedMeeting)?.title : '-- Select a Meeting --'}</span>
+            <span>
+              {selectedMeeting
+                ? meetings.find((m) => m._id === selectedMeeting)?.title
+                : "-- Select a Meeting --"}
+            </span>
             {dropdownOpen ? <IoChevronUp /> : <IoChevronDown />}
           </div>
-          
+
           {dropdownOpen && (
             <div className="absolute mt-1 w-full bg-white border border-gray-300 rounded-md max-h-48 overflow-y-auto z-10">
               {meetings?.map((meeting) => (
@@ -124,9 +136,9 @@ const AddRepositoryModal = ({ onClose, project, meetings, fetchProjects }) => {
           />
           <Button
             type="button"
-            variant={`${isLoading ? 'closed' : 'save'}`}
+            variant={`${isLoading ? "closed" : "save"}`}
             disabled={isLoading}
-            children={`${isLoading ? 'Uploading....' : 'Upload'}`}
+            children={`${isLoading ? "Uploading...." : "Upload"}`}
             className={`px-5 py-1 rounded-xl`}
             onClick={handleSave}
           />

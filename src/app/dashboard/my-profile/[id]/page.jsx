@@ -51,7 +51,7 @@ const Page = () => {
   const [userData, setUserData] = useState(null);
   const router = useRouter();
   const { id } = useParams();
-console.log('id in my profile page', id)
+  console.log("id in my profile page", id);
   const handlePasswordChangeClick = () => {
     setShowModal(true);
   };
@@ -90,9 +90,12 @@ console.log('id in my profile page', id)
 
   const deleteUser = async () => {
     try {
-      await axios.delete(`${process.env.BACKEND_BASE_URL}/api/users/delete-by-id`, {
-        params: { id: id }, // replace with actual user ID
-      });
+      await axios.delete(
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/users/delete-by-id`,
+        {
+          params: { id: id }, // replace with actual user ID
+        }
+      );
       router.push("/register"); // Redirect to registration page
     } catch (error) {
       console.error("Error deleting user:", error);
@@ -110,9 +113,9 @@ console.log('id in my profile page', id)
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.BACKEND_BASE_URL}/api/users/find-by-id`,
+          `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/users/find-by-id`,
           {
-            params: { id: id }, 
+            params: { id: id },
           }
         );
         if (response.data.result) {
@@ -128,7 +131,7 @@ console.log('id in my profile page', id)
 
     checkToken();
     fetchUserData();
-  }, [id,router]);
+  }, [id, router]);
 
   const unreadCount = notifications.filter(
     (notification) => !notification.read

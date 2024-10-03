@@ -52,7 +52,7 @@ const Register = () => {
     if (!validateForm()) return;
     try {
       const response = await axios.post(
-        `${process.env.BACKEND_BASE_URL}/api/users/create`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/users/create`,
         {
           firstName: formData.firstName,
           lastName: formData.lastName,
@@ -61,11 +61,12 @@ const Register = () => {
           terms: formData.terms,
         }
       );
-      if(response.status === 200) {
+      if (response.status === 200) {
         toast.success("Your registration was successful!");
-        console.log("Email:", formData.email)
-        router.push(`/account-activation?email=${encodeURIComponent(formData.email)}`);
- 
+        console.log("Email:", formData.email);
+        router.push(
+          `/account-activation?email=${encodeURIComponent(formData.email)}`
+        );
       } else {
         toast.error(`${response.data.message}`);
       }

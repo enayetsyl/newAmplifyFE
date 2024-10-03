@@ -1,28 +1,33 @@
-'use client';
-import React, { useState, useEffect, useRef } from 'react';
-import TableHead from '../shared/TableHead';
-import TableData from '../shared/TableData';
-import { BsThreeDotsVertical } from 'react-icons/bs';
-import { FaUser } from 'react-icons/fa';
-import { RiPencilFill } from 'react-icons/ri';
-import ViewModeratorModal from './ViewModeratorModal';
-import EditModeratorModal from './EditModeratorModal';
-import Button from '../shared/button';
+"use client";
+import React, { useState, useEffect, useRef } from "react";
+import TableHead from "../shared/TableHead";
+import TableData from "../shared/TableData";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { FaUser } from "react-icons/fa";
+import { RiPencilFill } from "react-icons/ri";
+import ViewModeratorModal from "./ViewModeratorModal";
+import EditModeratorModal from "./EditModeratorModal";
+import Button from "../shared/button";
 
 const ModeratorTable = () => {
   const [moderators, setModerators] = useState([]);
   const [filteredModerators, setFilteredModerators] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedStatus, setSelectedStatus] = useState('All');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10; // Number of items per page
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
   const [isModeratorModalOpen, setIsModeratorModalOpen] = useState(false);
-  const [isEditModeratorModalOpen, setIsEditModeratorModalOpen] = useState(false);
+  const [isEditModeratorModalOpen, setIsEditModeratorModalOpen] =
+    useState(false);
   const [currentModerator, setCurrentModerator] = useState(null);
   const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
-  const [inviteDetails, setInviteDetails] = useState({ firstName: '', lastName: '', email: '' });
+  const [inviteDetails, setInviteDetails] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
 
   const modalRef = useRef();
 
@@ -36,18 +41,20 @@ const ModeratorTable = () => {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const year = date.getFullYear().toString().slice(); // Get last 2 digits of the year
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Add leading zero to month if necessary
-    const day = String(date.getDate()).padStart(2, '0'); // Add leading zero to day if necessary
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Add leading zero to month if necessary
+    const day = String(date.getDate()).padStart(2, "0"); // Add leading zero to day if necessary
     return `${year}-${month}-${day}`;
   };
   const fetchModerators = async () => {
     try {
-      const response = await fetch(`${process.env.BACKEND_BASE_URL}/api/get-all/moderator?page=1&limit=10`);
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/get-all/moderator?page=1&limit=10`
+      );
       const data = await response.json();
       setModerators(data.moderators);
       setFilteredModerators(data.moderators);
     } catch (error) {
-      console.error('Error fetching moderators:', error);
+      console.error("Error fetching moderators:", error);
     }
   };
 
@@ -57,14 +64,20 @@ const ModeratorTable = () => {
     if (searchQuery) {
       results = results.filter(
         (moderator) =>
-          moderator.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          moderator.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          moderator.firstName
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase()) ||
+          moderator.lastName
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase()) ||
           moderator.email.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
-    if (selectedStatus !== 'All') {
-      results = results.filter((moderator) => moderator.status === selectedStatus);
+    if (selectedStatus !== "All") {
+      results = results.filter(
+        (moderator) => moderator.status === selectedStatus
+      );
     }
 
     setFilteredModerators(results);
@@ -119,13 +132,14 @@ const ModeratorTable = () => {
     }
   };
 
-
-
   const handleDeleteModerator = async (moderatorId) => {
     try {
-      const response = await fetch(`${process.env.BACKEND_BASE_URL}/api/delete/moderator?id=${moderatorId}`, {
-        method: 'DELETE',
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/delete/moderator?id=${moderatorId}`,
+        {
+          method: "DELETE",
+        }
+      );
       const data = await response.json();
       if (response.ok) {
         alert(data.message);
@@ -136,8 +150,8 @@ const ModeratorTable = () => {
         alert(data.message);
       }
     } catch (error) {
-      console.error('Error deleting moderator:', error);
-      alert('Error deleting moderator.');
+      console.error("Error deleting moderator:", error);
+      alert("Error deleting moderator.");
     }
   };
 
@@ -154,28 +168,37 @@ const ModeratorTable = () => {
   };
   const handleInviteModerator = async () => {
     try {
-      const response = await fetch(`${process.env.BACKEND_BASE_URL}/api/moderator-invitation/link'`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ...inviteDetails, project: '66b0a6bf824132f349bbbc84' }),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/moderator-invitation/link'`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...inviteDetails,
+            project: "66b0a6bf824132f349bbbc84",
+          }),
+        }
+      );
       const data = await response.json();
       if (data.success) {
-        alert('Moderator invited successfully!');
+        alert("Moderator invited successfully!");
         setIsInviteModalOpen(false);
       } else {
-        alert('Failed to invite moderator.');
+        alert("Failed to invite moderator.");
       }
     } catch (error) {
-      console.error('Error inviting moderator:', error);
+      console.error("Error inviting moderator:", error);
     }
   };
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentModerators = filteredModerators.slice(indexOfFirstItem, indexOfLastItem);
+  const currentModerators = filteredModerators.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   const totalPages = Math.ceil(filteredModerators.length / itemsPerPage);
 
@@ -228,88 +251,98 @@ const ModeratorTable = () => {
           <tbody className="bg-white divide-y divide-gray-200 rounded-lg w-full ">
             {currentModerators.map((moderator, index) => (
               <>
-              <tr key={index} className="shadow-[0px_0px_26px_#00000029] w-full md:hidden">
-                <TableData>{moderator.firstName}</TableData>
-                <TableData>{moderator.lastName}</TableData>
-                {/* <TableData>{moderator.email}</TableData>
+                <tr
+                  key={index}
+                  className="shadow-[0px_0px_26px_#00000029] w-full md:hidden"
+                >
+                  <TableData>{moderator.firstName}</TableData>
+                  <TableData>{moderator.lastName}</TableData>
+                  {/* <TableData>{moderator.email}</TableData>
                 <TableData>{formatDate(moderator.joinedOn)}</TableData>
                 <TableData>{"filled"}</TableData> */}
-                <td className="flex justify-between items-center gap-2 relative">
-                  <Button
-                    variant="primary"
-                    className="w-7 text-center text-[12px] rounded-xl py-1"
-                    onClick={(event) => toggleModal(event, moderator)}
-                  >
-                    <BsThreeDotsVertical />
-                  </Button>
-                  {isModalOpen && currentModerator === moderator && (
-                    <div
-                      ref={modalRef}
-                      className="absolute top-12 right-10 z-10 bg-white shadow-lg rounded-md overflow-hidden"
+                  <td className="flex justify-between items-center gap-2 relative">
+                    <Button
+                      variant="primary"
+                      className="w-7 text-center text-[12px] rounded-xl py-1"
+                      onClick={(event) => toggleModal(event, moderator)}
                     >
-                      <button
-                        className="flex items-center justify-start px-4 py-2 w-full text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => handleModeratorOpenModal(moderator)}
+                      <BsThreeDotsVertical />
+                    </Button>
+                    {isModalOpen && currentModerator === moderator && (
+                      <div
+                        ref={modalRef}
+                        className="absolute top-12 right-10 z-10 bg-white shadow-lg rounded-md overflow-hidden"
                       >
-                        <FaUser className="mr-2" /> View
-                      </button>
-                      <button
-                        className="flex items-center justify-start px-4 py-2 w-full text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => handleEditModeratorOpenModal(moderator)}
-                      >
-                        <RiPencilFill className="mr-2" /> Edit
-                      </button>
-                      <button
-                        className=" hidden md:flex items-center justify-start px-4 py-2 w-full text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => handleDeleteModerator(moderator._id)}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  )}
-                </td>
-              </tr>
-              <tr key={index} className="shadow-[0px_0px_26px_#00000029] w-full  md:grid hidden grid-cols-6 ">
-                <TableData>{moderator.firstName}</TableData>
-                <TableData>{moderator.lastName}</TableData>
-                <TableData>{moderator.email}</TableData>
-                <TableData>{formatDate(moderator.joinedOn)}</TableData>
-                <TableData>{"filled"}</TableData>
-                <td className="flex justify-between items-center gap-2 relative">
-                  <Button
-                    variant="primary"
-                    className="w-16 text-center text-[12px] rounded-xl py-1"
-                    onClick={(event) => toggleModal(event, moderator)}
-                  >
-                    <BsThreeDotsVertical />
-                  </Button>
-                  {isModalOpen && currentModerator === moderator && (
-                    <div
-                      ref={modalRef}
-                      className="absolute top-12 right-10 z-10 bg-white shadow-lg rounded-md overflow-hidden"
+                        <button
+                          className="flex items-center justify-start px-4 py-2 w-full text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={() => handleModeratorOpenModal(moderator)}
+                        >
+                          <FaUser className="mr-2" /> View
+                        </button>
+                        <button
+                          className="flex items-center justify-start px-4 py-2 w-full text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={() =>
+                            handleEditModeratorOpenModal(moderator)
+                          }
+                        >
+                          <RiPencilFill className="mr-2" /> Edit
+                        </button>
+                        <button
+                          className=" hidden md:flex items-center justify-start px-4 py-2 w-full text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={() => handleDeleteModerator(moderator._id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    )}
+                  </td>
+                </tr>
+                <tr
+                  key={index}
+                  className="shadow-[0px_0px_26px_#00000029] w-full  md:grid hidden grid-cols-6 "
+                >
+                  <TableData>{moderator.firstName}</TableData>
+                  <TableData>{moderator.lastName}</TableData>
+                  <TableData>{moderator.email}</TableData>
+                  <TableData>{formatDate(moderator.joinedOn)}</TableData>
+                  <TableData>{"filled"}</TableData>
+                  <td className="flex justify-between items-center gap-2 relative">
+                    <Button
+                      variant="primary"
+                      className="w-16 text-center text-[12px] rounded-xl py-1"
+                      onClick={(event) => toggleModal(event, moderator)}
                     >
-                      <button
-                        className="flex items-center justify-start px-4 py-2 w-full text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => handleModeratorOpenModal(moderator)}
+                      <BsThreeDotsVertical />
+                    </Button>
+                    {isModalOpen && currentModerator === moderator && (
+                      <div
+                        ref={modalRef}
+                        className="absolute top-12 right-10 z-10 bg-white shadow-lg rounded-md overflow-hidden"
                       >
-                        <FaUser className="mr-2" /> View
-                      </button>
-                      <button
-                        className="flex items-center justify-start px-4 py-2 w-full text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => handleEditModeratorOpenModal(moderator)}
-                      >
-                        <RiPencilFill className="mr-2" /> Edit
-                      </button>
-                      <button
-                        className="flex items-center justify-start px-4 py-2 w-full text-sm text-gray-700 hover:bg-gray-100"
-                        onClick={() => handleDeleteModerator(moderator.id)}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  )}
-                </td>
-              </tr>
+                        <button
+                          className="flex items-center justify-start px-4 py-2 w-full text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={() => handleModeratorOpenModal(moderator)}
+                        >
+                          <FaUser className="mr-2" /> View
+                        </button>
+                        <button
+                          className="flex items-center justify-start px-4 py-2 w-full text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={() =>
+                            handleEditModeratorOpenModal(moderator)
+                          }
+                        >
+                          <RiPencilFill className="mr-2" /> Edit
+                        </button>
+                        <button
+                          className="flex items-center justify-start px-4 py-2 w-full text-sm text-gray-700 hover:bg-gray-100"
+                          onClick={() => handleDeleteModerator(moderator.id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    )}
+                  </td>
+                </tr>
               </>
             ))}
           </tbody>
@@ -328,7 +361,7 @@ const ModeratorTable = () => {
             key={index}
             onClick={() => handlePageChange(index + 1)}
             className={`px-3 py-1 border border-gray-300 rounded-md ${
-              index + 1 === currentPage ? 'bg-gray-300' : ''
+              index + 1 === currentPage ? "bg-gray-300" : ""
             }`}
           >
             {index + 1}
@@ -355,7 +388,7 @@ const ModeratorTable = () => {
       {/* Edit Moderator Modal */}
       {isEditModeratorModalOpen && (
         <EditModeratorModal
-        handleDeleteModerator={handleDeleteModerator}
+          handleDeleteModerator={handleDeleteModerator}
           isOpen={isEditModeratorModalOpen}
           onClose={handleEditModeratorCloseModal}
           user={currentModerator}

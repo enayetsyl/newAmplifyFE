@@ -18,12 +18,21 @@ const page = () => {
   const userRole = searchParams.get("role");
   const [participants, setParticipants] = useState([]);
 
-  console.log('params id', params.id, 'fullName', fullName, 'userRole', userRole, 'participants', participants);
+  console.log(
+    "params id",
+    params.id,
+    "fullName",
+    fullName,
+    "userRole",
+    userRole,
+    "participants",
+    participants
+  );
 
   const getParticipantList = async (meetingId) => {
     try {
       const response = await axios.get(
-        `${process.env.BACKEND_BASE_URL}/api/live-meeting/participant-list/${meetingId}`
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/live-meeting/participant-list/${meetingId}`
       );
       setParticipants(response?.data?.participantsList);
 
@@ -34,13 +43,16 @@ const page = () => {
       );
 
       if (matchedParticipant) {
-        router.push(`/meeting/${params.id}?fullName=${encodeURIComponent(fullName)}&role=${encodeURIComponent(userRole)}`);
+        router.push(
+          `/meeting/${params.id}?fullName=${encodeURIComponent(
+            fullName
+          )}&role=${encodeURIComponent(userRole)}`
+        );
       }
     } catch (error) {
       console.error("Error in getting participant list", error);
     }
   };
-
 
   useEffect(() => {
     const meetingId = params?.id; // Ensure params id is used correctly

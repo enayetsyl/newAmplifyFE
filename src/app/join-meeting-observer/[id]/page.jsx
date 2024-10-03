@@ -35,7 +35,7 @@ const page = () => {
 
     try {
       const response1 = await axios.post(
-        `${process.env.BACKEND_BASE_URL}/api/user-role`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/user-role`,
         {
           name: formData.fullName,
           role: "Observer", // Fixed role as Observer,
@@ -45,7 +45,7 @@ const page = () => {
       // Redirect based on the role and the API response
       localStorage.setItem("RoletoSend", response1.data._id);
       const response = await axios.post(
-        `${process.env.BACKEND_BASE_URL}/api/live-meeting/join-meeting-observer`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/live-meeting/join-meeting-observer`,
         {
           name: formData.fullName,
           role: "Observer", // Fixed role as Observer

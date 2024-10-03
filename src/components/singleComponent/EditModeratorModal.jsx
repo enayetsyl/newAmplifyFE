@@ -33,7 +33,7 @@ const EditModeratorModal = ({
 
     try {
       const response = await fetch(
-        `${process.env.BACKEND_BASE_URL}/api/update/moderator/${user._id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/update/moderator/${user._id}`,
         {
           method: "PUT",
           headers: {
@@ -210,7 +210,7 @@ const EditModeratorModal = ({
               className="h-2 w-2 text-white"
             >
               <path
-              className="w-3 h-3"
+                className="w-3 h-3"
                 stroke-linecap="round"
                 fill="white"
                 stroke-linejoin="round"

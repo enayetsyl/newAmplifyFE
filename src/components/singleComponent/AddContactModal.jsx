@@ -43,8 +43,8 @@ const AddContactModal = ({
     try {
       const response = await fetch(
         isEditing
-          ? `${process.env.BACKEND_BASE_URL}/api/update-contact/${contactToEdit._id}`
-          : `${process.env.BACKEND_BASE_URL}/api/create/contact`,
+          ? `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/update-contact/${contactToEdit._id}`
+          : `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/create/contact`,
         {
           method: isEditing ? "PUT" : "POST",
           headers: {

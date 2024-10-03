@@ -37,7 +37,7 @@ const AddMeetingModal = ({ onClose, project, user, refetchMeetings }) => {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.BACKEND_BASE_URL}/api/get-all/contact/${user._id}`
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/get-all/contact/${user._id}`
       );
       if (!response.ok) {
         throw new Error(`Failed to fetch contacts: ${response.statusText}`);
@@ -95,10 +95,13 @@ const AddMeetingModal = ({ onClose, project, user, refetchMeetings }) => {
       projectId: project._id,
     };
     try {
-      const response = await axios.post(`${process.env.BACKEND_BASE_URL}/api/create/meeting`, updatedFormData);
-      
-      if (response.status === 201) { 
-        refetchMeetings(); 
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/create/meeting`,
+        updatedFormData
+      );
+
+      if (response.status === 201) {
+        refetchMeetings();
         // Refetch meetings after successful creation
       }
       onClose();
@@ -228,7 +231,7 @@ const AddMeetingModal = ({ onClose, project, user, refetchMeetings }) => {
               </div>
             </div>
             <div className="flex justify-between mb-2 md:hidden">
-            <div className="flex justify-start items-center gap-2">
+              <div className="flex justify-start items-center gap-2">
                 <input
                   type="checkbox"
                   name="ongoing"
@@ -255,7 +258,7 @@ const AddMeetingModal = ({ onClose, project, user, refetchMeetings }) => {
                   Breakout Room
                 </label>
               </div>
-              </div>
+            </div>
             <div className="flex justify-start items-end gap-5 ">
               <InputField
                 label="Passcode"

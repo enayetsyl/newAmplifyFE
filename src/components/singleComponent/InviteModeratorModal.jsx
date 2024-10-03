@@ -14,7 +14,7 @@ const InviteModeratorModal = ({ onClose, projectId }) => {
 
     try {
       const response = await fetch(
-        `${process.env.BACKEND_BASE_URL}/api/moderator-invitation/link`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/moderator-invitation/link`,
         {
           method: "POST",
           headers: {

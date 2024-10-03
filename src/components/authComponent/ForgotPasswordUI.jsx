@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import axios from 'axios';
-import HeadingH1 from '../shared/HeadingH1';
-import ParagraphBlue2 from '../shared/ParagraphBlue2';
-import BackToLogin from '../shared/BackToLogin';
-import { FaEnvelopeOpenText } from 'react-icons/fa';
-import InputField from '../shared/InputField';
-import Button from '../shared/button';
+import React, { useState } from "react";
+import axios from "axios";
+import HeadingH1 from "../shared/HeadingH1";
+import ParagraphBlue2 from "../shared/ParagraphBlue2";
+import BackToLogin from "../shared/BackToLogin";
+import { FaEnvelopeOpenText } from "react-icons/fa";
+import InputField from "../shared/InputField";
+import Button from "../shared/button";
 
 const ForgotPasswordUI = () => {
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setEmail(e.target.value);
@@ -21,14 +21,17 @@ const ForgotPasswordUI = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${process.env.BACKEND_BASE_URL}/api/users/forgotPassword`, {
-        email: email,
-      });
-      setMessage('Reset link sent to your email');
-      setError('');
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/users/forgotPassword`,
+        {
+          email: email,
+        }
+      );
+      setMessage("Reset link sent to your email");
+      setError("");
     } catch (error) {
-      setError('Error sending reset link');
-      setMessage('');
+      setError("Error sending reset link");
+      setMessage("");
     }
   };
 
@@ -42,13 +45,15 @@ const ForgotPasswordUI = () => {
         {/* text div */}
         <div className="px-3">
           <HeadingH1>FORGOT PASSWORD</HeadingH1>
-          <ParagraphBlue2>Send a link to your email to reset your password.</ParagraphBlue2>
+          <ParagraphBlue2>
+            Send a link to your email to reset your password.
+          </ParagraphBlue2>
         </div>
         <form onSubmit={handleSubmit} className="pt-10">
           <InputField
-            label='Email'
-            type='email'
-            name='email'
+            label="Email"
+            type="email"
+            name="email"
             value={email}
             onChange={handleChange}
           />
@@ -58,7 +63,9 @@ const ForgotPasswordUI = () => {
             className="py-2 rounded-2xl w-full font-bold text-xl"
           />
         </form>
-        {message && <p className="text-green-500 text-center mt-4">{message}</p>}
+        {message && (
+          <p className="text-green-500 text-center mt-4">{message}</p>
+        )}
         {error && <p className="text-red-500 text-center mt-4">{error}</p>}
         <div className="pt-14 pb-20">
           <BackToLogin />

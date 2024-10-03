@@ -53,7 +53,6 @@ const Page = () => {
     },
   });
 
-
   useEffect(() => {
     fetchContacts();
   }, []);
@@ -62,7 +61,7 @@ const Page = () => {
     try {
       setIsLoading(true);
       const response = await fetch(
-        `${process.env.BACKEND_BASE_URL}/api/get-all/contact/${user?._id}`
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/get-all/contact/${user?._id}`
       );
       if (!response.ok) {
         throw new Error(`Failed to fetch contacts: ${response.statusText}`);
@@ -106,11 +105,10 @@ const Page = () => {
       },
       status,
     };
-   
-    
+
     try {
       const response = await axios.post(
-        `${process.env.BACKEND_BASE_URL}/api/create/project`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/create/project`,
         updatedFormData
       );
 

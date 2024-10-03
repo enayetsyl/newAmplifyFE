@@ -3,7 +3,7 @@ import HeadingBlue25px from "../shared/HeadingBlue25px";
 import InputField from "../shared/InputField";
 import Dropdown from "../shared/Dropdown";
 import { IoTrashSharp } from "react-icons/io5";
-import {  language } from "@/constant/Index";
+import { language } from "@/constant/Index";
 import FormDropdownLabel from "../shared/FormDropdownLabel";
 import HeadingLg from "../shared/HeadingLg";
 import ParagraphLg from "../shared/ParagraphLg";
@@ -29,7 +29,7 @@ const EditBreakoutRoomModal = ({
     const fetchBreakoutRoom = async () => {
       try {
         const response = await axios.get(
-          `${process.env.BACKEND_BASE_URL}/get-breakout-room/${breakoutRoomId}`
+          `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/get-breakout-room/${breakoutRoomId}`
         );
         const data = response.data;
 
@@ -68,7 +68,7 @@ const EditBreakoutRoomModal = ({
   const handleSave = async () => {
     try {
       const response = await axios.put(
-        `${process.env.BACKEND_BASE_URL}/update-breakout-room/${breakoutRoomId}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/update-breakout-room/${breakoutRoomId}`,
         {
           name: newRoom.name,
           participants: newRoom.participants.map((p) => p._id),

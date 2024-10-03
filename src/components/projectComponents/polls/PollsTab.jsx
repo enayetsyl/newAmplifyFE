@@ -29,7 +29,7 @@ const PollsTab = ({ project, fetchProjects, userId, polls }) => {
     setIsLoading(true);
     try {
       const response = await axios.patch(
-        `${process.env.BACKEND_BASE_URL}/api/change-active-status/${poll._id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/change-active-status/${poll._id}`,
         { isActive: newStatus }
       );
 
@@ -61,7 +61,7 @@ const PollsTab = ({ project, fetchProjects, userId, polls }) => {
     setIsLoading(true);
     try {
       const response = await axios.delete(
-        `${process.env.BACKEND_BASE_URL}/api/delete/poll/${pollId}`
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/delete/poll/${pollId}`
       );
 
       if (response.status === 200) {

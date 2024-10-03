@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import VerificationErrorUI from "@/components/authComponent/VerificationErrorUI";
 import VerifyAccountUI from "@/components/authComponent/VerifyAccountUI";
 import Logo from "@/components/shared/Logo";
@@ -8,36 +8,40 @@ import { useEffect, useState, Suspense } from "react";
 
 const VerifyAccountContent = () => {
   const searchParams = useSearchParams();
-  const id = searchParams.get('id');
+  const id = searchParams.get("id");
   const [verificationStatus, setVerificationStatus] = useState(null);
 
   useEffect(() => {
     if (id) {
       const verifyEmail = async () => {
         try {
-          console.log('sending verification request');
-          const response = await axios.get(`${process.env.BACKEND_BASE_URL}/api/verify?id=${id}`);
-          console.log('response .data', response.data);
-          
+          console.log("sending verification request");
+          const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/verify?id=${id}`
+          );
+          console.log("response .data", response.data);
+
           if (response.status === 200) {
-            setVerificationStatus('success');
+            setVerificationStatus("success");
           }
         } catch (error) {
-          setVerificationStatus('error');
+          setVerificationStatus("error");
           console.error("Verification error:", error);
         }
       };
-      
+
       verifyEmail();
     }
   }, [id]);
 
-  if (verificationStatus === 'success') {
+  if (verificationStatus === "success") {
     return <VerifyAccountUI />;
-  } else if (verificationStatus === 'error') {
+  } else if (verificationStatus === "error") {
     return <VerificationErrorUI />;
   } else {
-    return <p className="min-h-screen text-center">Verifying your account...</p>;
+    return (
+      <p className="min-h-screen text-center">Verifying your account...</p>
+    );
   }
 };
 
@@ -50,7 +54,9 @@ const VerifyAccount = () => {
       <div className="pt-5 pl-10 lg:block hidden">
         <Logo />
       </div>
-      <Suspense fallback={<p className="min-h-screen text-center">Loading...</p>}>
+      <Suspense
+        fallback={<p className="min-h-screen text-center">Loading...</p>}
+      >
         <VerifyAccountContent />
       </Suspense>
     </div>

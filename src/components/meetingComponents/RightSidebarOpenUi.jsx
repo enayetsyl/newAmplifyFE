@@ -1,14 +1,11 @@
 // RightSidebarOpenUi.js
 import React, { useEffect, useState } from "react";
 import { FaFolder, FaTrash } from "react-icons/fa";
-import {
-  BsChatSquareDotsFill,
-  BsChatSquareFill,
-} from "react-icons/bs";
+import { BsChatSquareDotsFill, BsChatSquareFill } from "react-icons/bs";
 import Search from "../singleComponent/Search";
 import { IoIosDocument } from "react-icons/io";
 import { FaEye } from "react-icons/fa";
-import { IoClose,  IoSend } from "react-icons/io5";
+import { IoClose, IoSend } from "react-icons/io5";
 import { MdInsertEmoticon } from "react-icons/md";
 import axios from "axios";
 import Button from "../shared/button";
@@ -31,16 +28,16 @@ const RightSidebarOpenUi = ({
   observersMessages,
   userName,
   meetingId,
-  sendMessageObserver
+  sendMessageObserver,
 }) => {
   const [fileList, setFileList] = useState(files);
   const [inputMessage, setInputMessage] = useState("");
 
- 
-
   const fetchFiles = async () => {
     try {
-      const response = await axios.get(`${process.env.BACKEND_BASE_URL}/api/files`);
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/files`
+      );
       setFileList(response.data);
     } catch (error) {
       console.error("Error fetching files:", error);
@@ -50,7 +47,6 @@ const RightSidebarOpenUi = ({
   useEffect(() => {
     fetchFiles();
   }, []);
-  
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
@@ -59,12 +55,18 @@ const RightSidebarOpenUi = ({
       formData.append("file", file);
 
       try {
-        await axios.post(`${process.env.BACKEND_BASE_URL}/api/upload`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
-        const response = await axios.get(`${process.env.BACKEND_BASE_URL}/api/files`);
+        await axios.post(
+          `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/upload`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/files`
+        );
         setFileList(response.data);
       } catch (error) {
         console.error("Error uploading file:", error);
@@ -74,14 +76,17 @@ const RightSidebarOpenUi = ({
 
   const handleDeleteFile = async (fileId) => {
     try {
-      await axios.delete(`${process.env.BACKEND_BASE_URL}/api/files/${fileId}`);
-      const response = await axios.get(`${process.env.BACKEND_BASE_URL}/api/files`);
+      await axios.delete(
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/files/${fileId}`
+      );
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/files`
+      );
       setFileList(response.data);
     } catch (error) {
       console.error("Error deleting file:", error);
     }
   };
-
 
   const handleSendMessage = () => {
     if (inputMessage.trim()) {
@@ -152,18 +157,20 @@ const RightSidebarOpenUi = ({
               iconClassName="!bg-[#EBEBEB]"
             />
             {/* participant container */}
-            {observers?.filter(observer => observer.name !== userName).map((observer) => (
-              <div
-                className="flex justify-center items-center gap-2 py-1"
-                key={observer?.id}
-              >
-                <p className="text-[#1a1a1a] text-[10px] flex-grow">
-                  {observer?.name}
-                </p>
+            {observers
+              ?.filter((observer) => observer.name !== userName)
+              .map((observer) => (
+                <div
+                  className="flex justify-center items-center gap-2 py-1"
+                  key={observer?.id}
+                >
+                  <p className="text-[#1a1a1a] text-[10px] flex-grow">
+                    {observer?.name}
+                  </p>
 
-                <BsChatSquareDotsFill />
-              </div>
-            ))}
+                  <BsChatSquareDotsFill />
+                </div>
+              ))}
           </div>
         )}
 
@@ -262,26 +269,26 @@ const RightSidebarOpenUi = ({
                 <IoSend />
               </button>
             </div> */}
-              {/* send message */}
-              <div className="flex justify-between items-center gap-2 relative">
-                  <input
-                    type="text"
-                    placeholder="Type Message"
-                    className="rounded-lg py-1 px-2 placeholder:text-[10px]"
-                    value={inputMessage}
-                    onChange={(e) => setInputMessage(e.target.value)}
-                    onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
-                  />
-                  <div className="absolute right-11 cursor-pointer">
-                    <MdInsertEmoticon />
-                  </div>
-                  <div
-                    className="py-1.5 px-1.5 bg-custom-orange-2 rounded-[50%] text-white cursor-pointer text-sm"
-                    onClick={handleSendMessage}
-                  >
-                    <IoSend />
-                  </div>
-                </div>
+            {/* send message */}
+            <div className="flex justify-between items-center gap-2 relative">
+              <input
+                type="text"
+                placeholder="Type Message"
+                className="rounded-lg py-1 px-2 placeholder:text-[10px]"
+                value={inputMessage}
+                onChange={(e) => setInputMessage(e.target.value)}
+                onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+              />
+              <div className="absolute right-11 cursor-pointer">
+                <MdInsertEmoticon />
+              </div>
+              <div
+                className="py-1.5 px-1.5 bg-custom-orange-2 rounded-[50%] text-white cursor-pointer text-sm"
+                onClick={handleSendMessage}
+              >
+                <IoSend />
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -314,7 +321,9 @@ const RightSidebarOpenUi = ({
             >
               <div className="flex items-center space-x-2">
                 <FaFolder className="h-3 w-3 text-custom-gray-3" />
-                <span className="text-xs text-custom-gray-3">{file.filename}</span>
+                <span className="text-xs text-custom-gray-3">
+                  {file.filename}
+                </span>
               </div>
               <div className="flex items-center space-x-4">
                 <span className="text-xs text-custom-gray-3">{file.size}</span>

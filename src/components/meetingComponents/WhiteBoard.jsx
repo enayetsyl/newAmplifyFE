@@ -9,30 +9,30 @@ import "./style.css";
 const WhiteBoard = ({ role, users }) => {
   const drawonCanvas = () => {
     const root = {};
-    root.socket = io.connect(`${process.env.BACKEND_BASE_URL}`);
-  
+    root.socket = io.connect(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}`);
+
     root.socket.on("canvas-data", (data) => {
-      const image = new window.Image();  
+      const image = new window.Image();
       const canvas = document.querySelector("#board");
       const ctx = canvas.getContext("2d");
-  
+
       image.onload = () => {
         ctx.drawImage(image, 0, 0);
       };
       image.src = data;
     });
-  
+
     const canvas = document.querySelector("#board");
     const ctx = canvas.getContext("2d");
-  
+
     const sketch = document.querySelector("#sketch");
     const sketchStyle = getComputedStyle(sketch);
     canvas.width = parseInt(sketchStyle.getPropertyValue("width"));
     canvas.height = parseInt(sketchStyle.getPropertyValue("height"));
-  
+
     const mouse = { x: 0, y: 0 };
     const lastMouse = { x: 0, y: 0 };
-  
+
     /* Mouse Capturing Work */
     canvas.addEventListener(
       "mousemove",
@@ -45,13 +45,13 @@ const WhiteBoard = ({ role, users }) => {
       },
       false
     );
-  
+
     /* Drawing on Paint App */
     ctx.lineWidth = 5;
     ctx.lineJoin = "round";
     ctx.lineCap = "round";
     ctx.strokeStyle = "blue";
-  
+
     canvas.addEventListener(
       "mousedown",
       () => {
@@ -59,7 +59,7 @@ const WhiteBoard = ({ role, users }) => {
       },
       false
     );
-  
+
     canvas.addEventListener(
       "mouseup",
       () => {
@@ -67,14 +67,14 @@ const WhiteBoard = ({ role, users }) => {
       },
       false
     );
-  
+
     const onPaint = () => {
       ctx.beginPath();
       ctx.moveTo(lastMouse.x, lastMouse.y);
       ctx.lineTo(mouse.x, mouse.y);
       ctx.closePath();
       ctx.stroke();
-  
+
       if (root.timeout !== undefined) clearTimeout(root.timeout);
       root.timeout = setTimeout(() => {
         const base64ImageData = canvas.toDataURL("image/png");
@@ -82,7 +82,6 @@ const WhiteBoard = ({ role, users }) => {
       }, 1000);
     };
   };
-  
 
   useEffect(() => {
     drawonCanvas();
@@ -120,7 +119,7 @@ const WhiteBoard = ({ role, users }) => {
     <div className="bg-white board-container flex justify-start items-center  w-full h-full rounded-xl relative">
       {/* video */}
       {/* <div className="w-1/5 bg-black border-2 border-black  grid-cols-1 p-2  gap-2 items-center overflow-y-auto max-h-full rounded-l-xl "> */}
-        {/* {users &&
+      {/* {users &&
           users?.map((user) => (
             <div className="relative">
               <Image
@@ -140,8 +139,8 @@ const WhiteBoard = ({ role, users }) => {
               </div>
             </div>
           ))} */}
-        {/* control bar */}
-        {/* <div className="bg-[#1b1b1b] py-2 flex justify-center items-center gap-2  w-1/5 rounded-bl-xl absolute bottom-0 left-0 ">
+      {/* control bar */}
+      {/* <div className="bg-[#1b1b1b] py-2 flex justify-center items-center gap-2  w-1/5 rounded-bl-xl absolute bottom-0 left-0 ">
           <FaHeadphones className="text-custom-gray-2" />
           <FaVideoSlash className="text-custom-gray-2" />
 

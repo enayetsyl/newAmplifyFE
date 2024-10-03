@@ -33,26 +33,27 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [showAddContactModal, setShowAddContactModal] = useState(false);
   const [showBulkUpdateModal, setShowBulkUpdateModal] = useState(false);
   const [isAddPollModalOpen, setIsAddPollModalOpen] = useState(false);
-  const [isAddRepositoryModalOpen, setIsAddRepositoryModalOpen] = useState(false);
+  const [isAddRepositoryModalOpen, setIsAddRepositoryModalOpen] =
+    useState(false);
   const [repositoryData, setRepositoryData] = useState({
     documents: [],
     media: [],
   });
-  const [selectedRepositoryMeetingTab, setSelectedRepositoryMeetingTab] = useState(null);
-  const [showDocAndMediaTab, setShowDocAndMediaTab] = useState(false)
+  const [selectedRepositoryMeetingTab, setSelectedRepositoryMeetingTab] =
+    useState(null);
+  const [showDocAndMediaTab, setShowDocAndMediaTab] = useState(false);
   const [selectedDocAndMediaTab, setSelectedDocAndMediaTab] = useState("");
 
   const handleRepositoryMeetingTabChange = (meeting) => {
     setSelectedRepositoryMeetingTab(meeting);
-  setSelectedDocAndMediaTab(""); 
-  setShowDocAndMediaTab(true);
+    setSelectedDocAndMediaTab("");
+    setShowDocAndMediaTab(true);
   };
 
   const handleDocAndMediaTabChange = (tab) => {
     setSelectedDocAndMediaTab(tab);
   };
 
-    
   console.log("project", project);
   console.log("meetings", meetings);
   const handleModalClose = () => {
@@ -72,7 +73,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     console.log("Updated Project Data:", updatedProjectData);
     try {
       const response = await axios.put(
-        `${process.env.BACKEND_BASE_URL}/api/update-general-project-info/${project._id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/update-general-project-info/${project._id}`,
         updatedProjectData
       );
       if (response.status === 200) {
@@ -132,7 +133,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `${process.env.BACKEND_BASE_URL}/api/get-all/meeting/${project._id}`
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/get-all/meeting/${project._id}`
         // {
         //   params: { page, limit: 10 },
         // }
@@ -150,7 +151,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `${process.env.BACKEND_BASE_URL}/api/get-all/poll/${project._id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/get-all/poll/${project._id}`,
         {
           params: { page, limit: 10 },
         }
@@ -177,7 +178,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     setIsAddPollModalOpen(true);
   };
   const handleOpenAddRepositoryModal = () => {
-    console.log('is add repository modal open', isAddRepositoryModalOpen);
+    console.log("is add repository modal open", isAddRepositoryModalOpen);
     setIsAddRepositoryModalOpen(true);
   };
 
@@ -200,7 +201,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     try {
       // Sending request to change project status
       const response = await axios.put(
-        `${process.env.BACKEND_BASE_URL}/api/change-project-status/${project._id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/change-project-status/${project._id}`,
         { status: newStatus }
       );
 
@@ -446,7 +447,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
 
           {activeTab === "Repository" && (
             <div className="pt-2">
-               <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center">
                 <HeadingLg children="Repository List" />
                 <div
                   className="flex justify-end items-center
@@ -462,56 +463,68 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
               </div>
               <div className="overflow-x-auto border-b">
                 <div className="flex space-x-5 whitespace-nowrap">
-                {meetings?.map((meeting) => (
-                <button
-                  key={meeting?._id}
-                  className={`py-2 border-custom-dark-blue-1 text-sm ${
-                    selectedRepositoryMeetingTab === meeting ? "border-b-2" : "opacity-25"
-                  }`}
-                  onClick={() => handleRepositoryMeetingTabChange(meeting)}
-                >
-                  {meeting?.title}
-                </button>
-              ))}
+                  {meetings?.map((meeting) => (
+                    <button
+                      key={meeting?._id}
+                      className={`py-2 border-custom-dark-blue-1 text-sm ${
+                        selectedRepositoryMeetingTab === meeting
+                          ? "border-b-2"
+                          : "opacity-25"
+                      }`}
+                      onClick={() => handleRepositoryMeetingTabChange(meeting)}
+                    >
+                      {meeting?.title}
+                    </button>
+                  ))}
                 </div>
               </div>
 
-      {/* Show "Documents" and "Media" tabs immediately below the selected meeting tab */}
-      {showDocAndMediaTab && selectedRepositoryMeetingTab && (
-            <div className="flex justify-center space-x-5 border-b">
-              <button
-                className={`py-2 border-custom-dark-blue-1 text-sm ${
-                  selectedDocAndMediaTab === "Documents" ? "border-b-2" : "opacity-25"
-                }`}
-                onClick={() => handleDocAndMediaTabChange("Documents")}
-              >
-                Documents
-              </button>
-              <button
-                className={`py-2 px-4 rounded ${
-                  selectedDocAndMediaTab === "Media" ? "border-b-2" : "opacity-25"
-                }`}
-                onClick={() => handleDocAndMediaTabChange("Media")}
-              >
-                Media
-              </button>
-            </div>
-          )}
+              {/* Show "Documents" and "Media" tabs immediately below the selected meeting tab */}
+              {showDocAndMediaTab && selectedRepositoryMeetingTab && (
+                <div className="flex justify-center space-x-5 border-b">
+                  <button
+                    className={`py-2 border-custom-dark-blue-1 text-sm ${
+                      selectedDocAndMediaTab === "Documents"
+                        ? "border-b-2"
+                        : "opacity-25"
+                    }`}
+                    onClick={() => handleDocAndMediaTabChange("Documents")}
+                  >
+                    Documents
+                  </button>
+                  <button
+                    className={`py-2 px-4 rounded ${
+                      selectedDocAndMediaTab === "Media"
+                        ? "border-b-2"
+                        : "opacity-25"
+                    }`}
+                    onClick={() => handleDocAndMediaTabChange("Media")}
+                  >
+                    Media
+                  </button>
+                </div>
+              )}
 
-          {/* Display content for the selected sub-sub-tab */}
-          {selectedRepositoryMeetingTab && (
-            <div className="mt-5">
-              <HeadingLg children={`Details for ${selectedRepositoryMeetingTab.title}`} />
-              {selectedDocAndMediaTab === "Documents" && (
-                <p className="mt-3">Here are the documents for this meeting.</p>
-              )}
-              {selectedDocAndMediaTab === "Media" && (
-                <p className="mt-3">Here is the media content for this meeting.</p>
+              {/* Display content for the selected sub-sub-tab */}
+              {selectedRepositoryMeetingTab && (
+                <div className="mt-5">
+                  <HeadingLg
+                    children={`Details for ${selectedRepositoryMeetingTab.title}`}
+                  />
+                  {selectedDocAndMediaTab === "Documents" && (
+                    <p className="mt-3">
+                      Here are the documents for this meeting.
+                    </p>
+                  )}
+                  {selectedDocAndMediaTab === "Media" && (
+                    <p className="mt-3">
+                      Here is the media content for this meeting.
+                    </p>
+                  )}
+                </div>
               )}
             </div>
           )}
-        </div>
-      )}
           {isAddMeetingModalOpen && (
             <AddMeetingModal
               onClose={closeAddMeetingModal}

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState,  useRef } from "react";
+import React, { useState, useRef } from "react";
 import TableHead from "../shared/TableHead";
 import TableData from "../shared/TableData";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -109,7 +109,7 @@ const ContactTable = ({
   const handleDeleteContact = async (contactId) => {
     try {
       const response = await fetch(
-        `${process.env.BACKEND_BASE_URL}/api/delete/contact/${contactId}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/delete/contact/${contactId}`,
         {
           method: "DELETE",
         }
