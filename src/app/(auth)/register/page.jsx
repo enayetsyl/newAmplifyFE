@@ -8,6 +8,7 @@ import Logo from "@/components/shared/Logo";
 import registerImage from "../../../../public/register.jpg";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const router = useRouter();
@@ -60,8 +61,16 @@ const Register = () => {
           terms: formData.terms,
         }
       );
-      router.push("/login");
+      if(response.status === 200) {
+        toast.success("Your registration was successful!");
+        console.log("Email:", formData.email)
+        router.push(`/account-activation?email=${encodeURIComponent(formData.email)}`);
+ 
+      } else {
+        toast.error(`${response.data.message}`);
+      }
     } catch (error) {
+      toast.error(`${error.response.data.message}`);
       console.error("Error creating user:", error);
     }
   };

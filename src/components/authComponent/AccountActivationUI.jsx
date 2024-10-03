@@ -5,9 +5,9 @@ import Button from '../shared/button'
 import BackToLogin from '../shared/BackToLogin'
 import { FaEnvelopeOpenText } from 'react-icons/fa'
 
-const AccountActivationUI = () => {
+const AccountActivationUI = ({email}) => {
   return (
-    <div className="py-20">
+    <div className="py-20 min-h-screen flex flex-col justify-center items-center">
        <div className="max-w-[800px] mx-auto shadow_primary px-10 lg:px-20 bg-white rounded-xl">
          {/* icon div */}
          <div className="flex justify-center items-center py-5">
@@ -19,17 +19,17 @@ const AccountActivationUI = () => {
            <HeadingH1 children="Account Activation" />
            <ParagraphBlue2 children="Thank you for signing up. A verification link has been sent to" />
            <p className="text-custom-gray-3  text-lg text-center">
-             JohnnSilvie02@gmail.com
+             {email}
            </p>
            <ParagraphBlue2 children="Please click the link in the email to verify your account. " />
          </div>
-         <div className="pt-10 ">
+         {/* <div className="pt-10 ">
            <Button
              children="Resend Email"
              variant="primary"
              className="py-2 rounded-2xl w-full font-bold text-xl"
            />
-         </div>
+         </div> */}
          <div className="pt-14 pb-20">
            <BackToLogin />
          </div>
