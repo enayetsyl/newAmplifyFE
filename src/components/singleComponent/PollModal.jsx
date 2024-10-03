@@ -7,8 +7,8 @@ import FormDropdownLabel from '../shared/FormDropdownLabel';
 import { FiMinus } from 'react-icons/fi';
 import Button from '../shared/button';
 
-const PoolModal = ({ onClose, formData, setFormData, poolToEdit }) => {
-  const [newPool, setNewPool] = useState({
+const PollModal = ({ onClose, formData, setFormData, pollToEdit }) => {
+  const [newPoll, setNewPoll] = useState({
     name: '',
     active: false,
     questions: [
@@ -21,16 +21,16 @@ const PoolModal = ({ onClose, formData, setFormData, poolToEdit }) => {
   });
 
   useEffect(() => {
-    if (poolToEdit) {
-      setNewPool(poolToEdit);
+    if (pollToEdit) {
+      setNewPoll(pollToEdit);
     }
-  }, [poolToEdit]);
+  }, [pollToEdit]);
 
   const addQuestion = () => {
-    setNewPool({
-      ...newPool,
+    setNewPoll({
+      ...newPoll,
       questions: [
-        ...newPool.questions,
+        ...newPoll.questions,
         {
           question: '',
           type: 'single',
@@ -41,14 +41,14 @@ const PoolModal = ({ onClose, formData, setFormData, poolToEdit }) => {
   };
 
   const updateQuestion = (index, field, value) => {
-    const updatedQuestions = newPool.questions.map((q, i) =>
+    const updatedQuestions = newPoll.questions.map((q, i) =>
       i === index ? { ...q, [field]: value } : q
     );
-    setNewPool({ ...newPool, questions: updatedQuestions });
+    setNewPoll({ ...newPoll, questions: updatedQuestions });
   };
 
   const updateAnswer = (qIndex, aIndex, value) => {
-    const updatedQuestions = newPool.questions.map((q, i) =>
+    const updatedQuestions = newPoll.questions.map((q, i) =>
       i === qIndex
         ? {
             ...q,
@@ -58,39 +58,39 @@ const PoolModal = ({ onClose, formData, setFormData, poolToEdit }) => {
           }
         : q
     );
-    setNewPool({ ...newPool, questions: updatedQuestions });
+    setNewPoll({ ...newPoll, questions: updatedQuestions });
   };
 
   const addAnswer = (index) => {
-    const updatedQuestions = newPool.questions.map((q, i) =>
+    const updatedQuestions = newPoll.questions.map((q, i) =>
       i === index ? { ...q, answers: [...q.answers, { answer: '' }] } : q
     );
-    setNewPool({ ...newPool, questions: updatedQuestions });
+    setNewPoll({ ...newPoll, questions: updatedQuestions });
   };
 
   const removeAnswer = (qIndex, aIndex) => {
-    const updatedQuestions = newPool.questions.map((q, i) =>
+    const updatedQuestions = newPoll.questions.map((q, i) =>
       i === qIndex
         ? { ...q, answers: q.answers.filter((_, j) => j !== aIndex) }
         : q
     );
-    setNewPool({ ...newPool, questions: updatedQuestions });
+    setNewPoll({ ...newPoll, questions: updatedQuestions });
   };
 
   const removeQuestion = (index) => {
-    const updatedQuestions = newPool.questions.filter((_, i) => i !== index);
-    setNewPool({ ...newPool, questions: updatedQuestions });
+    const updatedQuestions = newPoll.questions.filter((_, i) => i !== index);
+    setNewPoll({ ...newPoll, questions: updatedQuestions });
   };
 
   const handleSave = () => {
     let updatedPolls = [...formData.polls];
     
-    if (poolToEdit) {
+    if (pollToEdit) {
       // Update existing poll
-      updatedPolls[poolToEdit.index] = newPool;
+      updatedPolls[pollToEdit.index] = newPoll;
     } else {
       // Add new poll
-      updatedPolls.push(newPool);
+      updatedPolls.push(newPoll);
     }
 
     setFormData({
@@ -104,27 +104,27 @@ const PoolModal = ({ onClose, formData, setFormData, poolToEdit }) => {
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg p-6 w-full max-w-2xl h-[90%] overflow-y-scroll">
-        <HeadingBlue25px children={poolToEdit ? "Edit Poll" : "Add Poll"} />
+        <HeadingBlue25px children={pollToEdit ? "Edit Poll" : "Add Poll"} />
         <div className="pt-5">
           <InputField
             label="Name"
             type="text"
-            value={newPool.name}
-            onChange={(e) => setNewPool({ ...newPool, name: e.target.value })}
+            value={newPoll.name}
+            onChange={(e) => setNewPoll({ ...newPoll, name: e.target.value })}
           />
         </div>
         <div className="flex items-center mt-2">
           <input
             type="checkbox"
-            checked={newPool.active}
+            checked={newPoll.active}
             onChange={(e) =>
-              setNewPool({ ...newPool, active: e.target.checked })
+              setNewPoll({ ...newPoll, active: e.target.checked })
             }
           />
           <FormDropdownLabel children="Active" className="ml-2 " />
         </div>
         <div className="bg-[#f3f3f3] -mx-6 p-6 mt-3">
-          {newPool.questions.map((question, qIndex) => (
+          {newPoll.questions.map((question, qIndex) => (
             <div key={qIndex} className="mt-4 ">
               <div className="flex justify-between items-center">
                 <FormDropdownLabel
@@ -229,4 +229,4 @@ const PoolModal = ({ onClose, formData, setFormData, poolToEdit }) => {
   );
 };
 
-export default PoolModal;
+export default PollModal;

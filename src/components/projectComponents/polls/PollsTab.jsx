@@ -6,10 +6,10 @@ import { RiPencilFill } from "react-icons/ri";
 import PollDetailsModal from "./PollDetailsModal";
 import toast from "react-hot-toast";
 import axios from "axios";
-import AddPoolModal from "./AddPoolModal";
+import AddPollModal from "./AddPollModal";
 import Button from "@/components/shared/button";
 
-const PoolsTab = ({ project, fetchProjects, userId, polls }) => {
+const PollsTab = ({ project, fetchProjects, userId, polls }) => {
   const [selectedPoll, setSelectedPoll] = useState(null);
   const [isViewPollModalOpen, setIsViewPollModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -168,9 +168,9 @@ const PoolsTab = ({ project, fetchProjects, userId, polls }) => {
       )}
 
       {isAddPollModalOpen && (
-        <AddPoolModal
+        <AddPollModal
           onClose={handleCloseAddModal}
-          poolToEdit={selectedPoll}
+          pollToEdit={selectedPoll}
           project={project}
           fetchProjects={fetchProjects}
         />
@@ -179,4 +179,4 @@ const PoolsTab = ({ project, fetchProjects, userId, polls }) => {
   );
 };
 
-export default PoolsTab;
+export default PollsTab;

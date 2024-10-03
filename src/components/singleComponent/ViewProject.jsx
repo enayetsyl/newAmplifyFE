@@ -15,8 +15,8 @@ import MemberTabAddMember from "../projectComponents/members/MemberTabAddMember"
 
 import MembersTab from "../projectComponents/members/MembersTab";
 import MemberBulkUpdate from "../projectComponents/members/MemberBulkUpdate";
-import PoolsTab from "../projectComponents/pools/PoolsTab";
-import AddPoolModal from "../projectComponents/pools/AddPoolModal";
+import PollsTab from "../projectComponents/polls/PollsTab";
+import AddPollModal from "../projectComponents/polls/AddPollModal";
 import Button from "../shared/button";
 
 const ViewProject = ({ project, onClose, user, fetchProjects }) => {
@@ -31,7 +31,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [showAddContactModal, setShowAddContactModal] = useState(false);
   const [showBulkUpdateModal, setShowBulkUpdateModal] = useState(false);
-  const [isAddPollModalOpen, setIsAddPoolModalOpen] = useState(false);
+  const [isAddPollModalOpen, setIsAddPollModalOpen] = useState(false);
   const [repositoryData, setRepositoryData] = useState({
     documents: [],
     media: [],
@@ -128,7 +128,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     }
   };
   // Fetching project meetings
-  const fetchPools = async (page=1) => {
+  const fetchPolls = async (page = 1) => {
     setIsLoading(true);
     try {
       const response = await axios.get(
@@ -146,18 +146,17 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     }
   };
 
-
   useEffect(() => {
     fetchMeetings();
-    fetchPools();
+    fetchPolls();
   }, []);
 
   const handleAddMeetingModal = () => {
     setIsAddMeetingModalOpen(true);
   };
 
-  const handleOpenAddPoolModal = () => {
-    setIsAddPoolModalOpen(true);
+  const handleOpenAddPollModal = () => {
+    setIsAddPollModalOpen(true);
   };
 
   const closeAddMeetingModal = () => {
@@ -231,7 +230,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [formData, setFormData] = useState({
     polls: [
       {
-        poolName: "Customer Satisfaction Survey",
+        pollName: "Customer Satisfaction Survey",
         isActive: true,
         questions: [
           {
@@ -257,7 +256,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
         ],
       },
       {
-        poolName: "Product Feedback",
+        pollName: "Product Feedback",
         isActive: false,
         questions: [
           {
@@ -284,8 +283,6 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
       },
     ],
   });
-
-
 
   return (
     <div className="my_profile_main_section_shadow bg-[#fafafb] bg-opacity-90 h-full min-h-screen flex flex-col justify-center items-center w-full">
@@ -321,7 +318,10 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
               <ParagraphBlue2 children={project?.name} />
             </div>
             <div>
-              <button className="cursor-pointer absolute top-2 right-3" onClick={handleEditModal}>
+              <button
+                className="cursor-pointer absolute top-2 right-3"
+                onClick={handleEditModal}
+              >
                 Edit
               </button>
             </div>
@@ -362,7 +362,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
           </div>
         </div>
 
-        {/* participants, observers, breakout rooms and pools div container */}
+        {/* participants, observers, breakout rooms and polls div container */}
         <div className="bg-white shadow-[0px_0px_12px_#00000029] rounded-xl p-5 mt-3 mb-10">
           {/* tab navigation */}
           <div className="flex justify-around space-x-10 overflow-x-auto border-b">
@@ -384,11 +384,11 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
             </button>
             <button
               className={`py-2 border-custom-dark-blue-1 ${
-                activeTab === "Pools" ? "border-b-2 " : "opacity-25"
+                activeTab === "Polls" ? "border-b-2 " : "opacity-25"
               }`}
-              onClick={() => handleTabChange("Pools")}
+              onClick={() => handleTabChange("Polls")}
             >
-              Pools
+              Polls
             </button>
             <button
               className={`py-2 border-custom-dark-blue-1 ${
@@ -452,24 +452,24 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
             </div>
           )}
 
-          {activeTab === "Pools" && (
+          {activeTab === "Polls" && (
             <div className="pt-5">
               <div className="flex justify-between items-center">
-                <HeadingLg children="Pools List" />
+                <HeadingLg children="Polls List" />
                 <div
                   className="flex justify-end items-center
              gap-5"
                 >
                   <Button
-                    children={"Add Pool"}
+                    children={"Add Poll"}
                     className="px-5 py-1.5 rounded-xl"
                     variant="secondary"
-                    onClick={handleOpenAddPoolModal}
+                    onClick={handleOpenAddPollModal}
                   />
                 </div>
               </div>
               <div className="border-[0.5px] border-solid border-custom-dark-blue-1 rounded-xl h-[300px] overflow-y-scroll mt-2">
-                <PoolsTab
+                <PollsTab
                   project={project}
                   fetchProjects={fetchProjects}
                   userId={user?._id}
@@ -477,7 +477,6 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
                 />
               </div>
             </div>
-            
           )}
 
           {activeTab === "Repository" && (
@@ -555,11 +554,11 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
               userId={user._id}
             />
           )}
-          {/* Render add pool modal if open */}
+          {/* Render add poll modal if open */}
           {isAddPollModalOpen && (
-            <AddPoolModal
-              onClose={() => setIsAddPoolModalOpen(false)}
-              poolToEdit={null}
+            <AddPollModal
+              onClose={() => setIsAddPollModalOpen(false)}
+              pollToEdit={null}
               project={project}
               fetchProjects={fetchProjects}
             />

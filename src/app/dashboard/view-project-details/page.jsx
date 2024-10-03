@@ -143,7 +143,7 @@ export default page
 //           </div>
 //         </div>
 
-//         {/* participants, observers, breakout rooms and pools div container */}
+//         {/* participants, observers, breakout rooms and polls div container */}
 //         <div className="bg-white shadow-[0px_0px_12px_#00000029] rounded-xl p-5 mt-3 mb-10">
 //           {/* tab navigation */}
 //           <div className="flex justify-around space-x-10  border-b">
