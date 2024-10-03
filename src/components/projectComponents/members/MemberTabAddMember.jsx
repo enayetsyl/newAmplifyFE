@@ -74,7 +74,7 @@ const MemberTabAddMember = ({ onClose, project, fetchProjects, userId }) => {
 
   // Function to copy the registration link
   const handleCopyLink = () => {
-    navigator.clipboard.writeText("http://localhost:3000/register");
+    navigator.clipboard.writeText("https://new-amplify-fe-kj4c.vercel.app/register");
     alert("Link copied to clipboard!");
   };
 
