@@ -1,12 +1,19 @@
 'use client'
 
+import { useRouter } from 'next/navigation';
 import { createContext, useContext, useEffect, useState } from 'react'
 
 const GlobalContext = createContext()
 
 export function GlobalContextProvider({ children }) {
   const [user, setUser] = useState(null);
-
+  const router = useRouter()
+  const handleLogout = () => {
+    router.push('/login')
+    localStorage.clear();
+    setUser(null)
+    // onClose();
+  };
 
   useEffect(() => {
     // Retrieve user from local storage
@@ -21,7 +28,7 @@ export function GlobalContextProvider({ children }) {
     
 
   const value = {
-    user, setUser, 
+    user, setUser, handleLogout
   }
 
   return (

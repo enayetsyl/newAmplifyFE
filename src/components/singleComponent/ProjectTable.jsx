@@ -21,10 +21,10 @@ const ProjectTable = ({ projects, setProjects, fetchProjects, user }) => {
   console.log("isShareProjectModalOpen", isShareProjectModalOpen);
 
   const getRole = (project) => {
-    if (project.createdBy === user._id) {
+    if (project.createdBy === user?._id) {
       return "Admin";
     } else {
-      const person = project?.people?.find((p) => p.userId === user._id);
+      const person = project?.people?.find((p) => p.userId === user?._id);
       return person ? person.role : "No Role";
     }
   };

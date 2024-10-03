@@ -5,15 +5,9 @@ import { useGlobalContext } from '@/context/GlobalContext';
 import Button from '../shared/button';
 
 const LogoutModal = ({ onClose }) => {
-  const {  setUser } = useGlobalContext();
+  const {  handleLogout } = useGlobalContext();
   
-  const router = useRouter()
-  const handleLogout = () => {
-    localStorage.clear();
-    setUser(null)
-    router.push('/login')
-    onClose();
-  };
+  
 
   return (
     <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
