@@ -48,9 +48,12 @@ const Register = () => {
   };
 
   const handleSubmit = async (e) => {
+    console.log('register button clicked');
     e.preventDefault();
     if (!validateForm()) return;
     try {
+      console.log('registering user...', `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/users/create`);
+
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/users/create`,
         {
