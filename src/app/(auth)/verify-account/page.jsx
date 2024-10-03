@@ -16,7 +16,7 @@ const VerifyAccountContent = () => {
       const verifyEmail = async () => {
         try {
           console.log('sending verification request');
-          const response = await axios.get(`http://localhost:8008/api/verify?id=${id}`);
+          const response = await axios.get(`${process.env.BACKEND_BASE_URL}/api/verify?id=${id}`);
           console.log('response .data', response.data);
           
           if (response.status === 200) {

@@ -16,7 +16,7 @@ const EditPollModal = ({ onClose, formData, setFormData, polls }) => {
   useEffect(() => {
     const fetchPollById = async () => {
       try {
-        const response = await axios.get(`https://amplifybe-2.onrender.com/api/get/poll-id/${polls}`);
+        const response = await axios.get(`${process.env.BACKEND_BASE_URL}/api/get/poll-id/${polls}`);
         setPoll(response.data);
         setLoading(false);
       } catch (error) {
@@ -109,7 +109,7 @@ const EditPollModal = ({ onClose, formData, setFormData, polls }) => {
   const handleSave = async () => {
     try {
       const response = await axios.put(
-        `https://amplifybe-2.onrender.com/api/update-poll/${polls}`,
+        `${process.env.BACKEND_BASE_URL}/api/update-poll/${polls}`,
         {
           pollName: newPoll.name,
           isActive: newPoll.active,

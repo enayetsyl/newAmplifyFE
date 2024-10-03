@@ -23,7 +23,7 @@ const page = () => {
   const fetchContacts = async (userId) => {
     try {
       const response = await fetch(
-        `https://amplifybe-2.onrender.com/api/get-all/contact/${userId}`
+        `${process.env.BACKEND_BASE_URL}/api/get-all/contact/${userId}`
       );
       const data = await response.json();
       setContacts(data);

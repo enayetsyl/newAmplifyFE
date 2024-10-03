@@ -29,7 +29,7 @@ const PollsTab = ({ project, fetchProjects, userId, polls }) => {
     setIsLoading(true);
     try {
       const response = await axios.patch(
-        `https://amplifybe-2.onrender.com/api/change-active-status/${poll._id}`,
+        `${process.env.BACKEND_BASE_URL}/api/change-active-status/${poll._id}`,
         { isActive: newStatus }
       );
 
@@ -61,7 +61,7 @@ const PollsTab = ({ project, fetchProjects, userId, polls }) => {
     setIsLoading(true);
     try {
       const response = await axios.delete(
-        `https://amplifybe-2.onrender.com/api/delete/poll/${pollId}`
+        `${process.env.BACKEND_BASE_URL}/api/delete/poll/${pollId}`
       );
 
       if (response.status === 200) {

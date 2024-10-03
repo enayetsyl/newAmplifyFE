@@ -18,6 +18,7 @@ import MemberBulkUpdate from "../projectComponents/members/MemberBulkUpdate";
 import PollsTab from "../projectComponents/polls/PollsTab";
 import AddPollModal from "../projectComponents/polls/AddPollModal";
 import Button from "../shared/button";
+import AddRepositoryModal from "../projectComponents/repository/AddRepositoryModal";
 
 const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -32,11 +33,28 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [showAddContactModal, setShowAddContactModal] = useState(false);
   const [showBulkUpdateModal, setShowBulkUpdateModal] = useState(false);
   const [isAddPollModalOpen, setIsAddPollModalOpen] = useState(false);
+  const [isAddRepositoryModalOpen, setIsAddRepositoryModalOpen] = useState(false);
   const [repositoryData, setRepositoryData] = useState({
     documents: [],
     media: [],
   });
+  const [selectedRepositoryMeetingTab, setSelectedRepositoryMeetingTab] = useState(null);
+  const [showDocAndMediaTab, setShowDocAndMediaTab] = useState(false)
+  const [selectedDocAndMediaTab, setSelectedDocAndMediaTab] = useState("");
 
+  const handleRepositoryMeetingTabChange = (meeting) => {
+    setSelectedRepositoryMeetingTab(meeting);
+  setSelectedDocAndMediaTab(""); 
+  setShowDocAndMediaTab(true);
+  };
+
+  const handleDocAndMediaTabChange = (tab) => {
+    setSelectedDocAndMediaTab(tab);
+  };
+
+    
+  console.log("project", project);
+  console.log("meetings", meetings);
   const handleModalClose = () => {
     setShowAddContactModal(false);
   };
@@ -54,7 +72,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     console.log("Updated Project Data:", updatedProjectData);
     try {
       const response = await axios.put(
-        `https://amplifybe-2.onrender.com/api/update-general-project-info/${project._id}`,
+        `${process.env.BACKEND_BASE_URL}/api/update-general-project-info/${project._id}`,
         updatedProjectData
       );
       if (response.status === 200) {
@@ -114,7 +132,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `https://amplifybe-2.onrender.com/api/get-all/meeting/${project._id}`
+        `${process.env.BACKEND_BASE_URL}/api/get-all/meeting/${project._id}`
         // {
         //   params: { page, limit: 10 },
         // }
@@ -132,7 +150,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `https://amplifybe-2.onrender.com/api/get-all/poll/${project._id}`,
+        `${process.env.BACKEND_BASE_URL}/api/get-all/poll/${project._id}`,
         {
           params: { page, limit: 10 },
         }
@@ -158,6 +176,10 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const handleOpenAddPollModal = () => {
     setIsAddPollModalOpen(true);
   };
+  const handleOpenAddRepositoryModal = () => {
+    console.log('is add repository modal open', isAddRepositoryModalOpen);
+    setIsAddRepositoryModalOpen(true);
+  };
 
   const closeAddMeetingModal = () => {
     setIsAddMeetingModalOpen(false);
@@ -178,7 +200,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     try {
       // Sending request to change project status
       const response = await axios.put(
-        `https://amplifybe-2.onrender.com/api/change-project-status/${project._id}`,
+        `${process.env.BACKEND_BASE_URL}/api/change-project-status/${project._id}`,
         { status: newStatus }
       );
 
@@ -226,63 +248,6 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const handleOpenAddContactModal = () => {
     setShowAddContactModal(true);
   };
-
-  const [formData, setFormData] = useState({
-    polls: [
-      {
-        pollName: "Customer Satisfaction Survey",
-        isActive: true,
-        questions: [
-          {
-            question: "How satisfied are you with our service?",
-            type: "single",
-            answers: [
-              { answer: "Very Satisfied" },
-              { answer: "Satisfied" },
-              { answer: "Neutral" },
-              { answer: "Dissatisfied" },
-            ],
-          },
-          {
-            question: "What could we improve?",
-            type: "multiple",
-            answers: [
-              { answer: "Speed of service" },
-              { answer: "Product quality" },
-              { answer: "Customer support" },
-              { answer: "Pricing" },
-            ],
-          },
-        ],
-      },
-      {
-        pollName: "Product Feedback",
-        isActive: false,
-        questions: [
-          {
-            question: "How would you rate the product?",
-            type: "single",
-            answers: [
-              { answer: "Excellent" },
-              { answer: "Good" },
-              { answer: "Fair" },
-              { answer: "Poor" },
-            ],
-          },
-          {
-            question: "What features do you like the most?",
-            type: "multiple",
-            answers: [
-              { answer: "Design" },
-              { answer: "Functionality" },
-              { answer: "Durability" },
-              { answer: "Price" },
-            ],
-          },
-        ],
-      },
-    ],
-  });
 
   return (
     <div className="my_profile_main_section_shadow bg-[#fafafb] bg-opacity-90 h-full min-h-screen flex flex-col justify-center items-center w-full">
@@ -480,44 +445,73 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
           )}
 
           {activeTab === "Repository" && (
-            <div className="pt-5">
-              <HeadingLg children="You have created 2 polls for this meeting." />
-              <div className="flex justify-start items-center px-3 mt-4">
-                <div className="w-[25%]">
-                  <HeadingLg children="Name" />
-                </div>
-                <div className="w-[20%]">
-                  <HeadingLg children="Total Questions" />
-                </div>
-                <div className="w-[20%]">
-                  <HeadingLg children="Creator" />
-                </div>
-                <div className="w-[35%]">
-                  <HeadingLg children="Status" />
-                </div>
-              </div>
-              {/* {formData.breakoutRooms.map((room, index) => ( */}
-              <div className="py-3 space-y-3">
-                <div className="flex justify-start items-center bg-white rounded-xl shadow-[0px_0px_6px_#00000029] p-3">
-                  <ParagraphLg className="w-[25%]">
-                    Poll 1: Sistine Chapel
-                  </ParagraphLg>
-                  <ParagraphLg className="w-[20%]">1 Question</ParagraphLg>
-                  <ParagraphLg className="w-[20%]">Olivia Hasting</ParagraphLg>
-                  <ParagraphLg className="w-[30%]">Active</ParagraphLg>
-                </div>
-                <div className="flex justify-start items-center bg-white rounded-xl shadow-[0px_0px_6px_#00000029] p-3">
-                  <ParagraphLg className="w-[25%]">
-                    Poll 1: Sistine Chapel
-                  </ParagraphLg>
-                  <ParagraphLg className="w-[20%]">1 Question</ParagraphLg>
-                  <ParagraphLg className="w-[20%]">Olivia Hasting</ParagraphLg>
-                  <ParagraphLg className="w-[30%]">Active</ParagraphLg>
+            <div className="pt-2">
+               <div className="flex justify-between items-center">
+                <HeadingLg children="Repository List" />
+                <div
+                  className="flex justify-end items-center
+             gap-5"
+                >
+                  <Button
+                    children={"Upload"}
+                    className="px-5 py-1.5 rounded-xl"
+                    variant="secondary"
+                    onClick={handleOpenAddRepositoryModal}
+                  />
                 </div>
               </div>
-              {/* ))} */}
+              <div className="overflow-x-auto border-b">
+                <div className="flex space-x-5 whitespace-nowrap">
+                {meetings?.map((meeting) => (
+                <button
+                  key={meeting?._id}
+                  className={`py-2 border-custom-dark-blue-1 text-sm ${
+                    selectedRepositoryMeetingTab === meeting ? "border-b-2" : "opacity-25"
+                  }`}
+                  onClick={() => handleRepositoryMeetingTabChange(meeting)}
+                >
+                  {meeting?.title}
+                </button>
+              ))}
+                </div>
+              </div>
+
+      {/* Show "Documents" and "Media" tabs immediately below the selected meeting tab */}
+      {showDocAndMediaTab && selectedRepositoryMeetingTab && (
+            <div className="flex justify-center space-x-5 border-b">
+              <button
+                className={`py-2 border-custom-dark-blue-1 text-sm ${
+                  selectedDocAndMediaTab === "Documents" ? "border-b-2" : "opacity-25"
+                }`}
+                onClick={() => handleDocAndMediaTabChange("Documents")}
+              >
+                Documents
+              </button>
+              <button
+                className={`py-2 px-4 rounded ${
+                  selectedDocAndMediaTab === "Media" ? "border-b-2" : "opacity-25"
+                }`}
+                onClick={() => handleDocAndMediaTabChange("Media")}
+              >
+                Media
+              </button>
             </div>
           )}
+
+          {/* Display content for the selected sub-sub-tab */}
+          {selectedRepositoryMeetingTab && (
+            <div className="mt-5">
+              <HeadingLg children={`Details for ${selectedRepositoryMeetingTab.title}`} />
+              {selectedDocAndMediaTab === "Documents" && (
+                <p className="mt-3">Here are the documents for this meeting.</p>
+              )}
+              {selectedDocAndMediaTab === "Media" && (
+                <p className="mt-3">Here is the media content for this meeting.</p>
+              )}
+            </div>
+          )}
+        </div>
+      )}
           {isAddMeetingModalOpen && (
             <AddMeetingModal
               onClose={closeAddMeetingModal}
@@ -560,6 +554,15 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
               onClose={() => setIsAddPollModalOpen(false)}
               pollToEdit={null}
               project={project}
+              fetchProjects={fetchProjects}
+            />
+          )}
+          {/* Render add repository modal if open */}
+          {isAddRepositoryModalOpen && (
+            <AddRepositoryModal
+              onClose={() => setIsAddRepositoryModalOpen(false)}
+              project={project}
+              meetings={meetings}
               fetchProjects={fetchProjects}
             />
           )}

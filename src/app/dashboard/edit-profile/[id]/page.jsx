@@ -21,7 +21,7 @@ const Page = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `https://amplifybe-2.onrender.com/api/users/find-by-id`,
+          `${process.env.BACKEND_BASE_URL}/api/users/find-by-id`,
           {
             params: { id },
           }
@@ -50,7 +50,7 @@ const Page = () => {
   const handleSave = async () => {
     try {
       await axios.put(
-        `https://amplifybe-2.onrender.com/api/users/update`,
+        `${process.env.BACKEND_BASE_URL}/api/users/update`,
         user
       );
       alert("Profile updated successfully");

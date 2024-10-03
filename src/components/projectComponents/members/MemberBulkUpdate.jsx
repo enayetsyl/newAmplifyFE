@@ -46,7 +46,7 @@ const MemberBulkUpdate= ({
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post(`https://amplifybe-2.onrender.com/api/project/updateBulkMembers`, {
+      const response = await axios.post(`${process.env.BACKEND_BASE_URL}/api/project/updateBulkMembers`, {
         projectId: project._id,
         members: members,
       });

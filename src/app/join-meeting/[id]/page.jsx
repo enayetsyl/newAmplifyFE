@@ -44,7 +44,7 @@ const Page = () => {
     try {
       // Call the new API with the extracted role and name
       const userRoleResponse = await axios.post(
-        `https://amplifybe-2.onrender.com/api/user-role`,
+        `${process.env.BACKEND_BASE_URL}/api/user-role`,
         {
           name: formData.fullName,
           role: "Participant",
@@ -57,7 +57,7 @@ const Page = () => {
 
       // Call the original API for joining the meeting
       const meetingResponse = await axios.post(
-        `https://amplifybe-2.onrender.com/api/live-meeting/join-meeting-participant`,
+        `${process.env.BACKEND_BASE_URL}/api/live-meeting/join-meeting-participant`,
         {
           name: formData.fullName,
           role: "Participant", // Assuming the role to send here is always "Participant"
@@ -107,7 +107,7 @@ const Page = () => {
   //   try {
   //     // Call the new API with the extracted role and name
   //     const response = await axios.post(
-  //       `https://amplifybe-2.onrender.com/api/user-role`,
+  //       `${process.env.BACKEND_BASE_URL}/api/user-role`,
   //       {
   //         name: formData.fullName,
   //         role: role,
