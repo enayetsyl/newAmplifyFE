@@ -37,7 +37,7 @@ const MemberBulkUpdate = ({ onClose, project, fetchProjects, userId }) => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post(
+      const response = await axios.put(
         `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/project/updateBulkMembers`,
         {
           projectId: project._id,

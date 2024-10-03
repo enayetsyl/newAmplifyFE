@@ -199,6 +199,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     setSelectedStatus(newStatus);
 
     try {
+      console.log('project status',  `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/change-project-status/${project._id}`)
       // Sending request to change project status
       const response = await axios.put(
         `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/change-project-status/${project._id}`,
