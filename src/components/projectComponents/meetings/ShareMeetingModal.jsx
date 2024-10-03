@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useState } from "react";
 import { BsCheckCircle } from "react-icons/bs";
 
@@ -56,12 +57,12 @@ const ShareMeetingModal = ({ meeting, onClose }) => {
             <p className="mt-2 text-sm">
               <strong>Join Meeting</strong>
               <br />
-              <a
-                href={`https://amplify.us/j/${meeting._id}`}
+              <Link
+                href={`https://new-amplify-fe-kj4c.vercel.app/join-meeting-observer/${meeting._id}`}
                 className="text-blue-500"
               >
-                https://amplify.us/j/{meeting._id}
-              </a>
+                https://new-amplify-fe-kj4c.vercel.app/join-meeting-observer/{meeting._id}
+              </Link>
             </p>
             <p className="mt-2 text-sm">
               <strong>Passcode:</strong> {meeting.meetingPasscode}
@@ -70,9 +71,9 @@ const ShareMeetingModal = ({ meeting, onClose }) => {
             <p className="mt-2 text-sm">
               <strong>Create an account</strong>
               <br />
-              <a href={`https://amplify.us/register`} className="text-blue-500">
-                https://amplify.us/register
-              </a>
+              <Link href={`https://new-amplify-fe-kj4c.vercel.app/register`} className="text-blue-500">
+                https://new-amplify-fe-kj4c.vercel.app/register
+              </Link>
             </p>
           </div>
         ) : (
@@ -90,12 +91,12 @@ const ShareMeetingModal = ({ meeting, onClose }) => {
             <p className="mt-2 text-sm">
               <strong>Join Meeting</strong>
               <br />
-              <a
-                href={`https://amplify.us/j/${meeting._id}`}
+              <Link
+                href={`https://new-amplify-fe-kj4c.vercel.app/join-meeting/${meeting._id}`}
                 className="text-blue-500"
               >
                 https://amplify.us/j/{meeting._id}
-              </a>
+              </Link>
             </p>
           </div>
         )}

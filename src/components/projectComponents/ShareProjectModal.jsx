@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useState } from "react";
 import { BsCheckCircle } from "react-icons/bs";
 
@@ -42,18 +43,12 @@ const ShareProjectModal = ({ project, onClose }) => {
 
         {/* Dropdown for access level */}
         <div className="mb-4 flex justify-center">
-          <select
-            value={accessLevel}
-            onChange={(e) => setAccessLevel(e.target.value)}
-            className="p-2 border rounded-md w-1/2 text-center text-gray-700"
-          >
-            <option value="Observer Access">Observer Access</option>
-            <option value="Participant Access">Participant Access</option>
-          </select>
+         
+            <p >Observer Access</p>
+          
         </div>
 
-        {/* Conditional content based on access level */}
-        {accessLevel === "Observer Access" ? (
+       
           <div className="p-4 border rounded-md mb-4">
             <p className="text-sm">
               Nancy Jones has just created a Project named{" "}
@@ -63,12 +58,12 @@ const ShareProjectModal = ({ project, onClose }) => {
             <p className="mt-2 text-sm">
               <strong>Join Project</strong>
               <br />
-              <a
-                href={`https://amplify.us/j/${project._id}`}
+              <Link
+                href={`https://new-amplify-fe-kj4c.vercel.app/login`}
                 className="text-blue-500"
               >
-                https://amplify.us/j/{project._id}
-              </a>
+                https://new-amplify-fe-kj4c.vercel.app/login
+              </Link>
             </p>
             <p className="mt-2 text-sm">
               <strong>Passcode:</strong> {project.projectPasscode}
@@ -77,35 +72,15 @@ const ShareProjectModal = ({ project, onClose }) => {
             <p className="mt-2 text-sm">
               <strong>Create an account</strong>
               <br />
-              <a
-                href={`https://amplify.us/register/${project._id}`}
+              <Link
+                href={`https://new-amplify-fe-kj4c.vercel.app/register`}
                 className="text-blue-500"
               >
-                https://amplify.us/register/{project._id}
-              </a>
+                https://new-amplify-fe-kj4c.vercel.app/register
+              </Link>
             </p>
           </div>
-        ) : (
-          <div className="p-4 border rounded-md mb-4">
-            <p className="text-sm">
-              Nancy Jones has invited you to a scheduled meeting for the project{" "}
-              <strong>{project.name}</strong>.
-            </p>
-            <p className="mt-2 text-sm">
-              <strong>Title:</strong> Focus Group Meeting
-            </p>
-            <p className="mt-2 text-sm">
-              <strong>Join Meeting</strong>
-              <br />
-              <a
-                href={`https://amplify.us/j/${project._id}/meet12`}
-                className="text-blue-500"
-              >
-                https://amplify.us/j/{project._id}/meet12
-              </a>
-            </p>
-          </div>
-        )}
+       
 
         {/* Copy button */}
         <button
