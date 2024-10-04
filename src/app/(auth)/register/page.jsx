@@ -23,6 +23,7 @@ const Register = () => {
   const [errors, setErrors] = useState({});
   const [emailAvailable, setEmailAvailable] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -48,11 +49,10 @@ const Register = () => {
   };
 
   const handleSubmit = async (e) => {
-    console.log('register button clicked');
     e.preventDefault();
     if (!validateForm()) return;
     try {
-      console.log('registering user...', `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/users/create`);
+      setIsLoading(true);
 
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/users/create`,
@@ -66,7 +66,6 @@ const Register = () => {
       );
       if (response.status === 200) {
         toast.success("Your registration was successful!");
-        console.log("Email:", formData.email);
         router.push(
           `/account-activation?email=${encodeURIComponent(formData.email)}`
         );
@@ -76,6 +75,8 @@ const Register = () => {
     } catch (error) {
       toast.error(`${error.response.data.message}`);
       console.error("Error creating user:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -199,9 +200,12 @@ const Register = () => {
             </div>
             <button
               type="submit"
-              className="w-full bg-custom-orange-1 text-white font-semibold py-2 rounded-lg hover:bg-orange-600"
+              disabled={isLoading}
+              className={`w-full text-white font-semibold py-2 rounded-lg ${
+                isLoading ? 'bg-gray-600 cursor-not-allowed' : 'bg-custom-orange-1 hover:bg-orange-600'
+              }`}
             >
-              Create Account
+              {isLoading ? 'Registering...' : 'Create Account'}
             </button>
           </form>
           <p className="mt-4 text-center">
