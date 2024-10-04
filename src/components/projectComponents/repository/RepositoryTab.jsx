@@ -11,7 +11,7 @@ const RepositoryTab = ({
   selectedRepositoryMeetingTab,
   selectedDocAndMediaTab,
 }) => {
-  // const [repos, setRepos] = useState(repositories);
+ 
 
   const renameFile = async (id) => {
     try {
@@ -29,12 +29,7 @@ const RepositoryTab = ({
         toast.error(`${response.data.message}`);
       }
 
-      // Update the state to reflect the new file name
-      // setRepos((prevRepos) =>
-      //   prevRepos.map((repo) =>
-      //     repo._id === id ? { ...repo, fileName: newFileName } : repo
-      //   )
-      // );
+   
     } catch (error) {
       toast.error(`${error.response.data.message}`)
       console.error("Error renaming file:", error);
@@ -52,14 +47,37 @@ const RepositoryTab = ({
         toast.error(`${response.data.message}`);
       }
 
-      // Update the state to remove the deleted file
-      // setRepos((prevRepos) => prevRepos.filter((repo) => repo._id !== id));
     } catch (error) {
       console.error("Error deleting file:", error);
       toast.error(`${error.response.data.message}`)
     }
   };
 
+  const downloadFile = async (url, fileName) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Failed to fetch the file');
+      }
+  
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+  
+      const link = document.createElement('a');
+      link.href = objectUrl;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+  
+      // Clean up
+      document.body.removeChild(link);
+      URL.revokeObjectURL(objectUrl);
+    } catch (error) {
+      console.error('Error downloading file:', error);
+      toast.error('Failed to download the file.');
+    }
+  };
+  
 
   const filteredRepositories = selectedRepositoryMeetingTab
     ? repositories.filter(
@@ -123,6 +141,7 @@ const RepositoryTab = ({
                       onClick={() => deleteFile(repo._id)}
                     ></Button>
                     <Button
+                    onClick={() => downloadFile(repo.cloudinaryLink, repo.fileName)}
                       children={"Download"}
                       type="button"
                       variant="plain"
