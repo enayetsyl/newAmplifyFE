@@ -19,6 +19,7 @@ import PollsTab from "../projectComponents/polls/PollsTab";
 import AddPollModal from "../projectComponents/polls/AddPollModal";
 import Button from "../shared/button";
 import AddRepositoryModal from "../projectComponents/repository/AddRepositoryModal";
+import RepositoryTab from "../projectComponents/repository/RepositoryTab";
 
 const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -35,6 +36,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [isAddPollModalOpen, setIsAddPollModalOpen] = useState(false);
   const [isAddRepositoryModalOpen, setIsAddRepositoryModalOpen] =
     useState(false);
+  const [repositories, setRepositories] = useState([]);
   const [repositoryData, setRepositoryData] = useState({
     documents: [],
     media: [],
@@ -160,10 +162,30 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
       setIsLoading(false);
     }
   };
+  // Fetching project meetings
+  const fetchRepositories = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/get-repository/${project._id}`,
+        // {
+        //   params: { page, limit: 10 },
+        // }
+      );
+      console.log('repo received',response.data.repositories);
+      setRepositories(response.data.repositories);
+     
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
     fetchMeetings();
     fetchPolls();
+    fetchRepositories()
   }, []);
 
   const handleAddMeetingModal = () => {
@@ -500,7 +522,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
               )}
 
               {/* Display content for the selected sub-sub-tab */}
-              {selectedRepositoryMeetingTab && (
+              {/* {selectedRepositoryMeetingTab && (
                 <div className="mt-5">
                   <HeadingLg
                     children={`Details for ${selectedRepositoryMeetingTab.title}`}
@@ -516,9 +538,21 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
                     </p>
                   )}
                 </div>
-              )}
+              )} */}
+                 <div className="border-[0.5px] border-solid border-custom-dark-blue-1 rounded-xl h-[300px] overflow-y-scroll mt-2">
+               <RepositoryTab
+               repositories={repositories}
+               project={project}
+               meetings={meetings}
+               fetchProjects={fetchProjects}
+               userId={user?._id}
+               selectedRepositoryMeetingTab={selectedRepositoryMeetingTab}
+               selectedDocAndMediaTab={selectedDocAndMediaTab}
+               />
+              </div>
             </div>
           )}
+
           {isAddMeetingModalOpen && (
             <AddMeetingModal
               onClose={closeAddMeetingModal}

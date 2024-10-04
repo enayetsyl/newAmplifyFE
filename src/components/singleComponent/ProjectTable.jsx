@@ -63,24 +63,19 @@ const ProjectTable = ({ projects, setProjects, fetchProjects, user }) => {
   const handleAction = (status, project) => {
     switch (status) {
       case "Draft":
-        // Redirect to edit page or open edit modal
-        // Implement edit logic here
+        
         break;
       case "Active":
-        // Continue project (perhaps redirect to the project page)
-        // Implement continue logic here
+        
         break;
       case "Complete":
-        // Close project
-        // Implement close logic here
+        
         break;
       case "Inactive":
-        // Reactivate project
-        // Implement reactivate logic here
+        
         break;
       case "Closed":
-        // Archive project
-        // Implement archive logic here
+        
         break;
       default:
     }
