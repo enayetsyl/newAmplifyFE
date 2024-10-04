@@ -117,7 +117,7 @@ const LeftSidebarCloseUi = ({
       ) : (
         <div className="hidden md:flex">
           <div className=" lg:pt-10 px-6">
-            <Button
+            {/* <Button
               variant="meeting"
               type="submit"
               className="w-full  rounded-xl justify-center py-2 pl-1.5  mb-2"
@@ -134,7 +134,7 @@ const LeftSidebarCloseUi = ({
                 <FaVideo className="bg-custom-orange-1 p-1 text-white text-2xl rounded-md font-bold" />
               }
               onClick={toggleRecordingButton}
-            />
+            /> */}
           </div>
           {/* Backroom chat and icon */}
           <div className="flex justify-center items-center py-4 ">
@@ -225,13 +225,13 @@ const LeftSidebarCloseUi = ({
       {/* waiting list */}
       {isWaiting && activeTab === "participantList" && role === "Moderator" && (
         <div className="pt-2 bg-custom-gray-8 py-4 rounded-xl mb-2 overflow-y-scroll mx-1 hidden md:flex">
-          <div className="flex justify-center items-center py-2">
+          {/* <div className="flex justify-center items-center py-2">
             <h1 className="font-bold text-[9px] ">
               Waiting ({isWaiting.length})
             </h1>
-          </div>
+          </div> */}
           {/* participant continer */}
-          {isWaiting?.map((user) => (
+          {/* {isWaiting?.map((user) => (
             <div
               className="flex justify-center items-center gap-2 py-1"
               key={user.name}
@@ -244,7 +244,7 @@ const LeftSidebarCloseUi = ({
                 className="rounded-2xl border-[3px] border-white border-solid"
               />
             </div>
-          ))}
+          ))} */}
         </div>
       )}
     </div>
@@ -322,7 +322,7 @@ const LeftSidebarCloseUi = ({
     ) : (
       <div className="">
         <div className=" lg:pt-10 px-6">
-          <Button
+          {/* <Button
             variant="meeting"
             type="submit"
             className="w-full  rounded-xl justify-center py-2 pl-1.5  mb-2"
@@ -339,7 +339,7 @@ const LeftSidebarCloseUi = ({
               <FaVideo className="bg-custom-orange-1 p-1 text-white text-2xl rounded-md font-bold" />
             }
             onClick={toggleRecordingButton}
-          />
+          /> */}
         </div>
         {/* Backroom chat and icon */}
         <div className="flex justify-center items-center py-4 ">
@@ -382,7 +382,7 @@ const LeftSidebarCloseUi = ({
           {activeTab === "participantList" && (
             <div className="flex-grow pt-2 overflow-y-auto">
               {/* participant continer */}
-              {users?.map((user) => (
+              {/* {users?.map((user) => (
                 <div
                   className="flex justify-center items-center gap-2 py-1"
                   key={user.id}
@@ -395,12 +395,12 @@ const LeftSidebarCloseUi = ({
                     className="rounded-2xl border-[3px] border-white border-solid"
                   />
                 </div>
-              ))}
+              ))} */}
             </div>
           )}
 
           {/* Participant chat */}
-          {activeTab === "participantChat" &&
+          {/* {activeTab === "participantChat" &&
             !selectedChat &&
             chatParticipants.map((chat) => (
               <div
@@ -422,21 +422,21 @@ const LeftSidebarCloseUi = ({
                   </p>
                 )}
               </div>
-            ))}
+            ))} */}
         </div>
       </div>
     )}
 
     {/* waiting list */}
-    {isWaiting && activeTab === "participantList" && role === "Moderator" && (
-      <div className="pt-2 bg-custom-gray-8 py-4 rounded-xl mb-2 overflow-y-scroll mx-1">
-        <div className="flex justify-center items-center py-2">
+    {/* {isWaiting && activeTab === "participantList" && role === "Moderator" && ( */}
+      {/*  <div className="pt-2 bg-custom-gray-8 py-4 rounded-xl mb-2 overflow-y-scroll mx-1"> */}
+        {/* <div className="flex justify-center items-center py-2">
           <h1 className="font-bold text-[9px] ">
             Waiting ({isWaiting.length})
           </h1>
-        </div>
+        </div> */}
         {/* participant continer */}
-        {isWaiting?.map((user) => (
+        {/* {isWaiting?.map((user) => (
           <div
             className="flex justify-center items-center gap-2 py-1"
             key={user.name}
@@ -449,9 +449,9 @@ const LeftSidebarCloseUi = ({
               className="rounded-2xl border-[3px] border-white border-solid"
             />
           </div>
-        ))}
-      </div>
-    )}
+        ))} */}
+       {/* </div> */}
+    {/* // )} */}
   </div>
   </div>
   );

@@ -229,7 +229,7 @@ const LeftSidebarOpenUi = ({
         <div className=" md:pt-0 pt-16">
           {/* Whiteboard and local recording */}
           <div className=" lg:pt-10 px-4">
-            <Button
+            {/* <Button
               children="Whiteboard"
               variant="meeting"
               type="submit"
@@ -248,7 +248,7 @@ const LeftSidebarOpenUi = ({
                 <FaVideo className="bg-custom-orange-1 p-1 text-white text-2xl rounded-md font-bold" />
               }
               onClick={toggleRecordingButton}
-            />
+            /> */}
             {
               role === "Moderator" && !isStreaming && (
                 <Button

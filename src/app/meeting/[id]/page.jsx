@@ -16,7 +16,7 @@ const page = () => {
   const { user } = useGlobalContext();
   const fullName = searchParams.get("fullName");
   const userRole = searchParams.get("role");
-
+  const [meetingDetails, setMeetingDetails] = useState([])
   const [users, setUsers] = useState([]);
   const [participants, setParticipants] = useState([]);
   const [observers, setObservers] = useState([]);
@@ -283,6 +283,24 @@ const page = () => {
       clearInterval(intervalId);
     };
   }, [fullName, params.id, router]);
+
+  // Use effect for getting meeting details
+  useEffect(() => {
+    getMeetingDetails(params.id);
+  }, [params.id]);
+
+  const getMeetingDetails = async (meetingId) => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/get-single-meeting/${meetingId}`
+      );
+      setMeetingDetails(response?.data?.meetingDetails);
+    } catch (error) {
+      console.error("Error in getting meeting details", error);
+    }
+  };
+
+  console.log('meeting details', meetingDetails);
 
   const getWaitingList = async (meetingId) => {
     try {
@@ -556,6 +574,7 @@ const page = () => {
                 setBreakoutRooms={setBreakoutRooms}
                 projectStatus={projectStatus}
                 iframeLink={iframeLink}
+                meetingDetails={meetingDetails}
               />
             </div>
           </>
@@ -603,6 +622,7 @@ const page = () => {
                 setBreakoutRooms={setBreakoutRooms}
                 projectStatus={projectStatus}
                 iframeLink={iframeLink}
+                meetingDetails={meetingDetails}
               />
             </div>
             <div className="h-full">
@@ -655,6 +675,7 @@ const page = () => {
                 setBreakoutRooms={setBreakoutRooms}
                 projectStatus={projectStatus}
                 iframeLink={iframeLink}
+                meetingDetails={meetingDetails}
               />
             </div>
             <div className="h-full">

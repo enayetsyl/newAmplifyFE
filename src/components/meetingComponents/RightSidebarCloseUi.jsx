@@ -68,9 +68,9 @@ const RightSidebarCloseUi = ({
         {/* observers container */}
 
         {/* observers list */}
-        {activeTab === "observersList" && (
+        {/* {activeTab === "observersList" && (
           <div className="flex-grow pt-2 overflow-y-auto">
-            {/* observers container */}
+          
             {observers?.map((observer) => (
               <div
                 className="flex justify-center items-center gap-2 py-1"
@@ -86,10 +86,10 @@ const RightSidebarCloseUi = ({
               </div>
             ))}
           </div>
-        )}
+        )} */}
 
         {/* Observer chat */}
-        {activeTab === "observersChat" &&
+        {/* {activeTab === "observersChat" &&
           !selectedChat &&
           chatParticipants.map((chat) => (
             <div
@@ -111,7 +111,7 @@ const RightSidebarCloseUi = ({
                 </p>
               )}
             </div>
-          ))}
+          ))} */}
       </div>
 
       <div className="mb-2 hidden md:flex">
@@ -127,13 +127,13 @@ const RightSidebarCloseUi = ({
           />
         </div>
         {/* Upload file div */}
-        <div className="bg-custom-gray-8 rounded-xl mx-1 p-1 overflow-y-auto">
+        {/* <div className="bg-custom-gray-8 rounded-xl mx-1 p-1 overflow-y-auto"> */}
           {/* title */}
-          <div className="flex justify-between items-center border-b border-solid border-custom-gray-3 pb-1">
+          {/* <div className="flex justify-between items-center border-b border-solid border-custom-gray-3 pb-1">
             <p className="text-[10px] text-custom-gray-3">Name</p>
-          </div>
+          </div> */}
           {/* files */}
-          <div className="flex items-center justify-between bg-gray-200 py-3 rounded">
+          {/* <div className="flex items-center justify-between bg-gray-200 py-3 rounded">
             <div className="flex items-center space-x-1">
               <FaFolder className="h-2 w-2 text-custom-gray-3" />
               <span className="text-[10px]  text-custom-gray-3 truncate w-12">
@@ -141,8 +141,8 @@ const RightSidebarCloseUi = ({
               </span>
             </div>
        
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
       </div>
     </>
   );
