@@ -10,7 +10,7 @@ import { FiMinus } from "react-icons/fi";
 import { GoPlus } from "react-icons/go";
 import { IoTrashSharp } from "react-icons/io5";
 
-const AddPollModal = ({ onClose, pollToEdit, project, fetchProjects }) => {
+const AddPollModal = ({ onClose, pollToEdit, project, setLocalProjectState, setPolls }) => {
   const { user } = useGlobalContext();
   const [newPoll, setNewPoll] = useState({
     pollName: "",
@@ -96,7 +96,6 @@ const AddPollModal = ({ onClose, pollToEdit, project, fetchProjects }) => {
         questions: newPoll.questions,
       };
 
-
       if (pollToEdit) {
         // If editing, send PUT request to update the poll
         const response = await axios.put(
@@ -105,6 +104,7 @@ const AddPollModal = ({ onClose, pollToEdit, project, fetchProjects }) => {
         );
 
         if (response.status === 200) {
+          setPolls(response.data.polls)
           toast.success("Poll updated successfully");
         }
       } else {
@@ -114,13 +114,15 @@ const AddPollModal = ({ onClose, pollToEdit, project, fetchProjects }) => {
           dataToSend
         );
 
+        console.log('response form addd poll', response.data)
         if (response.status === 201) {
+          setPolls(response.data.polls)
           toast.success("Poll created successfully");
         }
       }
 
-      fetchProjects(); // Refresh project data
-      onClose(); // Close the modal
+      
+            onClose(); // Close the modal
     } catch (error) {
       console.error("Error saving the poll:", error);
       toast.error("Error saving the poll");

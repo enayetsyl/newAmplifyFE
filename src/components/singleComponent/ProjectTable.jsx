@@ -11,12 +11,12 @@ import ShareProjectModal from "../projectComponents/ShareProjectModal";
 import Button from "../shared/button";
 import { useDashboardContext } from "@/context/DashboardContext";
 
-const ProjectTable = ({ projects, setProjects, fetchProjects, user }) => {
+const ProjectTable = ({ projects,  fetchProjects, user }) => {
   const { viewProject, setViewProject } = useDashboardContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
   const [selectedProject, setSelectedProject] = useState(null);
-  // const [viewProject, setViewProject] = useState(false);
+ 
   const [isShareProjectModalOpen, setIsShareProjectModalOpen] = useState(false);
   const modalRef = useRef();
 

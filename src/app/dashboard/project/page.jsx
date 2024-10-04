@@ -131,7 +131,7 @@ const Page = () => {
         ) : projects && projects.length > 0 ? (
           <ProjectTable
             projects={projects}
-            setProjects={setProjects}
+          
             fetchProjects={fetchProjects}
             user={user}
           />

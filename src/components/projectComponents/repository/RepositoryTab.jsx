@@ -6,10 +6,8 @@ import toast from "react-hot-toast";
 
 const RepositoryTab = ({
   repositories,
-  fetchProjects,
-  userId,
   selectedRepositoryMeetingTab,
-  selectedDocAndMediaTab,
+  selectedDocAndMediaTab,fetchRepositories, projectId
 }) => {
  
 
@@ -23,8 +21,8 @@ const RepositoryTab = ({
       });
 
     if (response.status === 200) {
-        fetchProjects(userId);
         toast.success(`${response.data.message}`);
+        fetchRepositories(projectId);
       } else {
         toast.error(`${response.data.message}`);
       }
@@ -41,7 +39,7 @@ const RepositoryTab = ({
       const response = await axios.delete(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/delete-file/${id}`);
 
       if (response.status === 200) {
-        fetchProjects(userId);
+        fetchRepositories(projectId);
         toast.success(`${response.data.message}`);
       } else {
         toast.error(`${response.data.message}`);

@@ -8,13 +8,13 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 
-const AddRepositoryModal = ({ onClose, project, meetings, fetchProjects }) => {
+const AddRepositoryModal = ({ onClose, project, meetings, setLocalProjectState, fetchRepositories }) => {
   const { user } = useGlobalContext();
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedMeeting, setSelectedMeeting] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  console.log('user', user)
+
 
   // Handle file input change
   const handleFileChange = (event) => {
@@ -65,7 +65,7 @@ const AddRepositoryModal = ({ onClose, project, meetings, fetchProjects }) => {
         }
       );
       toast.success(`${response.data.message}`);
-      fetchProjects(user?._id);
+      fetchRepositories(project._id)
       onClose();
     } catch (error) {
       console.error("Error uploading file:", error);

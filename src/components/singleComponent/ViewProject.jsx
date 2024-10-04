@@ -163,11 +163,11 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     }
   };
   // Fetching project meetings
-  const fetchRepositories = async () => {
+  const fetchRepositories = async (projectId) => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/get-repository/${localProjectState._id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/get-repository/${projectId}`,
        
       );
       setRepositories(response.data.repositories);
@@ -182,8 +182,8 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   useEffect(() => {
     fetchMeetings();
     fetchPolls();
-    fetchRepositories()
-  }, []);
+    fetchRepositories(localProjectState._id)
+  }, [localProjectState]);
 
   const handleAddMeetingModal = () => {
     setIsAddMeetingModalOpen(true);
@@ -449,10 +449,10 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
               </div>
               <div className="border-[0.5px] border-solid border-custom-dark-blue-1 rounded-xl h-[300px] overflow-y-scroll mt-2">
                 <PollsTab
-                  localProjectState={localProjectState}
-                  fetchProjects={fetchProjects}
-                  userId={user?._id}
+                  project={localProjectState}
                   polls={polls}
+                  setPolls={setPolls}
+                  setLocalProjectState={setLocalProjectState}
                 />
               </div>
             </div>
@@ -522,10 +522,10 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
                  <div className="border-[0.5px] border-solid border-custom-dark-blue-1 rounded-xl h-[300px] overflow-y-scroll mt-2">
                <RepositoryTab
                repositories={repositories}
-               fetchProjects={fetchProjects}
-               userId={user?._id}
                selectedRepositoryMeetingTab={selectedRepositoryMeetingTab}
                selectedDocAndMediaTab={selectedDocAndMediaTab}
+               fetchRepositories={fetchRepositories}
+               projectId={localProjectState?._id}
                />
               </div>
             </div>
@@ -564,8 +564,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
             <MemberBulkUpdate
               onClose={closeBulkUpdateModal}
               project={localProjectState}
-              fetchProjects={fetchProjects}
-              userId={user._id}
+              setLocalProjectState={setLocalProjectState}
             />
           )}
           {/* Render add poll modal if open */}
@@ -573,17 +572,19 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
             <AddPollModal
               onClose={() => setIsAddPollModalOpen(false)}
               pollToEdit={null}
-              project={project}
-              fetchProjects={fetchProjects}
+              project={localProjectState}
+              setLocalProjectState={setLocalProjectState}
+              setPolls={setPolls}
             />
           )}
           {/* Render add repository modal if open */}
           {isAddRepositoryModalOpen && (
             <AddRepositoryModal
               onClose={() => setIsAddRepositoryModalOpen(false)}
-              project={project}
+              project={localProjectState}
               meetings={meetings}
-              fetchProjects={fetchProjects}
+              setLocalProjectState={setLocalProjectState}
+              fetchRepositories={fetchRepositories}
             />
           )}
           <div className="flex justify-end py-3">
