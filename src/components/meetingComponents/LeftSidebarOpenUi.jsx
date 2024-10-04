@@ -130,10 +130,7 @@ const LeftSidebarOpenUi = ({
   }, [isModeratorPopupModalOpen]);
 
   const handleRemoveUser = (userId) => {
-    console.log('user to remove', userToRemove)
-    console.log('user id for remove', userId)
     const userName = users?.find((user) => user._id === userId);
-    console.log('user name for remove', userName)
     removeParticipant(userName.name, userName.role, meetingId);
     notify("success", "Success", `${userName.name} has been removed`);
 

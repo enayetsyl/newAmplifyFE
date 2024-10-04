@@ -18,16 +18,7 @@ const page = () => {
   const userRole = searchParams.get("role");
   const [participants, setParticipants] = useState([]);
 
-  console.log(
-    "params id",
-    params.id,
-    "fullName",
-    fullName,
-    "userRole",
-    userRole,
-    "participants",
-    participants
-  );
+  
 
   const getParticipantList = async (meetingId) => {
     try {

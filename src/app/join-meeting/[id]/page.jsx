@@ -50,7 +50,6 @@ const Page = () => {
           role: "Participant",
         }
       );
-      console.log(userRoleResponse.data);
 
       // Store the role ID for later use
       localStorage.setItem("RoletoSend", userRoleResponse.data._id);
@@ -99,45 +98,7 @@ const Page = () => {
     }
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   const role = getRoleFromUrl(); // Extract the role based on URL
-
-  //   try {
-  //     // Call the new API with the extracted role and name
-  //     const response = await axios.post(
-  //       `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/user-role`,
-  //       {
-  //         name: formData.fullName,
-  //         role: role,
-  //       }
-  //     );
-  //     console.log(response.data);
-  //     // Redirect based on the role and the API response
-  //     localStorage.setItem("RoletoSend", response.data._id);
-
-  //     if (role === "Participant") {
-  //       router.push(
-  //         `/participant-waiting-room/${meetingId}?fullName=${encodeURIComponent(
-  //           formData.fullName
-  //         )}&role=Participant`
-  //       );
-  //     } else {
-  //       router.push(
-  //         `/observer-waiting-room/${meetingId}?fullName=${encodeURIComponent(
-  //           formData.fullName
-  //         )}&role=Observer`
-  //       );
-  //     }
-  //   } catch (error) {
-  //     console.error(
-  //       "Received error from backend",
-  //       error?.response?.data?.message
-  //     );
-  //   }
-  // };
-
+ 
   return (
     <div>
       <div className="bg-white lg:flex lg:justify-center lg:items-center">

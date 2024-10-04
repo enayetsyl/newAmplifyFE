@@ -51,7 +51,6 @@ const MembersTab = ({ project, fetchProjects, userId }) => {
 
   const handleRemoveMember = async (memberId) => {
     // Handle remove logic here, e.g., make an API call to remove the member
-    console.log("Remove Member ID:", memberId);
     try {
       const response = await axios.delete(
         `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/delete-member-from-project/${project._id}/${memberId}`

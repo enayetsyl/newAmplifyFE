@@ -51,7 +51,6 @@ const Page = () => {
   const [userData, setUserData] = useState(null);
   const router = useRouter();
   const { id } = useParams();
-  console.log("id in my profile page", id);
   const handlePasswordChangeClick = () => {
     setShowModal(true);
   };

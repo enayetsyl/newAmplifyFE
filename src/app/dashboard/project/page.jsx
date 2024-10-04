@@ -30,10 +30,7 @@ const Page = () => {
         }
       );
       setProjects(response.data.projects);
-      console.log(
-        "project data set using fetchProjects",
-        response.data.projects
-      );
+     
       setTotalPages(response.data.totalPages);
     } catch (error) {
       console.error("Error fetching projects:", error);

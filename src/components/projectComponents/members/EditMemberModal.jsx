@@ -5,7 +5,6 @@ import React, { useState, useEffect } from 'react';
 const EditMemberModal = ({ member, onClose, onSave }) => {
   const [selectedRoles, setSelectedRoles] = useState([]);
   const [name, setName] = useState('');
-console.log('member', member)
   useEffect(() => {
     if (member) {
       // Pre-fill the name and roles when the modal opens

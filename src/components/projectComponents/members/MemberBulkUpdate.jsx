@@ -46,7 +46,7 @@ const MemberBulkUpdate = ({ onClose, project, fetchProjects, userId }) => {
         }
       );
       console.log("Bulk update response:", response.data);
-      fetchProjects(); // Refresh the project data after update
+      fetchProjects(userId); // Refresh the project data after update
       onClose(); // Close the modal after submission
     } catch (error) {
       console.error("Error updating members:", error);

@@ -7,7 +7,6 @@ import { Suspense } from 'react';
 const AccountActivationContent = () => {
   const searchParams = useSearchParams();
   const email = searchParams.get('email');
-  console.log('email', email);
   return <AccountActivationUI email={email} />;
 };
 

@@ -50,9 +50,7 @@ const AddRepositoryModal = ({ onClose, project, meetings, fetchProjects }) => {
     formData.append("addedDate", new Date().toISOString());
     formData.append("meetingId", selectedMeeting);
     formData.append("projectId", project._id);
-    for (let pair of formData.entries()) {
-      console.log(`${pair[0]}: ${pair[1]}`);
-    }
+   
     try {
       setIsLoading(true);
       // Make the API call to upload the file
@@ -65,7 +63,6 @@ const AddRepositoryModal = ({ onClose, project, meetings, fetchProjects }) => {
           },
         }
       );
-      console.log("response.data", response.data);
       toast.success(`${response.data.message}`);
       fetchProjects();
       onClose();

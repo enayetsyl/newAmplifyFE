@@ -17,14 +17,7 @@ const page = () => {
   const fullName = searchParams.get("fullName");
   const userRole = searchParams.get("role");
 
-  console.log(
-    "params id",
-    params.id,
-    "fullName",
-    fullName,
-    "userRole",
-    userRole
-  );
+ 
 
   const getStreamingStatus = async (meetingId) => {
     try {

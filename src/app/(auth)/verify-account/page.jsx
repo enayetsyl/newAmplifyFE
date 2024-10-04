@@ -15,11 +15,9 @@ const VerifyAccountContent = () => {
     if (id) {
       const verifyEmail = async () => {
         try {
-          console.log("sending verification request");
           const response = await axios.get(
             `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/verify?id=${id}`
           );
-          console.log("response .data", response.data);
 
           if (response.status === 200) {
             setVerificationStatus("success");

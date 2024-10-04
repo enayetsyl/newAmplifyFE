@@ -41,7 +41,6 @@ const page = () => {
           role: "Observer", // Fixed role as Observer,
         }
       );
-      console.log(response1.data);
       // Redirect based on the role and the API response
       localStorage.setItem("RoletoSend", response1.data._id);
       const response = await axios.post(

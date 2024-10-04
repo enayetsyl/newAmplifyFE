@@ -17,7 +17,6 @@ const MemberTabAddMember = ({ onClose, project, fetchProjects, userId }) => {
     }
   };
 
-  console.log("peoples", peoples);
 
   useEffect(() => {
     fetchContacts();
@@ -54,7 +53,6 @@ const MemberTabAddMember = ({ onClose, project, fetchProjects, userId }) => {
         roles: selectedRoles[person._id],
       }));
 
-    console.log("selectedPeople and project id", project._id, selectedPeople);
 
     try {
       const response = await axios.put(
@@ -64,7 +62,6 @@ const MemberTabAddMember = ({ onClose, project, fetchProjects, userId }) => {
           people: selectedPeople,
         }
       );
-      console.log(response);
       fetchProjects(userId);
       onClose();
     } catch (error) {

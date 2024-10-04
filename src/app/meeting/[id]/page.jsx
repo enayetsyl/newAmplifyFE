@@ -493,7 +493,6 @@ const page = () => {
       }
 
       // Log the success response
-      console.log("Streaming started successfully:", response.data);
     } catch (error) {
       // Check for a specific error message
       if (error?.response?.data?.message === "Participant not found") {

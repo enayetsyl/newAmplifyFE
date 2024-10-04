@@ -22,7 +22,7 @@ const DashboardSidebar = ({
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  console.log('user', user)
+
   const modalRef = useRef(null);
 
   const handleModalOpen = () => {

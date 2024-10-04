@@ -26,7 +26,6 @@ const AddPollModal = ({ onClose, pollToEdit, project, fetchProjects }) => {
 
   useEffect(() => {
     if (pollToEdit) {
-      console.log("pollToEdit:", pollToEdit);
       setNewPoll(pollToEdit);
     }
   }, [pollToEdit]);
@@ -97,7 +96,6 @@ const AddPollModal = ({ onClose, pollToEdit, project, fetchProjects }) => {
         questions: newPoll.questions,
       };
 
-      console.log("data to send:", dataToSend);
 
       if (pollToEdit) {
         // If editing, send PUT request to update the poll
@@ -129,7 +127,6 @@ const AddPollModal = ({ onClose, pollToEdit, project, fetchProjects }) => {
     }
   };
 
-  console.log("new poll", newPoll);
 
   return (
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">

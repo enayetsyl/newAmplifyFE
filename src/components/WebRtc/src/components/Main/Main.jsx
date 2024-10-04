@@ -26,7 +26,6 @@ const Main = ({ breakRoomID }) => {
   useEffect(() => {
     if (breakRoomID) {
       setRoomProps(breakRoomID);
-      console.log("isopenBreak");
       socket.emit("BE-check-user", { roomId: breakRoomID, userName:"medulas" });
       setShowRoom(true);
     }
@@ -35,7 +34,6 @@ const Main = ({ breakRoomID }) => {
     
     const roomName = roomRef.current.value;
     const userName = userRef.current.value;
-    console.log("roomName: ", breakRoomID);
     
     localStorage.setItem("user2", userName);
     if (!roomName || !userName) {
@@ -44,7 +42,6 @@ const Main = ({ breakRoomID }) => {
     } else {
       setRoomProps(roomName); // Set room name in state
       socket.emit("BE-check-user", { roomId: roomName, userName });
-      console.log("BE-check-user: ", { roomId: roomName, userName });
       setShowRoom(true);
     }
   }

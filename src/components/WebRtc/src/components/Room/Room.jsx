@@ -10,7 +10,6 @@ import BottomBar from "../BottomBar/BottomBar";
 // import { useParams } from "react-router-dom";
 
 const Room = ({ roomId }) => {  
-  console.log("roomIdProps: ", roomId);
   const currentUser = localStorage.getItem("user2");
   const [peers, setPeers] = useState([]);
   const [userVideoAudio, setUserVideoAudio] = useState({
@@ -24,10 +23,8 @@ const Room = ({ roomId }) => {
   const userVideoRef = useRef();
   const screenTrackRef = useRef();
   const userStream = useRef();
-  console.log("roomId: ", roomId);
 
   useEffect(() => {
-    console.log("effect roomId: ", roomId);
     // Get Video Devices
     navigator.mediaDevices.enumerateDevices().then((devices) => {
       const filtered = devices.filter((device) => device.kind === "videoinput");
@@ -138,7 +135,6 @@ const Room = ({ roomId }) => {
     });
 
     return () => {
-      console.log("disconnect");
       socket.disconnect();
     };
     // eslint-disable-next-line
@@ -190,7 +186,6 @@ const Room = ({ roomId }) => {
   }
 
   function createUserVideo(peer, index, arr) {
-    console.log("createUserVideo", peer, index, arr);
     return (
       <VideoBox
         className={`width-peer${peers.length > 8 ? "" : peers.length}`}

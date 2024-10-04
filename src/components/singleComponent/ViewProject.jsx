@@ -54,8 +54,6 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     setSelectedDocAndMediaTab(tab);
   };
 
-  console.log("project", project);
-  console.log("meetings", meetings);
   const handleModalClose = () => {
     setShowAddContactModal(false);
   };
@@ -70,14 +68,12 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   };
 
   const handleEditProject = async (updatedProjectData) => {
-    console.log("Updated Project Data:", updatedProjectData);
     try {
       const response = await axios.put(
         `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/update-general-project-info/${project._id}`,
         updatedProjectData
       );
       if (response.status === 200) {
-        console.log("Project updated successfully", response.data);
         fetchProjects(user?._id); // Refetch projects after successful edit
         closeEditModal();
         toast.success(`${response.data.message}`);
@@ -178,7 +174,6 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     setIsAddPollModalOpen(true);
   };
   const handleOpenAddRepositoryModal = () => {
-    console.log("is add repository modal open", isAddRepositoryModalOpen);
     setIsAddRepositoryModalOpen(true);
   };
 
@@ -199,7 +194,6 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     setSelectedStatus(newStatus);
 
     try {
-      console.log('project status',  `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/change-project-status/${project._id}`)
       // Sending request to change project status
       const response = await axios.put(
         `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/change-project-status/${project._id}`,
@@ -207,7 +201,6 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
       );
 
       if (response.status === 200) {
-        console.log("Status updated successfully");
         fetchProjects(user?._id);
         // You can also add logic here to display success message to the user
       } else {
