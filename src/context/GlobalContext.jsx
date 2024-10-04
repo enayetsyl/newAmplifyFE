@@ -7,7 +7,9 @@ const GlobalContext = createContext()
 
 export function GlobalContextProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const router = useRouter()
+
   const handleLogout = () => {
     router.push('/login')
     localStorage.clear();
@@ -23,10 +25,14 @@ export function GlobalContextProvider({ children }) {
       // Parse the JSON string to an object and set it in state
       setUser(JSON.parse(storedUser));
     }
+    setLoading(false);
   }, []);
 
     
-
+  if (loading) {
+    return null; // Return null or a loader component while loading
+  }
+  
   const value = {
     user, setUser, handleLogout
   }
