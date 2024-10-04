@@ -12,7 +12,7 @@ import { RiPencilFill } from "react-icons/ri";
 import toast from "react-hot-toast";
 import EditMemberModal from "./EditMemberModal";
 
-const MembersTab = ({ project, fetchProjects, userId }) => {
+const MembersTab = ({ project, setLocalProjectState }) => {
   const [selectedMember, setSelectedMember] = useState(null); // Store the selected member for editing
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -39,7 +39,8 @@ const MembersTab = ({ project, fetchProjects, userId }) => {
 
       if (response.status === 200) {
         toast.success(`${response.data.message}`);
-        fetchProjects(userId);
+        setLocalProjectState(response.data.updatedProject);
+        // fetchProjects(userId);
       }
     } catch (error) {
       console.error("Error fetching projects:", error);
@@ -57,15 +58,15 @@ const MembersTab = ({ project, fetchProjects, userId }) => {
       );
 
       if (response.status === 200) {
+        setLocalProjectState(response.data.updatedProject);
         toast.success(`${response.data.message}`);
-        fetchProjects(userId);
+        // fetchProjects(userId);
       }
     } catch (error) {
       console.error("Error removing member:", error);
       toast.error(`${error.response.data.message}`);
     }
   };
-
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full bg-white shadow-md rounded-lg ">

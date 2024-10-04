@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "@/components/shared/button";
 
-const MemberTabAddMember = ({ onClose, project, fetchProjects, userId }) => {
+const MemberTabAddMember = ({ onClose, project,  userId, setLocalProjectState }) => {
   const [peoples, setPeoples] = useState([]);
   const [selectedRoles, setSelectedRoles] = useState({});
-
   const fetchContacts = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/create/contact-from-member-tab/${userId}/${project._id}`
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/create/contact-from-member-tab/${userId}/${project?._id}`
       );
       setPeoples(response.data);
     } catch (error) {
@@ -62,7 +61,9 @@ const MemberTabAddMember = ({ onClose, project, fetchProjects, userId }) => {
           people: selectedPeople,
         }
       );
-      fetchProjects(userId);
+      if (response.status === 200) {
+        setLocalProjectState(response.data.updatedProject);
+      }
       onClose();
     } catch (error) {
       console.error("Error adding people:", error);

@@ -127,7 +127,7 @@ const Page = () => {
 
       <div className="flex-grow mx-auto w-full">
         {loading ? (
-          <p>Loading...</p>
+          <p className="text-center pt-20 font-bold text-5xl text-custom-orange-1">Loading...</p>
         ) : projects && projects.length > 0 ? (
           <ProjectTable
             projects={projects}

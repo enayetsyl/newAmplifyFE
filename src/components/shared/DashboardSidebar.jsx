@@ -13,6 +13,7 @@ import { IoIosLogOut } from "react-icons/io";
 import LogoutModal from "../singleComponent/LogoutModal";
 import Link from "next/link";
 import { useGlobalContext } from "@/context/GlobalContext";
+import { useDashboardContext } from "@/context/DashboardContext";
 
 const DashboardSidebar = ({
   handleLogoutModalOpen,
@@ -20,7 +21,7 @@ const DashboardSidebar = ({
   user,
 }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+const { setViewProject } = useDashboardContext()
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const modalRef = useRef(null);
@@ -64,7 +65,9 @@ const DashboardSidebar = ({
             <Logo />
           </div>
           <div className=" flex-grow">
-            <Link href="/dashboard/project">
+            <Link href="/dashboard/project"
+            onClick={() => setViewProject(false)}
+            >
               <div className="flex justify-start items-center gap-3">
                 <FaListAlt className="text-base text-[#6A7E88]" />
                 <p className="text-base text-[#6A7E88] font-semibold">

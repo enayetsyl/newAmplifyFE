@@ -22,6 +22,7 @@ import AddRepositoryModal from "../projectComponents/repository/AddRepositoryMod
 import RepositoryTab from "../projectComponents/repository/RepositoryTab";
 
 const ViewProject = ({ project, onClose, user, fetchProjects }) => {
+  const [localProjectState, setLocalProjectState] = useState(project);
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState("Meetings");
   const [secondaryTab, setSecondaryTab] = useState("Documents");
@@ -29,7 +30,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const [meetings, setMeetings] = useState([]);
   const [polls, setPolls] = useState([]);
   const [isAddMeetingModalOpen, setIsAddMeetingModalOpen] = useState(false);
-  const [selectedStatus, setSelectedStatus] = useState(project?.status || "");
+  const [selectedStatus, setSelectedStatus] = useState(localProjectState?.status || "");
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [showAddContactModal, setShowAddContactModal] = useState(false);
   const [showBulkUpdateModal, setShowBulkUpdateModal] = useState(false);
@@ -72,11 +73,12 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
   const handleEditProject = async (updatedProjectData) => {
     try {
       const response = await axios.put(
-        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/update-general-project-info/${project._id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/update-general-project-info/${localProjectState._id}`,
         updatedProjectData
       );
       if (response.status === 200) {
-        fetchProjects(user?._id); // Refetch projects after successful edit
+        // fetchProjects(user?._id);
+        setLocalProjectState(response.data.project);
         closeEditModal();
         toast.success(`${response.data.message}`);
       } else {
@@ -131,10 +133,8 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/get-all/meeting/${project._id}`
-        // {
-        //   params: { page, limit: 10 },
-        // }
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/get-all/meeting/${localProjectState._id}`
+        
       );
       setMeetings(response.data.meetings);
       // setTotalPages(response.data.totalPages);
@@ -149,7 +149,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/get-all/poll/${project._id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/get-all/poll/${localProjectState._id}`,
         {
           params: { page, limit: 10 },
         }
@@ -167,12 +167,9 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/get-repository/${project._id}`,
-        // {
-        //   params: { page, limit: 10 },
-        // }
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/get-repository/${localProjectState._id}`,
+       
       );
-      console.log('repo received',response.data.repositories);
       setRepositories(response.data.repositories);
      
     } catch (error) {
@@ -218,12 +215,13 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
     try {
       // Sending request to change project status
       const response = await axios.put(
-        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/change-project-status/${project._id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/change-project-status/${localProjectState._id}`,
         { status: newStatus }
       );
 
       if (response.status === 200) {
-        fetchProjects(user?._id);
+        setLocalProjectState((prev) => ({ ...prev, status: newStatus }));
+        // fetchProjects(user?._id);
         // You can also add logic here to display success message to the user
       } else {
         console.error("Failed to update status");
@@ -297,7 +295,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
               <p className=" md:text-custom-dark-blue-1 text-base font-semibold sm:text-lg">
                 Project Name:
               </p>
-              <ParagraphBlue2 children={project?.name} />
+              <ParagraphBlue2 children={localProjectState?.name} />
             </div>
             <div>
               <button
@@ -312,35 +310,35 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
             <p className=" md:text-custom-dark-blue-1 text-base font-semibold sm:text-lg">
               Description:
             </p>
-            <ParagraphBlue2 children={project?.description} />
+            <ParagraphBlue2 children={localProjectState?.description} />
           </div>
           <div className="flex justify-start items-center gap-1 sm:gap-5">
             <p className=" md:text-custom-dark-blue-1 text-base font-semibold sm:text-lg">
               Opened On:
             </p>
             {/* <HeadingLg children="Opened On" /> */}
-            <ParagraphBlue2 children={project?.startDate} />
+            <ParagraphBlue2 children={localProjectState?.startDate} />
           </div>
           <div className="flex justify-start items-center gap-3 sm:gap-5">
             <p className=" md:text-custom-dark-blue-1 text-base font-semibold sm:text-lg">
               Expires In:
             </p>
             {/* <HeadingLg children="Expires In" /> */}
-            <ParagraphBlue2 children={project?.endDate} />
+            <ParagraphBlue2 children={localProjectState?.endDate} />
           </div>
           <div className="flex justify-start items-center gap-3 sm:gap-5">
             <p className=" md:text-custom-dark-blue-1 text-base font-semibold sm:text-lg">
               Passcode:
             </p>
             {/* <HeadingLg children="Passcode" /> */}
-            <ParagraphBlue2 children={project?.projectPasscode} />
+            <ParagraphBlue2 children={localProjectState?.projectPasscode} />
           </div>
           <div className="flex justify-start items-center gap-3 sm:gap-5">
             <p className=" md:text-custom-dark-blue-1 text-base font-semibold sm:text-lg">
               Project Status:
             </p>
             {/* <HeadingLg children="Project Status" /> */}
-            <ParagraphBlue2 children={project?.status} />
+            <ParagraphBlue2 children={localProjectState?.status} />
           </div>
         </div>
 
@@ -426,9 +424,8 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
               </div>
               <div className="border-[0.5px] border-solid border-custom-dark-blue-1 rounded-xl h-[300px] overflow-y-scroll mt-2">
                 <MembersTab
-                  project={project}
-                  fetchProjects={fetchProjects}
-                  userId={user?._id}
+                  project={localProjectState}
+                setLocalProjectState={setLocalProjectState}
                 />
               </div>
             </div>
@@ -452,7 +449,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
               </div>
               <div className="border-[0.5px] border-solid border-custom-dark-blue-1 rounded-xl h-[300px] overflow-y-scroll mt-2">
                 <PollsTab
-                  project={project}
+                  localProjectState={localProjectState}
                   fetchProjects={fetchProjects}
                   userId={user?._id}
                   polls={polls}
@@ -521,24 +518,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
                 </div>
               )}
 
-              {/* Display content for the selected sub-sub-tab */}
-              {/* {selectedRepositoryMeetingTab && (
-                <div className="mt-5">
-                  <HeadingLg
-                    children={`Details for ${selectedRepositoryMeetingTab.title}`}
-                  />
-                  {selectedDocAndMediaTab === "Documents" && (
-                    <p className="mt-3">
-                      Here are the documents for this meeting.
-                    </p>
-                  )}
-                  {selectedDocAndMediaTab === "Media" && (
-                    <p className="mt-3">
-                      Here is the media content for this meeting.
-                    </p>
-                  )}
-                </div>
-              )} */}
+           
                  <div className="border-[0.5px] border-solid border-custom-dark-blue-1 rounded-xl h-[300px] overflow-y-scroll mt-2">
                <RepositoryTab
                repositories={repositories}
@@ -554,7 +534,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
           {isAddMeetingModalOpen && (
             <AddMeetingModal
               onClose={closeAddMeetingModal}
-              project={project}
+              project={localProjectState}
               user={user}
               refetchMeetings={fetchMeetings}
             />
@@ -564,7 +544,7 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
           {isEditModalOpen && (
             <EditProjectModal
               onClose={closeEditModal}
-              project={project}
+              project={localProjectState}
               onSave={handleEditProject}
             />
           )}
@@ -573,16 +553,17 @@ const ViewProject = ({ project, onClose, user, fetchProjects }) => {
           {showAddContactModal && (
             <MemberTabAddMember
               onClose={handleModalClose}
-              project={project}
-              fetchProjects={fetchProjects}
+              project={localProjectState}
+              
               userId={user._id}
+              setLocalProjectState={setLocalProjectState}
             />
           )}
           {/* Render bulk update modal if open */}
           {showBulkUpdateModal && (
             <MemberBulkUpdate
               onClose={closeBulkUpdateModal}
-              project={project}
+              project={localProjectState}
               fetchProjects={fetchProjects}
               userId={user._id}
             />

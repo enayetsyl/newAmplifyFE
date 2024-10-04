@@ -12,7 +12,6 @@ const EditProjectModal = ({ onClose, project, onSave }) => {
   endDate: project?.endDate?.split('T')[0] || "",
     projectPasscode: project?.projectPasscode || "",
   });
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
